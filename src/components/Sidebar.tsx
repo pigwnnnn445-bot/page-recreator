@@ -39,6 +39,8 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
   useMemo(() => {
     if (!selectedQuality) setSelectedQuality(currentConfig.qualities[0]);
     if (!selectedDuration) setSelectedDuration(currentConfig.durations[0]);
+    const enabledRatios = currentConfig.aspectRatios.filter(r => r.enabled);
+    if (!selectedRatio && enabledRatios.length > 0) setSelectedRatio(enabledRatios[0].label);
   }, []);
 
   return (
