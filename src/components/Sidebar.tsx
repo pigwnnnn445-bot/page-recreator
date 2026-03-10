@@ -135,8 +135,12 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
           </div>
         </div>
 
-        {/* Quota Info */}
-        <div className="mb-4 p-3 bg-card-secondary rounded-xl">
+      </aside>
+    </>
+  );
+};
+
+export default Sidebar;
           <div className="flex justify-between text-xs text-text-muted mb-1">
             <span>套餐额度</span>
             <span>{config.data.service_quota_remain} / {config.data.service_quota_all}</span>
