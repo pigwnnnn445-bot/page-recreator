@@ -1,4 +1,4 @@
-import { ChevronDown, X, Check } from "lucide-react";
+import { ChevronDown, X, Zap } from "lucide-react";
 import { useState, useMemo } from "react";
 import {
   mockUserConfig,
@@ -71,21 +71,42 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
               <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modelOpen ? "rotate-180" : ""}`} />
             </button>
             {modelOpen && (
-              <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg max-h-[320px] overflow-y-auto">
-                {models.map((m) => (
-                  <button
-                    key={m.id}
-                    onClick={() => handleSelectModel(m)}
-                    className={`w-full px-4 py-2.5 text-sm text-left rounded-xl transition-colors cursor-pointer flex items-center justify-between ${
-                      m.id === selectedModel.id
-                        ? "text-primary bg-menu-selected font-medium"
-                        : "text-foreground hover:bg-hover-bg"
-                    }`}
-                  >
-                    <span>{m.name}</span>
-                    {m.id === selectedModel.id && <Check className="w-4 h-4 text-primary" />}
-                  </button>
-                ))}
+              <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg max-h-[400px] overflow-y-auto">
+                {models.map((m) => {
+                  const isComingSoon = m.status === "coming_soon";
+                  return (
+                    <button
+                      key={m.id}
+                      onClick={() => !isComingSoon && handleSelectModel(m)}
+                      disabled={isComingSoon}
+                      className={`w-full px-4 py-3 text-left rounded-xl transition-colors ${
+                        isComingSoon
+                          ? "opacity-50 cursor-not-allowed"
+                          : m.id === selectedModel.id
+                            ? "bg-menu-selected cursor-pointer"
+                            : "hover:bg-hover-bg cursor-pointer"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className={`font-semibold text-sm ${isComingSoon ? "text-text-muted" : "text-foreground"}`}>
+                          {m.name}
+                        </span>
+                        {isComingSoon ? (
+                          <span className="px-2 py-0.5 rounded-full bg-card-secondary text-text-muted text-xs">
+                            Coming Soon
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-1 text-theme-1 text-sm font-medium">
+                            <Zap className="w-3.5 h-3.5" /> {m.cost}
+                          </span>
+                        )}
+                      </div>
+                      <p className={`text-xs leading-relaxed ${isComingSoon ? "text-text-muted" : "text-text-secondary"}`}>
+                        {m.description}
+                      </p>
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
