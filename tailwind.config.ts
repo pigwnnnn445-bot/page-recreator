@@ -23,6 +23,7 @@ export default {
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-bg))",
           border: "hsl(var(--sidebar-border))",
+          title: "hsl(var(--sidebar-title))",
         },
         badge: "hsl(var(--badge-bg))",
         success: "hsl(var(--success))",
