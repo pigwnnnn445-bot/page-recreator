@@ -114,7 +114,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                             Coming Soon
                           </span>
                         ) : (
-                          <span className="flex items-center gap-1 text-theme-1 text-sm font-medium">
+                          <span className="flex items-center gap-1 text-theme-2 dark:text-theme-1 text-xs font-medium" style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif" }}>
                             <Zap className="w-3.5 h-3.5" /> {m.cost}
                           </span>
                         )}
