@@ -43,12 +43,12 @@ const Sidebar = () => {
             <ChevronDown className="w-4 h-4 text-muted-foreground" />
           </button>
           {modelOpen && (
-            <div className="absolute top-full mt-1 w-full bg-card border border-border rounded-lg overflow-hidden z-10">
+            <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border">
               {models.map((m) => (
                 <button
                   key={m}
                   onClick={() => { setSelectedModel(m); setModelOpen(false); }}
-                  className={`w-full px-4 py-2.5 text-sm text-left hover:bg-secondary transition-colors ${m === selectedModel ? "text-accent" : "text-foreground"}`}
+                  className={`w-full px-4 py-2.5 text-sm text-left rounded-xl transition-colors ${m === selectedModel ? "text-accent bg-secondary" : "text-foreground hover:bg-secondary"}`}
                 >
                   {m}
                 </button>
