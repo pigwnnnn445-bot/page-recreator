@@ -140,8 +140,6 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
   );
 };
 
-export default Sidebar;
-          <div className="flex justify-between text-xs text-text-muted mb-1">
             <span>套餐额度</span>
             <span>{config.data.service_quota_remain} / {config.data.service_quota_all}</span>
           </div>
