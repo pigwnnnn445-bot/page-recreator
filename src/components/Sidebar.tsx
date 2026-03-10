@@ -32,6 +32,8 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
     const cfg = modelConfigMap[model.id] ?? defaultModelConfig;
     setSelectedQuality(cfg.qualities[0]);
     setSelectedDuration(cfg.durations[0]);
+    const enabledRatios = cfg.aspectRatios.filter(r => r.enabled);
+    setSelectedRatio(enabledRatios.length > 0 ? enabledRatios[0].label : "");
   };
 
   useMemo(() => {
