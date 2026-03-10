@@ -61,7 +61,25 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
 
         {/* Model Selector */}
         <div className="mb-6">
-          <span className="text-sm text-text-secondary mb-2 block">切换模型</span>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm text-text-secondary">切换模型</span>
+          <div className="flex -space-x-1.5">
+            {models.slice(0, 4).map((m) => (
+              m.icon ? (
+                <img key={m.id} src={m.icon} alt={m.name} className="w-6 h-6 rounded-full object-cover border-2 border-sidebar" />
+              ) : (
+                <div key={m.id} className="w-6 h-6 rounded-full bg-card-secondary border-2 border-sidebar flex items-center justify-center text-[8px] text-text-muted font-bold">
+                  {m.name.charAt(0)}
+                </div>
+              )
+            ))}
+            {models.length > 4 && (
+              <div className="w-6 h-6 rounded-full bg-card-secondary border-2 border-sidebar flex items-center justify-center text-[9px] text-text-muted font-medium">
+                {models.length - 4}+
+              </div>
+            )}
+          </div>
+        </div>
           <div className="relative">
             <button
               onClick={() => setModelOpen(!modelOpen)}
