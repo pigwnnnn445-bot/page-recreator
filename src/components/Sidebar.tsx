@@ -79,12 +79,12 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                       key={m.id}
                       onClick={() => !isComingSoon && handleSelectModel(m)}
                       disabled={isComingSoon}
-                      className={`w-full px-4 py-3 text-left rounded-xl transition-colors ${
+                      className={`w-full px-4 py-3 text-left rounded-xl transition-colors border ${
                         isComingSoon
-                          ? "opacity-50 cursor-not-allowed"
+                          ? "opacity-50 cursor-not-allowed border-transparent"
                           : m.id === selectedModel.id
-                            ? "bg-menu-selected cursor-pointer"
-                            : "hover:bg-hover-bg cursor-pointer"
+                            ? "bg-menu-selected border-primary cursor-pointer"
+                            : "hover:bg-hover-bg border-transparent cursor-pointer"
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
