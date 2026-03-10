@@ -19,6 +19,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
   const [selectedModel, setSelectedModel] = useState<ModelInfo>(models[0]);
   const [selectedQuality, setSelectedQuality] = useState<string>("");
   const [selectedDuration, setSelectedDuration] = useState<string>("");
+  const [selectedRatio, setSelectedRatio] = useState<string>("");
   const [modelOpen, setModelOpen] = useState(false);
 
   const currentConfig = useMemo(() => {
@@ -31,11 +32,15 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
     const cfg = modelConfigMap[model.id] ?? defaultModelConfig;
     setSelectedQuality(cfg.qualities[0]);
     setSelectedDuration(cfg.durations[0]);
+    const enabledRatios = cfg.aspectRatios.filter(r => r.enabled);
+    setSelectedRatio(enabledRatios.length > 0 ? enabledRatios[0].label : "");
   };
 
   useMemo(() => {
     if (!selectedQuality) setSelectedQuality(currentConfig.qualities[0]);
     if (!selectedDuration) setSelectedDuration(currentConfig.durations[0]);
+    const enabledRatios = currentConfig.aspectRatios.filter(r => r.enabled);
+    if (!selectedRatio && enabledRatios.length > 0) setSelectedRatio(enabledRatios[0].label);
   }, []);
 
   return (
@@ -130,7 +135,41 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
           </div>
         </div>
 
-        {/* Video Quality */}
+        {/* Aspect Ratio */}
+        {currentConfig.aspectRatios.filter(r => r.enabled).length > 0 && (
+          <div className="mb-6">
+            <span className="text-sm text-text-secondary mb-2 block">比例</span>
+            <div className="flex gap-2 flex-wrap">
+              {currentConfig.aspectRatios.filter(r => r.enabled).map((r) => {
+                const isSelected = r.label === selectedRatio;
+                // Aspect ratio icon sizing
+                const iconMap: Record<string, { w: string; h: string }> = {
+                  "1:1": { w: "w-3.5", h: "h-3.5" },
+                  "16:9": { w: "w-4", h: "h-2.5" },
+                  "4:3": { w: "w-3.5", h: "h-3" },
+                  "9:16": { w: "w-2", h: "h-3.5" },
+                  "21:9": { w: "w-5", h: "h-2" },
+                };
+                const icon = iconMap[r.label] ?? { w: "w-3.5", h: "h-3.5" };
+                return (
+                  <button
+                    key={r.label}
+                    onClick={() => setSelectedRatio(r.label)}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer border ${
+                      isSelected
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-card dark:bg-card border-border text-text-secondary hover:bg-hover-bg"
+                    }`}
+                  >
+                    <span className={`${icon.w} ${icon.h} border-2 rounded-[2px] ${isSelected ? "border-primary-foreground" : "border-text-muted"}`} />
+                    {r.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         <div className="mb-6">
           <span className="text-sm text-text-secondary mb-2 block">视频质量</span>
           <div className="flex gap-2 flex-wrap">
