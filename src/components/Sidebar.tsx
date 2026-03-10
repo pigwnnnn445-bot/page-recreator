@@ -1,4 +1,4 @@
-import { ChevronDown, User, X, Zap, Check } from "lucide-react";
+import { ChevronDown, X, Check } from "lucide-react";
 import { useState, useMemo } from "react";
 import {
   mockUserConfig,
