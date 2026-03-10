@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <aside className="w-[280px] min-h-screen bg-sidebar border-r border-sidebar-border flex flex-col p-5">
-      <h2 className="text-foreground font-semibold text-lg mb-6">视频制作</h2>
+      <h2 className="text-sidebar-title font-bold text-base mb-6" style={{ fontFamily: "'Gilroy', ui-sans-serif, system-ui, sans-serif" }}>视频制作</h2>
 
       {/* Model Selector */}
       <div className="mb-6">
