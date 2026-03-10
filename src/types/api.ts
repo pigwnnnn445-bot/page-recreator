@@ -57,26 +57,32 @@ export const mockUserConfig: UserConfig = {
 };
 
 // 模型对应的质量和时长配置（可按后台扩展）
+export interface AspectRatioOption {
+  label: string;
+  enabled: boolean;
+}
+
 export interface ModelConfig {
   qualities: string[];
   durations: string[];
+  aspectRatios: AspectRatioOption[];
   costPerGenerate: number;
 }
 
 export const modelConfigMap: Record<number, ModelConfig> = {
-  1119: { qualities: ["720p", "1080p", "4K"], durations: ["5s", "10s", "15s"], costPerGenerate: 35 },
-  1104: { qualities: ["720p", "1080p"], durations: ["5s", "10s"], costPerGenerate: 60 },
-  1105: { qualities: ["720p", "1080p"], durations: ["5s", "10s"], costPerGenerate: 50 },
-  1107: { qualities: ["720p", "1080p", "4K"], durations: ["5s", "10s", "15s", "30s"], costPerGenerate: 80 },
-  1122: { qualities: ["1080p", "4K"], durations: ["5s", "10s", "15s"], costPerGenerate: 30 },
-  1109: { qualities: ["1080p", "4K"], durations: ["5s", "10s"], costPerGenerate: 40 },
-  1110: { qualities: ["720p", "1080p"], durations: ["5s", "10s"], costPerGenerate: 20 },
-  1111: { qualities: ["1080p", "4K"], durations: ["5s", "10s", "15s", "30s"], costPerGenerate: 60 },
+  1119: { qualities: ["720p", "1080p", "4K"], durations: ["5s", "10s", "15s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "4:3", enabled: true }, { label: "9:16", enabled: true }, { label: "21:9", enabled: true }], costPerGenerate: 35 },
+  1104: { qualities: ["720p", "1080p"], durations: ["5s", "10s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "9:16", enabled: true }], costPerGenerate: 60 },
+  1105: { qualities: ["720p", "1080p"], durations: ["5s", "10s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "9:16", enabled: true }], costPerGenerate: 50 },
+  1107: { qualities: ["720p", "1080p", "4K"], durations: ["5s", "10s", "15s", "30s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "4:3", enabled: true }, { label: "9:16", enabled: true }, { label: "21:9", enabled: true }], costPerGenerate: 80 },
+  1122: { qualities: ["1080p", "4K"], durations: ["5s", "10s", "15s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "4:3", enabled: true }], costPerGenerate: 30 },
+  1109: { qualities: ["1080p", "4K"], durations: ["5s", "10s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }], costPerGenerate: 40 },
+  1110: { qualities: ["720p", "1080p"], durations: ["5s", "10s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "9:16", enabled: true }], costPerGenerate: 20 },
+  1111: { qualities: ["1080p", "4K"], durations: ["5s", "10s", "15s", "30s"], aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "4:3", enabled: true }, { label: "9:16", enabled: true }, { label: "21:9", enabled: true }], costPerGenerate: 60 },
 };
 
-// 默认配置
 export const defaultModelConfig: ModelConfig = {
   qualities: ["720p", "1080p"],
   durations: ["5s", "10s"],
+  aspectRatios: [{ label: "1:1", enabled: true }, { label: "16:9", enabled: true }, { label: "9:16", enabled: true }],
   costPerGenerate: 30,
 };
