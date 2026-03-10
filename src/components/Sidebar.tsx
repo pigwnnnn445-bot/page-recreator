@@ -1,4 +1,4 @@
-import { ChevronDown, User, X, Zap, Check } from "lucide-react";
+import { ChevronDown, X, Check } from "lucide-react";
 import { useState, useMemo } from "react";
 import {
   mockUserConfig,
@@ -13,7 +13,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ open, onClose }: SidebarProps) => {
-  const config = mockUserConfig; // 后续替换为接口请求
+  const config = mockUserConfig;
   const models = config.data.enable_model;
 
   const [selectedModel, setSelectedModel] = useState<ModelInfo>(models[0]);
@@ -21,13 +21,10 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
   const [selectedDuration, setSelectedDuration] = useState<string>("");
   const [modelOpen, setModelOpen] = useState(false);
 
-  // 当前模型对应的配置
   const currentConfig = useMemo(() => {
-    const cfg = modelConfigMap[selectedModel.id] ?? defaultModelConfig;
-    return cfg;
+    return modelConfigMap[selectedModel.id] ?? defaultModelConfig;
   }, [selectedModel.id]);
 
-  // 切换模型时重置质量和时长为第一项
   const handleSelectModel = (model: ModelInfo) => {
     setSelectedModel(model);
     setModelOpen(false);
@@ -36,7 +33,6 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
     setSelectedDuration(cfg.durations[0]);
   };
 
-  // 初始化默认选中
   useMemo(() => {
     if (!selectedQuality) setSelectedQuality(currentConfig.qualities[0]);
     if (!selectedDuration) setSelectedDuration(currentConfig.durations[0]);
@@ -133,39 +129,6 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
               </button>
             ))}
           </div>
-        </div>
-
-        {/* Quota Info */}
-        <div className="mb-4 p-3 bg-card-secondary rounded-xl">
-          <div className="flex justify-between text-xs text-text-muted mb-1">
-            <span>套餐额度</span>
-            <span>{config.data.service_quota_remain} / {config.data.service_quota_all}</span>
-          </div>
-          <div className="w-full h-1.5 bg-border rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-theme-2 to-theme-1 rounded-full transition-all"
-              style={{ width: `${(config.data.service_quota_remain / config.data.service_quota_all) * 100}%` }}
-            />
-          </div>
-          <div className="flex justify-between text-xs text-text-muted mt-2">
-            <span>充值额度</span>
-            <span>{config.data.charge_quota_remain}</span>
-          </div>
-          <p className="text-xs text-text-muted mt-2">到期时间：{config.data.service_end_time}</p>
-        </div>
-
-        {/* Bottom */}
-        <div className="mt-auto flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-            <User className="w-4 h-4 text-primary" />
-          </div>
-          <div className="flex-1">
-            <span className="text-foreground text-sm font-medium">用户</span>
-            <p className="text-xs text-text-muted">在线</p>
-          </div>
-          <span className="text-warning text-sm font-semibold flex items-center gap-1">
-            <Zap className="w-3.5 h-3.5" /> {config.data.charge_quota_remain}
-          </span>
         </div>
       </aside>
     </>
