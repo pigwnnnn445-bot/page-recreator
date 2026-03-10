@@ -19,6 +19,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
   const [selectedModel, setSelectedModel] = useState<ModelInfo>(models[0]);
   const [selectedQuality, setSelectedQuality] = useState<string>("");
   const [selectedDuration, setSelectedDuration] = useState<string>("");
+  const [selectedRatio, setSelectedRatio] = useState<string>("");
   const [modelOpen, setModelOpen] = useState(false);
 
   const currentConfig = useMemo(() => {
