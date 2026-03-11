@@ -7,9 +7,10 @@ import ThemeToggle from "./ThemeToggle";
 
 interface MainContentProps {
   onMenuOpen: () => void;
+  totalCost: number;
 }
 
-const MainContent = ({ onMenuOpen }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
 
   return (
@@ -116,7 +117,7 @@ const MainContent = ({ onMenuOpen }: MainContentProps) => {
                 <Globe className="w-4 h-4" /> 提示词生成器
               </button>
               <button className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer">
-                生成 <Zap className="w-3.5 h-3.5" /> 35
+                生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
               </button>
             </div>
           </div>
