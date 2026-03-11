@@ -112,7 +112,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                     >
                       {isComingSoon && (
                         <span
-                          className="absolute text-[10px] font-medium text-[hsl(var(--warning-text,30,100%,50%))] flex items-center justify-center"
+                          className="absolute font-medium text-[hsl(30,100%,50%)] flex items-center justify-center text-[16px]"
                           style={{
                             left: "117px",
                             top: "8px",
