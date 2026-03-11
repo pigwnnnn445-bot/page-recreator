@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 
 interface MainContentProps {
   onMenuOpen: () => void;
+  totalCost: number;
 }
 
 const MainContent = ({ onMenuOpen }: MainContentProps) => {

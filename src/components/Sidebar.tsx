@@ -1,17 +1,29 @@
 import { ChevronDown, X, Zap } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
-  mockUserConfig,
+  type ModelInfo,
+  type ModelConfig,
+  type CreationMode,
   modelConfigMap,
   defaultModelConfig,
-  type ModelInfo,
-  type CreationMode,
 } from "@/types/api";
 import ImageUploadBox from "@/components/ImageUploadBox";
 
 interface SidebarProps {
   open: boolean;
   onClose: () => void;
+  models: ModelInfo[];
+  selectedModel: ModelInfo;
+  setSelectedModel: (m: ModelInfo) => void;
+  selectedCreationMode: CreationMode;
+  setSelectedCreationMode: (mode: CreationMode) => void;
+  selectedQuality: string;
+  setSelectedQuality: (q: string) => void;
+  selectedDuration: string;
+  setSelectedDuration: (d: string) => void;
+  selectedRatio: string;
+  setSelectedRatio: (r: string) => void;
+  currentConfig: ModelConfig;
 }
 
 const creationModeLabels: Record<CreationMode, string> = {
@@ -19,40 +31,28 @@ const creationModeLabels: Record<CreationMode, string> = {
   image_to_video: "图像转视频",
 };
 
-const Sidebar = ({ open, onClose }: SidebarProps) => {
-  const config = mockUserConfig;
-  const models = config.data.enable_model;
-
-  const [selectedModel, setSelectedModel] = useState<ModelInfo>(models[0]);
-  const [selectedCreationMode, setSelectedCreationMode] = useState<CreationMode>("text_to_video");
-  const [selectedQuality, setSelectedQuality] = useState<string>("");
-  const [selectedDuration, setSelectedDuration] = useState<string>("");
-  const [selectedRatio, setSelectedRatio] = useState<string>("");
+const Sidebar = ({
+  open, onClose, models,
+  selectedModel, setSelectedModel,
+  selectedCreationMode, setSelectedCreationMode,
+  selectedQuality, setSelectedQuality,
+  selectedDuration, setSelectedDuration,
+  selectedRatio, setSelectedRatio,
+  currentConfig,
+}: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
   const [modeOpen, setModeOpen] = useState(false);
-
-  const currentConfig = useMemo(() => {
-    return modelConfigMap[selectedModel.id] ?? defaultModelConfig;
-  }, [selectedModel.id]);
 
   const handleSelectModel = (model: ModelInfo) => {
     setSelectedModel(model);
     setModelOpen(false);
     const cfg = modelConfigMap[model.id] ?? defaultModelConfig;
-    // 重置创作模式
     setSelectedCreationMode(cfg.creationModes[0]);
     setSelectedQuality(cfg.qualities[0]);
     setSelectedDuration(cfg.durations.length > 0 ? cfg.durations[0] : "");
     const enabledRatios = cfg.aspectRatios.filter(r => r.enabled);
     setSelectedRatio(enabledRatios.length > 0 ? enabledRatios[0].label : "");
   };
-
-  useMemo(() => {
-    if (!selectedQuality) setSelectedQuality(currentConfig.qualities[0]);
-    if (!selectedDuration && currentConfig.durations.length > 0) setSelectedDuration(currentConfig.durations[0]);
-    const enabledRatios = currentConfig.aspectRatios.filter(r => r.enabled);
-    if (!selectedRatio && enabledRatios.length > 0) setSelectedRatio(enabledRatios[0].label);
-  }, []);
 
   const showCreationModeSelector = currentConfig.creationModes.length > 1;
   const isImageMode = selectedCreationMode === "image_to_video";
@@ -161,7 +161,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
           </div>
         </div>
 
-        {/* Creation Mode Selector - only show when model supports both modes */}
+        {/* Creation Mode Selector */}
         {showCreationModeSelector && (
           <div className="mb-6">
             <span className="text-sm text-text-secondary mb-2 block">创作模式</span>
@@ -225,11 +225,6 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                   >
                     <span className={`${icon.w} ${icon.h} border-2 rounded-[2px] ${isSelected ? "border-primary-foreground" : "border-text-muted"}`} />
                     {r.label}
-                    {r.extraCost && r.extraCost > 0 && (
-                      <span className={`text-[10px] ${isSelected ? "text-primary-foreground/70" : "text-text-muted"}`}>
-                        +{r.extraCost}
-                      </span>
-                    )}
                   </button>
                 );
               })}
@@ -257,7 +252,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
           </div>
         </div>
 
-        {/* Duration - only show when durations are enabled */}
+        {/* Duration */}
         {currentConfig.durations.length > 0 && (
           <div className="mb-6">
             <span className="text-sm text-text-secondary mb-2 block">时长</span>
@@ -279,7 +274,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
           </div>
         )}
 
-        {/* Image-to-video specific: Reference Image */}
+        {/* Image-to-video: Reference Image */}
         {isImageMode && currentConfig.enableReferenceImage && (
           <div className="mb-6">
             <span className="text-sm text-text-secondary mb-2 block">
@@ -289,7 +284,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
           </div>
         )}
 
-        {/* Image-to-video specific: First & Last Frame */}
+        {/* Image-to-video: First & Last Frame */}
         {isImageMode && currentConfig.enableFirstLastFrame && (
           <div className="mb-6">
             <span className="text-sm text-text-secondary mb-2 block">第一帧和最后一帧</span>
