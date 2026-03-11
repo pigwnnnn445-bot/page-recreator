@@ -10,7 +10,7 @@ interface MainContentProps {
   totalCost: number;
 }
 
-const MainContent = ({ onMenuOpen }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
 
   return (
