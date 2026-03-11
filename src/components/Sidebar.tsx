@@ -102,7 +102,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                       key={m.id}
                       onClick={() => !isComingSoon && handleSelectModel(m)}
                       disabled={isComingSoon}
-                      className={`w-full px-4 py-3 text-left rounded-xl transition-colors border ${
+                      className={`relative w-full px-4 py-3 text-left rounded-xl transition-colors border ${
                         isComingSoon
                           ? "opacity-50 cursor-not-allowed border-transparent"
                           : m.id === selectedModel.id
@@ -110,15 +110,26 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                             : "hover:bg-hover-bg border-transparent cursor-pointer"
                       }`}
                     >
+                      {isComingSoon && (
+                        <span
+                          className="absolute text-[10px] font-medium text-[hsl(var(--warning-text,30,100%,50%))] flex items-center justify-center"
+                          style={{
+                            left: "117px",
+                            top: "8px",
+                            width: "29.17%",
+                            height: "25%",
+                            borderRadius: "4px",
+                            background: "rgba(255, 146, 8, 0.2)",
+                          }}
+                        >
+                          Coming Soon
+                        </span>
+                      )}
                       <div className="flex items-center justify-between mb-1">
                         <span className={`font-semibold text-sm ${isComingSoon ? "text-text-muted" : "text-foreground"}`}>
                           {m.name}
                         </span>
-                        {isComingSoon ? (
-                          <span className="px-2 py-0.5 rounded-full bg-card-secondary text-text-muted text-xs">
-                            Coming Soon
-                          </span>
-                        ) : (
+                        {!isComingSoon && (
                           <span className="flex items-center gap-1 text-theme-2 dark:text-theme-1 text-xs font-medium" style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif" }}>
                             <Zap className="w-3.5 h-3.5" /> {m.cost}
                           </span>
