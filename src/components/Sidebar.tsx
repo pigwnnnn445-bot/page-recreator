@@ -115,7 +115,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
                           className="absolute font-medium text-[hsl(30,100%,50%)] flex items-center justify-center"
                           style={{
                             left: "117px",
-                            top: "8px",
+                            top: "12px",
                             width: "84px",
                             height: "16px",
                             borderRadius: "4px",
