@@ -102,8 +102,7 @@ const Sidebar = ({
           <div className="relative">
             <button
               onClick={() => setModelOpen(!modelOpen)}
-              className="w-full h-[48px] outline-none rounded-xl px-4 text-foreground text-sm flex items-center justify-between hover:border-primary/50 transition-colors cursor-pointer group"
-              style={{ border: "1px solid #44444D" }}
+              className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between hover:border-primary/50 transition-colors cursor-pointer group"
             >
               <span className="truncate">{selectedModel.name}</span>
               <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modelOpen ? "rotate-180" : ""}`} />
