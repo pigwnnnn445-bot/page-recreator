@@ -174,7 +174,7 @@ const Sidebar = ({
                 <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modeOpen ? "rotate-180" : ""}`} />
               </button>
               {modeOpen && (
-                <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg">
+                <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-primary-border shadow-lg">
                   {currentConfig.creationModes.map((mode) => (
                     <button
                       key={mode}
