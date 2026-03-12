@@ -15,11 +15,13 @@ const Index = () => {
   const config = mockUserConfig;
   const models = config.data.enable_model;
 
+  const initialConfig = modelConfigMap[models[0].id] ?? defaultModelConfig;
   const [selectedModel, setSelectedModel] = useState<ModelInfo>(models[0]);
-  const [selectedCreationMode, setSelectedCreationMode] = useState<CreationMode>("text_to_video");
-  const [selectedQuality, setSelectedQuality] = useState<string>("");
-  const [selectedDuration, setSelectedDuration] = useState<string>("");
-  const [selectedRatio, setSelectedRatio] = useState<string>("");
+  const [selectedCreationMode, setSelectedCreationMode] = useState<CreationMode>(initialConfig.creationModes[0]);
+  const [selectedQuality, setSelectedQuality] = useState<string>(initialConfig.qualities[0]);
+  const [selectedDuration, setSelectedDuration] = useState<string>(initialConfig.durations.length > 0 ? initialConfig.durations[0] : "");
+  const initialEnabledRatios = initialConfig.aspectRatios.filter(r => r.enabled);
+  const [selectedRatio, setSelectedRatio] = useState<string>(initialEnabledRatios.length > 0 ? initialEnabledRatios[0].label : "");
 
   const currentConfig = useMemo(() => {
     return modelConfigMap[selectedModel.id] ?? defaultModelConfig;
