@@ -34,7 +34,6 @@ export default {
         "theme-2": "hsl(var(--theme-2))",
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
-        "primary-border": "hsl(var(--primary-border))",
       },
       borderRadius: {
         lg: "var(--radius)",
