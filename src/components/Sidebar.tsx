@@ -168,13 +168,13 @@ const Sidebar = ({
             <div className="relative">
               <button
                 onClick={() => setModeOpen(!modeOpen)}
-                className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between hover:border-primary/50 transition-colors cursor-pointer"
+                className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between hover:border-primary/50 transition-colors cursor-pointer group"
               >
-                <span>{creationModeLabels[selectedCreationMode]}</span>
+                <span className="truncate">{creationModeLabels[selectedCreationMode]}</span>
                 <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modeOpen ? "rotate-180" : ""}`} />
               </button>
               {modeOpen && (
-                <div className="absolute top-full mt-1 z-10 p-2 rounded-xl flex flex-col gap-1 w-full bg-card border border-border shadow-lg">
+                <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg">
                   {currentConfig.creationModes.map((mode) => (
                     <button
                       key={mode}
@@ -182,10 +182,10 @@ const Sidebar = ({
                         setSelectedCreationMode(mode);
                         setModeOpen(false);
                       }}
-                      className={`w-full px-4 py-2.5 text-left rounded-lg text-sm transition-colors cursor-pointer ${
+                      className={`w-full px-4 py-3 text-left rounded-xl text-sm transition-colors cursor-pointer border ${
                         mode === selectedCreationMode
-                          ? "bg-menu-selected text-foreground font-medium"
-                          : "text-text-secondary hover:bg-hover-bg"
+                          ? "bg-menu-selected border-primary font-semibold text-foreground"
+                          : "border-transparent text-text-secondary hover:bg-hover-bg"
                       }`}
                     >
                       {creationModeLabels[mode]}
