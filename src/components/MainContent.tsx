@@ -1,4 +1,5 @@
 import { Home, Clock, Play, Globe, Zap, Menu } from "lucide-react";
+import HistoryDrawer from "./HistoryDrawer";
 import { useState } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
@@ -24,6 +25,7 @@ const SAMPLE_VIDEO = {
 
 const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   const handleMake = () => {
     setPrompt(SAMPLE_VIDEO.prompt);
@@ -49,7 +51,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           <button className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer">
             <Home className="w-4 h-4" /> <span className="hidden sm:inline">首页</span>
           </button>
-          <button className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer">
+          <button
+            onClick={() => setHistoryOpen(true)}
+            className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
+          >
             <Clock className="w-4 h-4" /> <span className="hidden sm:inline">历史记录</span>
           </button>
         </div>
@@ -146,6 +151,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           </div>
         </div>
       </div>
+      <HistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
     </div>
   );
 };
