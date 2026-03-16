@@ -42,6 +42,24 @@ const Sidebar = ({
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
   const [modeOpen, setModeOpen] = useState(false);
+  const modelListRef = useRef<HTMLDivElement>(null);
+
+  const handleModelOpen = useCallback((nextOpen: boolean) => {
+    setModelOpen(nextOpen);
+  }, []);
+
+  useEffect(() => {
+    if (modelOpen && modelListRef.current) {
+      const container = modelListRef.current;
+      const selectedEl = container.querySelector('[data-selected="true"]') as HTMLElement | null;
+      if (selectedEl) {
+        // Use requestAnimationFrame to ensure DOM is painted
+        requestAnimationFrame(() => {
+          selectedEl.scrollIntoView({ block: "nearest" });
+        });
+      }
+    }
+  }, [modelOpen]);
 
   const handleSelectModel = (model: ModelInfo) => {
     setSelectedModel(model);
