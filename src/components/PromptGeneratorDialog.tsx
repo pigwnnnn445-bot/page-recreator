@@ -45,14 +45,16 @@ const PromptGeneratorDialog = ({
   const [editText, setEditText] = useState("");
 
   // Reset state when dialog opens
-  const handleOpenChange = (isOpen: boolean) => {
-    if (isOpen) {
+  useEffect(() => {
+    if (open) {
       setInputText(initialPrompt || "");
       setResults(null);
       setIsOptimizing(false);
-    } else {
-      onClose();
     }
+  }, [open, initialPrompt]);
+
+  const handleOpenChange = (isOpen: boolean) => {
+    if (!isOpen) onClose();
   };
 
   const generateResults = useCallback(() => {
