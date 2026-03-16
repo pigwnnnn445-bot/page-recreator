@@ -28,6 +28,8 @@ const SAMPLE_VIDEO = {
 
 const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([
