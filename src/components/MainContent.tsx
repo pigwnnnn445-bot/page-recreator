@@ -132,14 +132,14 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   </div>
 
                   {/* Guide & Tips */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-card rounded-xl border border-border p-4 flex flex-col items-center justify-center gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                      <img src={iconGuide} alt="使用说明" className="w-16 h-16 object-contain" />
-                      <span className="text-foreground text-sm font-medium">使用说明</span>
+                  <div className="grid grid-cols-2 gap-3 md:gap-4">
+                    <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                      <img src={iconGuide} alt="使用说明" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
+                      <span className="text-foreground text-xs md:text-sm font-medium">使用说明</span>
                     </div>
-                    <div className="bg-card rounded-xl border border-border p-4 flex flex-col items-center justify-center gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                      <img src={iconTips} alt="生成技巧" className="w-16 h-16 object-contain" />
-                      <span className="text-foreground text-sm font-medium">生成技巧</span>
+                    <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                      <img src={iconTips} alt="生成技巧" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
+                      <span className="text-foreground text-xs md:text-sm font-medium">生成技巧</span>
                     </div>
                   </div>
                 </div>
