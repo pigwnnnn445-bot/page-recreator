@@ -42,6 +42,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       id: "mock-2",
       status: "completed",
       thumb: sampleThumb,
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
       prompt: "一只可爱的小猫在开车，在法国埃菲尔铁塔附近",
       modelName: "veo3-fast",
       category: "Veo",
