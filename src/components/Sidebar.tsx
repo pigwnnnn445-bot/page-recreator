@@ -1,5 +1,5 @@
 import { ChevronDown, X, Zap } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   type ModelInfo,
   type ModelConfig,
