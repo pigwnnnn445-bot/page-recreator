@@ -134,8 +134,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
             />
             <div className="flex items-center justify-between">
               <button
-                className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-0 text-text-secondary hover:text-foreground transition-colors cursor-pointer"
-                style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
+                className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px]"
+                style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px", border: "1px solid #44444D" }}
               >
                 <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
               </button>
