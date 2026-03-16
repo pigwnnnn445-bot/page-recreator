@@ -102,8 +102,8 @@ const PromptGeneratorDialog = ({
   return (
     <>
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="sm:max-w-[560px] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden">
-          <DialogHeader className="p-4 pb-0">
+        <DialogContent className="sm:max-w-[560px] max-h-[90vh] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden flex flex-col">
+          <DialogHeader className="p-4 pb-0 flex-shrink-0">
             <div className="flex items-center gap-2">
               <DialogTitle className="text-foreground text-base font-semibold">
                 提示生成器
@@ -111,9 +111,9 @@ const PromptGeneratorDialog = ({
             </div>
           </DialogHeader>
 
-          <div className="p-4 flex flex-col gap-3">
+          <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0">
             {/* Input area */}
-            <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[180px]">
+            <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[140px] md:min-h-[180px] flex-shrink-0">
               <textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
@@ -134,7 +134,7 @@ const PromptGeneratorDialog = ({
             {/* Results */}
             {results && (
               <>
-                <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto">
+                <div className="flex flex-col gap-2">
                   {results.map((result, index) => (
                     <div
                       key={index}
