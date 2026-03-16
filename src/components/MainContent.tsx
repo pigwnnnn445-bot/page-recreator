@@ -166,9 +166,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const handleSelectItem = useCallback((item: HistoryItem) => {
     if (item.status === "completed") {
       setPreviewItem(item);
+      setPrompt(item.prompt);
+      onRestoreFromHistory(item);
       setHistoryOpen(false);
     }
-  }, []);
+  }, [onRestoreFromHistory]);
 
   return (
     <div className="flex-1 flex flex-col min-h-screen min-w-0">
