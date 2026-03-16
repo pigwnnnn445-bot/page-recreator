@@ -173,6 +173,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   <p className="w-full text-foreground text-sm mb-3 truncate">{previewItem.prompt}</p>
                   <div className="flex items-center justify-between">
                     <button
+                      onClick={() => setPromptGenOpen(true)}
                       className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                       style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                     >
