@@ -320,6 +320,13 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           onSelect={handleSelectItem}
         />
       </div>
+
+      <PromptGeneratorDialog
+        open={promptGenOpen}
+        onClose={() => setPromptGenOpen(false)}
+        initialPrompt={prompt}
+        onApplyPrompt={(p) => setPrompt(p)}
+      />
     </div>
   );
 };
