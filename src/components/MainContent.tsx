@@ -202,7 +202,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                       视频生成大约需要20分钟🏖️。在这期间，您可以尽情体验其他有趣的AI模型，或者放松一下，生成过程不会中断哦！完成后，别忘了在历史记录中查看您的精彩视频！
                     </p>
                     <button
-                      onClick={() => setGenerating(false)}
+                      onClick={() => { setGenerating(false); setPrompt(""); }}
                       className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
                     >
                       <Copy className="w-5 h-5" /> 后台生成
