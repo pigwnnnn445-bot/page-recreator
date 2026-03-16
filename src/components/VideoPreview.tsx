@@ -34,10 +34,10 @@ const VideoPreview = ({ item }: VideoPreviewProps) => {
             <video
               ref={videoRef}
               src={item.videoUrl}
-              poster={item.thumb}
               onEnded={handleVideoEnded}
               className="absolute inset-0 w-full h-full object-contain"
               playsInline
+              preload="metadata"
             />
             <div
               className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
