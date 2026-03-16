@@ -29,7 +29,52 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
   const [prompt, setPrompt] = useState("");
   const [historyOpen, setHistoryOpen] = useState(false);
   const [generating, setGenerating] = useState(false);
-  const [historyItems, setHistoryItems] = useState<HistoryItem[]>([]);
+  const [historyItems, setHistoryItems] = useState<HistoryItem[]>([
+    {
+      id: "mock-1",
+      status: "loading",
+      prompt: "一只可爱的小猫在开车，在法国埃菲尔铁塔附近",
+      modelName: "veo3-fast",
+      category: "Veo",
+      createdAt: new Date("2026-03-16T10:30:00"),
+    },
+    {
+      id: "mock-2",
+      status: "completed",
+      thumb: sampleThumb,
+      prompt: "一只可爱的小猫在开车，在法国埃菲尔铁塔附近",
+      modelName: "veo3-fast",
+      category: "Veo",
+      createdAt: new Date("2026-03-16T09:15:00"),
+    },
+    {
+      id: "mock-3",
+      status: "completed",
+      thumb: sampleThumb,
+      prompt: "雪夜中的圣诞小屋，烟囱冒着白烟，门前的圣诞树闪烁着彩灯",
+      modelName: "veo3",
+      category: "Veo",
+      createdAt: new Date("2026-03-10T14:20:00"),
+    },
+    {
+      id: "mock-4",
+      status: "completed",
+      thumb: sampleThumb,
+      prompt: "星空下的雪山木屋，温暖的灯光从窗户透出，雪花缓缓飘落",
+      modelName: "veo3",
+      category: "Veo",
+      createdAt: new Date("2025-12-22T18:00:00"),
+    },
+    {
+      id: "mock-5",
+      status: "completed",
+      thumb: sampleThumb,
+      prompt: "冬日暖阳下的欧式小镇，街道上铺满积雪，远处教堂钟声响起",
+      modelName: "veo3-fast",
+      category: "Veo",
+      createdAt: new Date("2025-12-22T16:45:00"),
+    },
+  ]);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
 
   const handleMake = () => {
