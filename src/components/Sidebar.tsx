@@ -41,7 +41,7 @@ const Sidebar = ({
   currentConfig,
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
-  const [modeOpen, setModeOpen] = useState(false);
+  
   const modelListRef = useRef<HTMLDivElement>(null);
 
   const handleModelOpen = useCallback((nextOpen: boolean) => {
@@ -184,34 +184,20 @@ const Sidebar = ({
         {showCreationModeSelector && (
           <div className="mb-6">
             <span className="text-sm text-text-secondary mb-2 block">创作模式</span>
-            <div className="relative">
-              <button
-                onClick={() => setModeOpen(!modeOpen)}
-                className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer group"
-              >
-                <span className="truncate">{creationModeLabels[selectedCreationMode]}</span>
-                <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modeOpen ? "rotate-180" : ""}`} />
-              </button>
-              {modeOpen && (
-                <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg">
-                  {currentConfig.creationModes.map((mode) => (
-                    <button
-                      key={mode}
-                      onClick={() => {
-                        setSelectedCreationMode(mode);
-                        setModeOpen(false);
-                      }}
-                      className={`w-full px-4 py-3 text-left rounded-xl text-sm transition-colors cursor-pointer border ${
-                        mode === selectedCreationMode
-                          ? "bg-menu-selected border-primary font-semibold text-foreground"
-                          : "border-transparent text-text-secondary hover:bg-hover-bg"
-                      }`}
-                    >
-                      {creationModeLabels[mode]}
-                    </button>
-                  ))}
-                </div>
-              )}
+            <div className="flex h-[48px] rounded-full border border-border bg-card p-1">
+              {currentConfig.creationModes.map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => setSelectedCreationMode(mode)}
+                  className={`flex-1 h-full rounded-full text-sm font-medium transition-colors cursor-pointer ${
+                    mode === selectedCreationMode
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-text-secondary hover:text-foreground"
+                  }`}
+                >
+                  {creationModeLabels[mode]}
+                </button>
+              ))}
             </div>
           </div>
         )}
