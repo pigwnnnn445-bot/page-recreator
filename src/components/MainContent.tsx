@@ -291,7 +291,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                       }}
                       placeholder="输入你的提示，例如：一只猫"
                       rows={1}
-                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-auto max-h-[120px]"
+                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-auto max-h-[200px]"
                     />
                     <div className="flex items-center justify-between">
                       <button
