@@ -1,4 +1,5 @@
 import { Home, Clock, Play, Globe, Zap, Menu } from "lucide-react";
+import HistoryDrawer from "./HistoryDrawer";
 import { useState } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
