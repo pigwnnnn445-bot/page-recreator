@@ -286,10 +286,15 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
                     <textarea
                       value={prompt}
-                      onChange={(e) => setPrompt(e.target.value)}
+                      onChange={(e) => {
+                        setPrompt(e.target.value);
+                        setIsTyping(true);
+                        if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+                        typingTimerRef.current = setTimeout(() => setIsTyping(false), 1000);
+                      }}
                       placeholder="输入你的提示，例如：一只猫"
                       rows={3}
-                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[4.5rem]"
+                      className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none max-h-[4.5rem] ${isTyping ? 'overflow-y-auto scrollbar-hide' : 'overflow-y-scroll'}`}
                     />
                     <div className="flex items-center justify-between">
                       <button
