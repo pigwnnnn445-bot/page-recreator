@@ -33,7 +33,7 @@ const SAMPLE_VIDEO = {
   prompt: "一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院",
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -47,6 +47,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3-fast",
       category: "Veo",
       createdAt: new Date("2026-03-16T10:30:00"),
+      modelId: 1110,
+      creationMode: "text_to_video",
+      quality: "standard",
+      duration: "5s",
+      ratio: "16:9",
     },
     {
       id: "mock-2",
@@ -57,6 +62,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3-fast",
       category: "Veo",
       createdAt: new Date("2026-03-16T09:15:00"),
+      modelId: 1110,
+      creationMode: "text_to_video",
+      quality: "standard",
+      duration: "5s",
+      ratio: "16:9",
     },
     {
       id: "mock-3",
@@ -67,6 +77,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3",
       category: "Veo",
       createdAt: new Date("2026-03-10T14:20:00"),
+      modelId: 1109,
+      creationMode: "text_to_video",
+      quality: "pro",
+      duration: "8s",
+      ratio: "9:16",
     },
     {
       id: "mock-4",
@@ -77,6 +92,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3",
       category: "Veo",
       createdAt: new Date("2025-12-22T18:00:00"),
+      modelId: 1109,
+      creationMode: "text_to_video",
+      quality: "pro",
+      duration: "8s",
+      ratio: "16:9",
     },
     {
       id: "mock-5",
@@ -87,6 +107,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3-fast",
       category: "Veo",
       createdAt: new Date("2025-12-22T16:45:00"),
+      modelId: 1110,
+      creationMode: "text_to_video",
+      quality: "standard",
+      duration: "5s",
+      ratio: "16:9",
     },
   ]);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
