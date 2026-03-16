@@ -1,5 +1,5 @@
 import { ChevronDown, X, Zap } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   type ModelInfo,
   type ModelConfig,
@@ -42,6 +42,24 @@ const Sidebar = ({
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
   const [modeOpen, setModeOpen] = useState(false);
+  const modelListRef = useRef<HTMLDivElement>(null);
+
+  const handleModelOpen = useCallback((nextOpen: boolean) => {
+    setModelOpen(nextOpen);
+  }, []);
+
+  useEffect(() => {
+    if (modelOpen && modelListRef.current) {
+      const container = modelListRef.current;
+      const selectedEl = container.querySelector('[data-selected="true"]') as HTMLElement | null;
+      if (selectedEl) {
+        // Use requestAnimationFrame to ensure DOM is painted
+        requestAnimationFrame(() => {
+          selectedEl.scrollIntoView({ block: "nearest" });
+        });
+      }
+    }
+  }, [modelOpen]);
 
   const handleSelectModel = (model: ModelInfo) => {
     setSelectedModel(model);
@@ -101,19 +119,20 @@ const Sidebar = ({
           </div>
           <div className="relative">
             <button
-              onClick={() => setModelOpen(!modelOpen)}
+              onClick={() => handleModelOpen(!modelOpen)}
               className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer group"
             >
               <span className="truncate">{selectedModel.name}</span>
               <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modelOpen ? "rotate-180" : ""}`} />
             </button>
             {modelOpen && (
-              <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg max-h-[400px] overflow-y-auto">
+              <div ref={modelListRef} className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg max-h-[400px] overflow-y-auto">
                 {models.map((m) => {
                   const isComingSoon = m.status === "coming_soon";
                   return (
                     <button
                       key={m.id}
+                      data-selected={m.id === selectedModel.id ? "true" : undefined}
                       onClick={() => !isComingSoon && handleSelectModel(m)}
                       disabled={isComingSoon}
                       className={`relative w-full px-4 py-3 text-left rounded-xl transition-colors border ${
