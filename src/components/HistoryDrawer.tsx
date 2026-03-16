@@ -36,7 +36,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  if (!open) return null;
+  
 
   // Group items by date
   const grouped = items.reduce<Record<string, HistoryItem[]>>((acc, item) => {
