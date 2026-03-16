@@ -90,11 +90,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                 </div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-8">
                   {/* Video Preview Card */}
-                  <div className="bg-card rounded-xl border border-border p-4 shadow-sm md:row-span-2">
-                    <div className="relative rounded-lg overflow-hidden mb-4">
-                      <img src={sampleThumb} alt="示例视频" className="w-full aspect-video object-cover" />
+                  <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm md:row-span-2">
+                    <div className="relative rounded-lg overflow-hidden mb-2 md:mb-4">
+                      <img src={sampleThumb} alt="示例视频" className="w-full aspect-[2/1] md:aspect-video object-cover" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-12 h-12 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
                           <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground" />
