@@ -168,7 +168,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
             <>
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} />
               {/* Bottom Prompt Input - preview mode shows video prompt */}
-              <div className="px-3 md:px-6 pb-3 md:pb-5">
+              <div className="px-5 pb-4 md:p-6 md:pt-0">
                 <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
                   <p className="w-full text-foreground text-sm mb-3 truncate">{previewItem.prompt}</p>
                   <div className="flex items-center justify-between">
