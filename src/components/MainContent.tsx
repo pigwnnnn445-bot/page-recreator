@@ -3,6 +3,7 @@ import { useState } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
 import iconTips from "@/assets/icon-tips.png";
+import iconPromptGen from "@/assets/icon-prompt-generator.webp";
 import ThemeToggle from "./ThemeToggle";
 import type { ModelInfo } from "@/types/api";
 
