@@ -36,7 +36,7 @@ const MainContent = ({ onMenuOpen, totalCost }: MainContentProps) => {
       </header>
 
       {/* Main Area */}
-      <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-4">
+      <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-4 flex items-center justify-center">
         <div className="max-w-3xl mx-auto">
           {/* Welcome */}
           <div className="text-center mb-8 mt-6 md:mt-8">
