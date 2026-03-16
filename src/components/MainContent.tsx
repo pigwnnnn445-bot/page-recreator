@@ -1,4 +1,5 @@
 import { Home, Clock, Play, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download } from "lucide-react";
+import type { CreationMode } from "@/types/api";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
 import PromptGeneratorDialog from "./PromptGeneratorDialog";
@@ -16,6 +17,12 @@ interface MainContentProps {
   totalCost: number;
   models: ModelInfo[];
   onSelectModel: (model: ModelInfo) => void;
+  selectedModel: ModelInfo;
+  selectedCreationMode: CreationMode;
+  selectedQuality: string;
+  selectedDuration: string;
+  selectedRatio: string;
+  onRestoreFromHistory: (item: HistoryItem) => void;
 }
 
 // 示例视频关联的模型信息
@@ -26,7 +33,7 @@ const SAMPLE_VIDEO = {
   prompt: "一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院",
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -40,6 +47,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3-fast",
       category: "Veo",
       createdAt: new Date("2026-03-16T10:30:00"),
+      modelId: 1110,
+      creationMode: "text_to_video",
+      quality: "standard",
+      duration: "5s",
+      ratio: "16:9",
     },
     {
       id: "mock-2",
@@ -50,6 +62,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3-fast",
       category: "Veo",
       createdAt: new Date("2026-03-16T09:15:00"),
+      modelId: 1110,
+      creationMode: "text_to_video",
+      quality: "standard",
+      duration: "5s",
+      ratio: "16:9",
     },
     {
       id: "mock-3",
@@ -60,6 +77,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3",
       category: "Veo",
       createdAt: new Date("2026-03-10T14:20:00"),
+      modelId: 1109,
+      creationMode: "text_to_video",
+      quality: "pro",
+      duration: "8s",
+      ratio: "9:16",
     },
     {
       id: "mock-4",
@@ -70,6 +92,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3",
       category: "Veo",
       createdAt: new Date("2025-12-22T18:00:00"),
+      modelId: 1109,
+      creationMode: "text_to_video",
+      quality: "pro",
+      duration: "8s",
+      ratio: "16:9",
     },
     {
       id: "mock-5",
@@ -80,6 +107,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       modelName: "veo3-fast",
       category: "Veo",
       createdAt: new Date("2025-12-22T16:45:00"),
+      modelId: 1110,
+      creationMode: "text_to_video",
+      quality: "standard",
+      duration: "5s",
+      ratio: "16:9",
     },
   ]);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
@@ -100,9 +132,14 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       id: crypto.randomUUID(),
       status: "loading",
       prompt: prompt.trim(),
-      modelName: "veo3-fast",
-      category: "Veo",
+      modelName: selectedModel.name,
+      category: selectedModel.category ?? "",
       createdAt: new Date(),
+      modelId: selectedModel.id,
+      creationMode: selectedCreationMode,
+      quality: selectedQuality,
+      duration: selectedDuration,
+      ratio: selectedRatio,
     };
 
     setHistoryItems(prev => [newItem, ...prev]);
@@ -119,7 +156,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       );
       setGenerating(false);
     }, 5000);
-  }, [prompt]);
+  }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
   const handleDeleteItem = useCallback((id: string) => {
     setHistoryItems(prev => prev.filter(item => item.id !== id));
@@ -129,9 +166,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
   const handleSelectItem = useCallback((item: HistoryItem) => {
     if (item.status === "completed") {
       setPreviewItem(item);
+      setPrompt(item.prompt);
+      onRestoreFromHistory(item);
       setHistoryOpen(false);
     }
-  }, []);
+  }, [onRestoreFromHistory]);
 
   return (
     <div className="flex-1 flex flex-col min-h-screen min-w-0">

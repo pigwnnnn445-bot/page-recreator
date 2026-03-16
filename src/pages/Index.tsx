@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar";
 import MainContent from "@/components/MainContent";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   mockUserConfig,
   modelConfigMap,
@@ -8,6 +8,7 @@ import {
   type ModelInfo,
   type CreationMode,
 } from "@/types/api";
+import type { HistoryItem } from "@/types/history";
 
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,6 +36,27 @@ const Index = () => {
     return baseCost + extraCost;
   }, [currentConfig, selectedRatio]);
 
+  // Restore sidebar settings from a history item
+  const handleRestoreFromHistory = useCallback((item: HistoryItem) => {
+    const model = models.find(m => m.id === item.modelId);
+    if (model) setSelectedModel(model);
+
+    const cfg = modelConfigMap[item.modelId] ?? defaultModelConfig;
+    if (cfg.creationModes.includes(item.creationMode)) {
+      setSelectedCreationMode(item.creationMode);
+    }
+    if (cfg.qualities.includes(item.quality)) {
+      setSelectedQuality(item.quality);
+    }
+    if (item.duration && cfg.durations.includes(item.duration)) {
+      setSelectedDuration(item.duration);
+    }
+    const ratioOption = cfg.aspectRatios.find(r => r.label === item.ratio && r.enabled);
+    if (ratioOption) {
+      setSelectedRatio(item.ratio);
+    }
+  }, [models]);
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar
@@ -58,6 +80,12 @@ const Index = () => {
         totalCost={totalCost}
         models={models}
         onSelectModel={setSelectedModel}
+        selectedModel={selectedModel}
+        selectedCreationMode={selectedCreationMode}
+        selectedQuality={selectedQuality}
+        selectedDuration={selectedDuration}
+        selectedRatio={selectedRatio}
+        onRestoreFromHistory={handleRestoreFromHistory}
       />
     </div>
   );
