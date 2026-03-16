@@ -114,7 +114,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   </div>
 
                   {/* Chat Assistant Card */}
-                  <div className="bg-card rounded-xl border border-border p-4 shadow-sm">
+                  <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
                     <div className="flex items-start gap-3 mb-3">
                       <div className="w-8 h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Globe className="w-4 h-4 text-theme-1" />
