@@ -111,9 +111,11 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                             className="cursor-pointer"
                             onClick={() => onSelect(item)}
                           >
-                            <img
-                              src={item.thumb}
-                              alt="历史视频"
+                            <video
+                              src={item.videoUrl}
+                              muted
+                              playsInline
+                              preload="metadata"
                               className="w-full aspect-square object-cover rounded-lg hover:opacity-90 transition-opacity"
                             />
                           </div>

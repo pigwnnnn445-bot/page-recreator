@@ -111,7 +111,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       setHistoryItems(prev =>
         prev.map(item =>
           item.id === newItem.id
-            ? { ...item, status: "completed" as const, thumb: sampleThumb }
+            ? { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
             : item
         )
       );
