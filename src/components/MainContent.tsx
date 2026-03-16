@@ -81,6 +81,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
     },
   ]);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
+  const [promptGenOpen, setPromptGenOpen] = useState(false);
 
   const handleMake = () => {
     setPrompt(SAMPLE_VIDEO.prompt);
