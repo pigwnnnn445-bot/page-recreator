@@ -84,9 +84,9 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
             ) : (
               <div className="max-w-3xl mx-auto">
                 {/* Welcome */}
-                <div className="text-center mb-8 mt-6 md:mt-8">
-                  <h1 className="text-2xl md:text-3xl font-bold text-title mb-2">👋嘿！欢迎来到 Rita</h1>
-                  <p className="text-text-muted text-sm md:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
+                <div className="text-center mb-3 md:mb-8 mt-2 md:mt-8">
+                  <h1 className="text-xl md:text-3xl font-bold text-title mb-1 md:mb-2">👋嘿！欢迎来到 Rita</h1>
+                  <p className="text-text-muted text-xs md:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
                 </div>
 
                 {/* Cards Grid */}
