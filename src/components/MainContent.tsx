@@ -149,8 +149,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
 
           {/* Bottom Prompt Input - only show when not generating */}
           {!generating && (
-            <div className="px-4 md:px-6 pb-4 md:pb-5">
-              <div className="bg-card border border-border rounded-[24px] p-4 shadow-sm h-[100px] flex flex-col justify-between">
+            <div className="px-3 md:px-6 pb-3 md:pb-5">
+              <div className="bg-card border border-border rounded-[24px] p-3 md:p-4 shadow-sm h-[88px] md:h-[100px] flex flex-col justify-between">
                 <input
                   type="text"
                   value={prompt}
