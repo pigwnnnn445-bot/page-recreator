@@ -123,7 +123,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
       {/* Bottom Prompt Input */}
       <div className="px-4 md:px-6 pb-4 md:pb-5">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-card border border-border rounded-xl p-4 shadow-sm">
+          <div className="bg-card border border-border rounded-[24px] p-4 shadow-sm h-[100px] flex flex-col justify-between">
             <input
               type="text"
               value={prompt}
