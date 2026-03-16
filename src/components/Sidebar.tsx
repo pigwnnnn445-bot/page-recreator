@@ -132,6 +132,7 @@ const Sidebar = ({
                   return (
                     <button
                       key={m.id}
+                      data-selected={m.id === selectedModel.id ? "true" : undefined}
                       onClick={() => !isComingSoon && handleSelectModel(m)}
                       disabled={isComingSoon}
                       className={`relative w-full px-4 py-3 text-left rounded-xl transition-colors border ${
