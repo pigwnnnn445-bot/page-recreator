@@ -56,6 +56,8 @@ const Index = () => {
       <MainContent
         onMenuOpen={() => setSidebarOpen(true)}
         totalCost={totalCost}
+        models={models}
+        onSelectModel={setSelectedModel}
       />
     </div>
   );
