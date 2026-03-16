@@ -132,9 +132,14 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       id: crypto.randomUUID(),
       status: "loading",
       prompt: prompt.trim(),
-      modelName: "veo3-fast",
-      category: "Veo",
+      modelName: selectedModel.name,
+      category: selectedModel.category ?? "",
       createdAt: new Date(),
+      modelId: selectedModel.id,
+      creationMode: selectedCreationMode,
+      quality: selectedQuality,
+      duration: selectedDuration,
+      ratio: selectedRatio,
     };
 
     setHistoryItems(prev => [newItem, ...prev]);
