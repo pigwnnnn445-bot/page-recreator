@@ -17,6 +17,12 @@ interface MainContentProps {
   totalCost: number;
   models: ModelInfo[];
   onSelectModel: (model: ModelInfo) => void;
+  selectedModel: ModelInfo;
+  selectedCreationMode: CreationMode;
+  selectedQuality: string;
+  selectedDuration: string;
+  selectedRatio: string;
+  onRestoreFromHistory: (item: HistoryItem) => void;
 }
 
 // 示例视频关联的模型信息
