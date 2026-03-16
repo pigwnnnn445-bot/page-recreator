@@ -129,34 +129,33 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
               </div>
             </div>
           </div>
+          {/* Bottom Prompt Input */}
+          <div className="px-4 md:px-6 pb-4 md:pb-5">
+            <div className="bg-card border border-border rounded-[24px] p-4 shadow-sm h-[100px] flex flex-col justify-between">
+              <input
+                type="text"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="输入你的提示，例如：一只猫"
+                className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm mb-3"
+              />
+              <div className="flex items-center justify-between">
+                <button
+                  className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px]"
+                  style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px", border: "1px solid #44444D" }}
+                >
+                  <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
+                </button>
+                <button className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer">
+                  生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* History Panel - inline, not overlay */}
         <HistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
-      </div>
-
-      {/* Bottom Prompt Input - full width */}
-      <div className="px-4 md:px-6 pb-4 md:pb-5">
-        <div className="bg-card border border-border rounded-[24px] p-4 shadow-sm h-[100px] flex flex-col justify-between">
-          <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="输入你的提示，例如：一只猫"
-            className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm mb-3"
-          />
-          <div className="flex items-center justify-between">
-            <button
-              className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px]"
-              style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px", border: "1px solid #44444D" }}
-            >
-              <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
-            </button>
-            <button className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer">
-              生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
