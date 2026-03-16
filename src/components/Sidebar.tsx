@@ -168,7 +168,7 @@ const Sidebar = ({
             <div className="relative">
               <button
                 onClick={() => setModeOpen(!modeOpen)}
-                className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between hover:border-primary/50 transition-colors cursor-pointer group"
+                className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer group"
               >
                 <span className="truncate">{creationModeLabels[selectedCreationMode]}</span>
                 <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modeOpen ? "rotate-180" : ""}`} />
