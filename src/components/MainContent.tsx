@@ -137,7 +137,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                 className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-0 text-text-secondary hover:text-foreground transition-colors cursor-pointer"
                 style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
               >
-                <Globe className="w-4 h-4" /> 提示词生成器
+                <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
               </button>
               <button className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer">
                 生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
