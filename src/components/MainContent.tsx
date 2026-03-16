@@ -79,7 +79,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                 <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">Veo</span>
                 <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">veo3-fast</span>
                 <button
-                  onClick={() => setPrompt("一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院")}
+                  onClick={handleMake}
                   className="ml-auto px-4 py-1.5 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   制作！
