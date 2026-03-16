@@ -169,7 +169,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} />
               {/* Bottom Prompt Input - preview mode shows video prompt */}
               <div className="px-3 md:px-6 pb-3 md:pb-5">
-                <div className="bg-card border border-border rounded-[24px] p-3 md:p-4 shadow-sm h-[88px] md:h-[100px] flex flex-col justify-between">
+                <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
                   <p className="w-full text-foreground text-sm mb-3 truncate">{previewItem.prompt}</p>
                   <div className="flex items-center justify-between">
                     <button
@@ -281,7 +281,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
                 <div className="px-3 md:px-6 pb-3 md:pb-5">
-                  <div className="bg-card border border-border rounded-[24px] p-3 md:p-4 shadow-sm h-[88px] md:h-[100px] flex flex-col justify-between">
+                  <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
                     <input
                       type="text"
                       value={prompt}

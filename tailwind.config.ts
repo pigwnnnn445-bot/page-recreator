@@ -34,6 +34,7 @@ export default {
         "theme-2": "hsl(var(--theme-2))",
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
+        "bg-4": "hsl(var(--bg-4))",
       },
       borderRadius: {
         lg: "var(--radius)",
