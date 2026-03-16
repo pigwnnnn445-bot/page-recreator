@@ -286,8 +286,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
                       placeholder="输入你的提示，例如：一只猫"
-                      rows={2}
-                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-auto flex-1"
+                      rows={3}
+                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-auto max-h-[4.5rem]"
                     />
                     <div className="flex items-center justify-between">
                       <button
