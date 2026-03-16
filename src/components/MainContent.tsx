@@ -4,14 +4,33 @@ import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
 import iconTips from "@/assets/icon-tips.png";
 import ThemeToggle from "./ThemeToggle";
+import type { ModelInfo } from "@/types/api";
 
 interface MainContentProps {
   onMenuOpen: () => void;
   totalCost: number;
+  models: ModelInfo[];
+  onSelectModel: (model: ModelInfo) => void;
 }
 
-const MainContent = ({ onMenuOpen, totalCost }: MainContentProps) => {
+// 示例视频关联的模型信息
+const SAMPLE_VIDEO = {
+  modelId: 1110,
+  category: "Veo",
+  modelName: "veo3-fast",
+  prompt: "一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院",
+};
+
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
+
+  const handleMake = () => {
+    setPrompt(SAMPLE_VIDEO.prompt);
+    const targetModel = models.find(m => m.id === SAMPLE_VIDEO.modelId);
+    if (targetModel) {
+      onSelectModel(targetModel);
+    }
+  };
 
   return (
     <div className="flex-1 flex flex-col min-h-screen min-w-0">
@@ -60,7 +79,7 @@ const MainContent = ({ onMenuOpen, totalCost }: MainContentProps) => {
                 <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">Veo</span>
                 <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">veo3-fast</span>
                 <button
-                  onClick={() => setPrompt("一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院")}
+                  onClick={handleMake}
                   className="ml-auto px-4 py-1.5 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   制作！
