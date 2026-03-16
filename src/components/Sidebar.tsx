@@ -119,14 +119,14 @@ const Sidebar = ({
           </div>
           <div className="relative">
             <button
-              onClick={() => setModelOpen(!modelOpen)}
+              onClick={() => handleModelOpen(!modelOpen)}
               className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer group"
             >
               <span className="truncate">{selectedModel.name}</span>
               <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${modelOpen ? "rotate-180" : ""}`} />
             </button>
             {modelOpen && (
-              <div className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg max-h-[400px] overflow-y-auto">
+              <div ref={modelListRef} className="absolute top-full mt-1 z-10 p-2 rounded-2xl flex flex-col gap-1 w-[calc(100%+16px)] -ml-2 bg-card border border-border shadow-lg max-h-[400px] overflow-y-auto">
                 {models.map((m) => {
                   const isComingSoon = m.status === "coming_soon";
                   return (
