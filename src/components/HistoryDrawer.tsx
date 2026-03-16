@@ -63,7 +63,11 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
 
   return (
     <>
-      <div className="w-80 flex-shrink-0 border-l border-border bg-card flex flex-col h-full">
+      <div
+        className={`flex-shrink-0 border-l border-border bg-card flex flex-col h-full transition-all duration-300 ease-in-out overflow-hidden ${
+          open ? 'w-80 opacity-100' : 'w-0 opacity-0 border-l-0'
+        }`}
+      >
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
           <h2 className="text-foreground font-semibold text-base">历史记录</h2>
           <button
