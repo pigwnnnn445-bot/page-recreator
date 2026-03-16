@@ -151,6 +151,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           </div>
         </div>
       </div>
+      <HistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
     </div>
   );
 };
