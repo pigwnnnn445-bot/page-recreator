@@ -25,6 +25,7 @@ const SAMPLE_VIDEO = {
 
 const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   const handleMake = () => {
     setPrompt(SAMPLE_VIDEO.prompt);
