@@ -282,12 +282,16 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
               {!generating && (
                 <div className="px-5 pb-4 md:p-6 md:pt-0">
                   <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
-                    <input
-                      type="text"
+                    <textarea
                       value={prompt}
-                      onChange={(e) => setPrompt(e.target.value)}
+                      onChange={(e) => {
+                        setPrompt(e.target.value);
+                        e.target.style.height = 'auto';
+                        e.target.style.height = e.target.scrollHeight + 'px';
+                      }}
                       placeholder="输入你的提示，例如：一只猫"
-                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm mb-3"
+                      rows={1}
+                      className="w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-hidden"
                     />
                     <div className="flex items-center justify-between">
                       <button
