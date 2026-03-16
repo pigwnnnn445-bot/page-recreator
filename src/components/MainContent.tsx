@@ -66,7 +66,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           </header>
 
           {/* Main Area */}
-          <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-4 flex items-center justify-center">
+          <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-2 md:pb-4 flex items-center justify-center">
             {generating ? (
               /* Generating State */
               <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto">
