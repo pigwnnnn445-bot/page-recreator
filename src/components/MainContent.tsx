@@ -66,7 +66,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           </header>
 
           {/* Main Area */}
-          <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-4 flex items-center justify-center">
+          <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-2 md:pb-4 flex items-center justify-center">
             {generating ? (
               /* Generating State */
               <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto">
@@ -84,17 +84,17 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
             ) : (
               <div className="max-w-3xl mx-auto">
                 {/* Welcome */}
-                <div className="text-center mb-8 mt-6 md:mt-8">
-                  <h1 className="text-2xl md:text-3xl font-bold text-title mb-2">👋嘿！欢迎来到 Rita</h1>
-                  <p className="text-text-muted text-sm md:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
+                <div className="text-center mb-3 md:mb-8 mt-2 md:mt-8">
+                  <h1 className="text-xl md:text-3xl font-bold text-title mb-1 md:mb-2">👋嘿！欢迎来到 Rita</h1>
+                  <p className="text-text-muted text-xs md:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
                 </div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-8">
                   {/* Video Preview Card */}
-                  <div className="bg-card rounded-xl border border-border p-4 shadow-sm md:row-span-2">
-                    <div className="relative rounded-lg overflow-hidden mb-4">
-                      <img src={sampleThumb} alt="示例视频" className="w-full aspect-video object-cover" />
+                  <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm md:row-span-2">
+                    <div className="relative rounded-lg overflow-hidden mb-2 md:mb-4">
+                      <img src={sampleThumb} alt="示例视频" className="w-full aspect-[2/1] md:aspect-video object-cover" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-12 h-12 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
                           <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground" />
@@ -114,7 +114,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   </div>
 
                   {/* Chat Assistant Card */}
-                  <div className="bg-card rounded-xl border border-border p-4 shadow-sm">
+                  <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
                     <div className="flex items-start gap-3 mb-3">
                       <div className="w-8 h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Globe className="w-4 h-4 text-theme-1" />
@@ -132,14 +132,14 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   </div>
 
                   {/* Guide & Tips */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-card rounded-xl border border-border p-4 flex flex-col items-center justify-center gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                      <img src={iconGuide} alt="使用说明" className="w-16 h-16 object-contain" />
-                      <span className="text-foreground text-sm font-medium">使用说明</span>
+                  <div className="grid grid-cols-2 gap-3 md:gap-4">
+                    <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                      <img src={iconGuide} alt="使用说明" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
+                      <span className="text-foreground text-xs md:text-sm font-medium">使用说明</span>
                     </div>
-                    <div className="bg-card rounded-xl border border-border p-4 flex flex-col items-center justify-center gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                      <img src={iconTips} alt="生成技巧" className="w-16 h-16 object-contain" />
-                      <span className="text-foreground text-sm font-medium">生成技巧</span>
+                    <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                      <img src={iconTips} alt="生成技巧" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
+                      <span className="text-foreground text-xs md:text-sm font-medium">生成技巧</span>
                     </div>
                   </div>
                 </div>
@@ -149,8 +149,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
 
           {/* Bottom Prompt Input - only show when not generating */}
           {!generating && (
-            <div className="px-4 md:px-6 pb-4 md:pb-5">
-              <div className="bg-card border border-border rounded-[24px] p-4 shadow-sm h-[100px] flex flex-col justify-between">
+            <div className="px-3 md:px-6 pb-3 md:pb-5">
+              <div className="bg-card border border-border rounded-[24px] p-3 md:p-4 shadow-sm h-[88px] md:h-[100px] flex flex-col justify-between">
                 <input
                   type="text"
                   value={prompt}
