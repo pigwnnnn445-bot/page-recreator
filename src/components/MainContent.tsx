@@ -220,8 +220,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                             src="/videos/sample-home.mp4"
                             muted
                             playsInline
+                            preload="metadata"
                             className="w-full aspect-[2/1] md:aspect-video object-cover"
-                            poster={sampleThumb}
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="w-12 h-12 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
