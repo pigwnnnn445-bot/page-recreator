@@ -51,7 +51,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           <button className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer">
             <Home className="w-4 h-4" /> <span className="hidden sm:inline">首页</span>
           </button>
-          <button className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer">
+          <button
+            onClick={() => setHistoryOpen(true)}
+            className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
+          >
             <Clock className="w-4 h-4" /> <span className="hidden sm:inline">历史记录</span>
           </button>
         </div>
