@@ -159,7 +159,29 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
 
           {/* Main Area */}
           {previewItem ? (
-            <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} />
+            <>
+              <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} />
+              {/* Bottom Prompt Input - preview mode shows video prompt */}
+              <div className="px-3 md:px-6 pb-3 md:pb-5">
+                <div className="bg-card border border-border rounded-[24px] p-3 md:p-4 shadow-sm h-[88px] md:h-[100px] flex flex-col justify-between">
+                  <p className="w-full text-foreground text-sm mb-3 truncate">{previewItem.prompt}</p>
+                  <div className="flex items-center justify-between">
+                    <button
+                      className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
+                      style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
+                    >
+                      <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
+                    </button>
+                    <button
+                      onClick={handleGenerate}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                    >
+                      生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </>
           ) : (
             <>
               <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-2 md:pb-4 flex items-center justify-center">
