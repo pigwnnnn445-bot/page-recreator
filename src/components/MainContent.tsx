@@ -1,6 +1,7 @@
 import { Home, Clock, Play, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download } from "lucide-react";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
+import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import { useState, useCallback } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
@@ -80,6 +81,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
     },
   ]);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
+  const [promptGenOpen, setPromptGenOpen] = useState(false);
 
   const handleMake = () => {
     setPrompt(SAMPLE_VIDEO.prompt);
@@ -171,6 +173,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                   <p className="w-full text-foreground text-sm mb-3 truncate">{previewItem.prompt}</p>
                   <div className="flex items-center justify-between">
                     <button
+                      onClick={() => setPromptGenOpen(true)}
                       className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                       style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                     >
@@ -288,6 +291,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
                     />
                     <div className="flex items-center justify-between">
                       <button
+                        onClick={() => setPromptGenOpen(true)}
                         className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                         style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                       >
@@ -316,6 +320,13 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel }: MainConte
           onSelect={handleSelectItem}
         />
       </div>
+
+      <PromptGeneratorDialog
+        open={promptGenOpen}
+        onClose={() => setPromptGenOpen(false)}
+        initialPrompt={prompt}
+        onApplyPrompt={(p) => setPrompt(p)}
+      />
     </div>
   );
 };
