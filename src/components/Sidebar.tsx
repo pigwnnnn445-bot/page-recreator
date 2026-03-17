@@ -250,7 +250,7 @@ const Sidebar = ({
 
         {/* Video Quality */}
         <div className="mb-6">
-          <span className="text-sm text-foreground dark:text-muted-foreground mb-2 block">视频质量</span>
+          <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">视频质量</span>
           <div className="flex gap-2 flex-wrap">
             {currentConfig.qualities.map((q) => (
               <button
