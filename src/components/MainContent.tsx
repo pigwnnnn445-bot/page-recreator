@@ -51,8 +51,8 @@ const HomeVideoPlayer = () => {
     setPlaying(!playing);
   };
   return (
-    <div className="relative rounded-lg overflow-hidden mb-2 md:mb-4 cursor-pointer" onClick={handlePlayPause}>
-      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2/1] md:aspect-video object-cover" />
+    <div className="relative rounded-lg overflow-hidden mb-1.5 md:mb-4 cursor-pointer" onClick={handlePlayPause}>
+      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[5/2] md:aspect-video object-cover" />
       <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}>
         <div className="w-12 h-12 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center hover:bg-foreground/30 transition-colors">
           {playing ? <Pause className="w-6 h-6 text-primary-foreground fill-primary-foreground" /> : <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground" />}
