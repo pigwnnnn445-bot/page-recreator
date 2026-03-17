@@ -187,7 +187,24 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               {/* Bottom Prompt Input - preview mode shows video prompt */}
               <div className="px-5 pb-4 md:p-6 md:pt-0">
                 <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
-                  <p className="w-full text-foreground text-sm">{previewItem.prompt}</p>
+                  <textarea
+                    value={prompt}
+                    onChange={(e) => {
+                      setPrompt(e.target.value);
+                      setIsTyping(true);
+                      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+                      typingTimerRef.current = setTimeout(() => setIsTyping(false), 1000);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey && prompt.trim()) {
+                        e.preventDefault();
+                        handleGenerate();
+                      }
+                    }}
+                    placeholder="输入你的提示，例如：一只猫"
+                    rows={3}
+                    className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
+                  />
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => setPromptGenOpen(true)}
@@ -196,9 +213,9 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     >
                       <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
                     </button>
-                     <button
+                    <button
                       onClick={handleGenerate}
-                      disabled={!previewItem?.prompt}
+                      disabled={!prompt.trim()}
                       className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
