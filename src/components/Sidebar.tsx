@@ -114,7 +114,7 @@ const Sidebar = ({
         {/* Model Selector */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)]">切换模型</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground">切换模型</span>
             <div className="flex -space-x-1.5">
               {models.slice(0, 4).map((m) => (
                 m.icon ? (
@@ -198,7 +198,7 @@ const Sidebar = ({
         {/* Creation Mode Selector */}
         {showCreationModeSelector && (
           <div className="mb-6">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">创作模式</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">创作模式</span>
             <div className="relative">
               <button
                 onClick={() => setModeOpen(!modeOpen)}
@@ -231,7 +231,7 @@ const Sidebar = ({
         {/* Aspect Ratio */}
         {currentConfig.aspectRatios.filter(r => r.enabled).length > 0 && (
           <div className="mb-6">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">比例</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">比例</span>
             <div className="flex gap-2 flex-wrap">
               {currentConfig.aspectRatios.filter(r => r.enabled).map((r) => {
                 const isSelected = r.label === selectedRatio;
@@ -265,7 +265,7 @@ const Sidebar = ({
 
         {/* Video Quality */}
         <div className="mb-6">
-          <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">视频质量</span>
+          <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">视频质量</span>
           <div className="flex gap-2 flex-wrap">
             {currentConfig.qualities.map((q) => (
               <button
@@ -286,7 +286,7 @@ const Sidebar = ({
         {/* Duration */}
         {currentConfig.durations.length > 0 && (
           <div className="mb-6">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">时长</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">时长</span>
             <div className="flex gap-2 flex-wrap">
               {currentConfig.durations.map((d) => (
                 <button
