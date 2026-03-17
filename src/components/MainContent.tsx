@@ -195,12 +195,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
         <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-md:hidden' : ''}`}>
           {/* Top Nav */}
           <header className="flex items-center justify-between px-4 md:px-6 py-4 gap-3">
-            <button
-              onClick={onMenuOpen}
-              className="md:hidden p-2 rounded-lg hover:bg-hover-bg transition-colors cursor-pointer"
-            >
-              <Menu className="w-5 h-5 text-foreground" />
-            </button>
             <div className="flex-1" />
             <div className="flex items-center gap-2">
               <ThemeToggle />
@@ -209,6 +203,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                 className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
               >
                 <Home className="w-4 h-4" /> <span className="hidden sm:inline">首页</span>
+              </button>
+              <button
+                onClick={onMenuOpen}
+                className="md:hidden flex items-center gap-2 px-3 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
+              >
+                <Menu className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setHistoryOpen(!historyOpen)}
