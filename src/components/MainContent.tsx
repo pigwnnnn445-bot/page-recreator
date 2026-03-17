@@ -322,18 +322,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-2 md:mb-8">
                       {/* Video Preview Card */}
-                      <div className="bg-card rounded-xl border border-border p-2 md:p-4 shadow-sm md:row-span-2">
-                        <HomeVideoPlayer />
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="px-2.5 py-1 rounded-full bg-card-secondary text-text-secondary text-xs">Veo</span>
-                          <span className="px-2.5 py-1 rounded-full bg-card-secondary text-text-secondary text-xs">veo3-fast</span>
-                          <button
-                            onClick={handleMake}
-                            className="ml-auto px-3 py-1 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-xs md:text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
-                          >
-                            制作！
-                          </button>
-                        </div>
+                      <div className="rounded-xl overflow-hidden shadow-sm md:row-span-2">
+                        <HomeVideoPlayer onMake={handleMake} />
                       </div>
 
                       {/* Chat Assistant Card */}
