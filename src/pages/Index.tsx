@@ -13,6 +13,7 @@ import type { HistoryItem } from "@/types/history";
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [imageSizeTipOpen, setImageSizeTipOpen] = useState(false);
+  const [imageRatioTipOpen, setImageRatioTipOpen] = useState(false);
 
   const config = mockUserConfig;
   const models = config.data.enable_model;
