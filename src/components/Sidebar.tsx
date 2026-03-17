@@ -24,6 +24,7 @@ interface SidebarProps {
   selectedRatio: string;
   setSelectedRatio: (r: string) => void;
   currentConfig: ModelConfig;
+  onImageSizeError?: () => void;
 }
 
 const creationModeLabels: Record<CreationMode, string> = {
