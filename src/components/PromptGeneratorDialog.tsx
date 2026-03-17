@@ -219,7 +219,7 @@ const PromptGeneratorDialog = ({
       ) : (
         /* Mobile/Tablet: Bottom Drawer */
         <Drawer open={open} onOpenChange={(v) => !v && onClose()}>
-          <DrawerContent className="h-[55vh] max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+          <DrawerContent className="h-[85vh] max-h-[90vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
             <PromptGeneratorInner {...innerProps} />
           </DrawerContent>
         </Drawer>
