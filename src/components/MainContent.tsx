@@ -363,7 +363,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
                 <div className="px-3 pb-3 lg:p-6 lg:pt-0">
-                  <div className="lg:hidden mb-2 relative">
+                  <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
