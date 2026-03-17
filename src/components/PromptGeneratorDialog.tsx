@@ -71,8 +71,8 @@ const PromptGeneratorInner = ({
         <X className="w-5 h-5" />
       </button>
     </div>
-    <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0">
-      <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[140px] md:min-h-[180px] flex-shrink-0">
+    <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0 flex-1">
+      <div className="bg-secondary rounded-xl p-3 flex flex-col flex-1 min-h-[140px] md:min-h-[180px]">
         <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
