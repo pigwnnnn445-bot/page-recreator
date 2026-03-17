@@ -82,6 +82,7 @@ const Index = () => {
         currentConfig={currentConfig}
         onImageSizeError={() => setImageSizeTipOpen(true)}
         onImageRatioError={() => { if (shouldShowRatioTip()) setImageRatioTipOpen(true); }}
+        onImageUploaded={(hasImage) => setHasUploadedImage(hasImage)}
       />
       <MainContent
         onMenuOpen={() => setSidebarOpen(true)}
