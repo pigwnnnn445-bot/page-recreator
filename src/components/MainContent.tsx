@@ -401,6 +401,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
         open={imageRequiredTipOpen}
         onClose={() => setImageRequiredTipOpen(false)}
       />
+      <ImageSizeTip
+        open={imageSizeTipOpen}
+        onClose={() => setImageSizeTipOpen(false)}
+      />
     </div>
   );
 };
