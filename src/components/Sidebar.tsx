@@ -44,6 +44,7 @@ const Sidebar = ({
   currentConfig, onImageSizeError, onImageRatioError, onImageUploaded,
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
+  const [modeOpen, setModeOpen] = useState(false);
   const asideRef = useRef<HTMLElement>(null);
   
   const modelListRef = useRef<HTMLDivElement>(null);
