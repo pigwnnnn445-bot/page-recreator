@@ -322,18 +322,18 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       </div>
 
                       {/* Chat Assistant Card */}
-                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className="w-8 h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Globe className="w-4 h-4 text-theme-1" />
+                      <div className="bg-card rounded-xl border border-border p-2.5 md:p-4 shadow-sm">
+                        <div className="flex items-start gap-2 md:gap-3 mb-2 md:mb-3">
+                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Globe className="w-3.5 h-3.5 md:w-4 md:h-4 text-theme-1" />
                           </div>
-                          <p className="text-foreground text-sm leading-relaxed">
+                          <p className="text-foreground text-xs md:text-sm leading-relaxed">
                             嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-4 py-2.5">
-                          <span className="text-primary text-sm">💡 输入点想法试试看</span>
-                          <div className="ml-auto w-7 h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
+                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-3 py-2 md:px-4 md:py-2.5">
+                          <span className="text-primary text-xs md:text-sm">💡 输入点想法试试看</span>
+                          <div className="ml-auto w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
                             <span className="text-primary-foreground text-xs">😊</span>
                           </div>
                         </div>
