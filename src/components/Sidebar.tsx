@@ -231,7 +231,7 @@ const Sidebar = ({
         {/* Aspect Ratio */}
         {currentConfig.aspectRatios.filter(r => r.enabled).length > 0 && (
           <div className="mb-6">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">比例</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">比例</span>
             <div className="flex gap-2 flex-wrap">
               {currentConfig.aspectRatios.filter(r => r.enabled).map((r) => {
                 const isSelected = r.label === selectedRatio;
