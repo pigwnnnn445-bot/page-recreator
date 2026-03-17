@@ -43,8 +43,11 @@ const Sidebar = ({
   selectedRatio, setSelectedRatio,
   currentConfig, onImageSizeError, onImageRatioError, onImageUploaded,
 }: SidebarProps) => {
-  const [modelOpen, setModelOpen] = useState(false);
-  const [modeOpen, setModeOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<'model' | 'mode' | null>(null);
+  const modelOpen = openDropdown === 'model';
+  const modeOpen = openDropdown === 'mode';
+  const setModelOpen = (v: boolean) => setOpenDropdown(v ? 'model' : null);
+  const setModeOpen = (v: boolean) => setOpenDropdown(v ? 'mode' : null);
   const asideRef = useRef<HTMLElement>(null);
   
   const modelListRef = useRef<HTMLDivElement>(null);
