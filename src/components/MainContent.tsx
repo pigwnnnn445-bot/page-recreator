@@ -88,12 +88,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   };
 
   // Check if image is required but not uploaded
-  const isImageRequired = selectedCreationMode === "image_to_video";
+  const isImageRequired = selectedCreationMode === "image_to_video" && !hasUploadedImage;
 
   const handleGenerate = useCallback(() => {
     if (!prompt.trim()) return;
 
-    // If in image_to_video mode, image is required
+    // If in image_to_video mode and no image uploaded, show tip
     if (isImageRequired) {
       setImageRequiredTipOpen(true);
       return;
