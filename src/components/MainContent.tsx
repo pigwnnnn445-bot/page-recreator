@@ -1,4 +1,4 @@
-import { Home, Clock, Play, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download } from "lucide-react";
+import { Home, Clock, Play, Pause, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download } from "lucide-react";
 import type { CreationMode, ModelConfig } from "@/types/api";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
