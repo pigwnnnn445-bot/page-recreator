@@ -322,7 +322,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3 lg:gap-4 mb-2 lg:mb-8">
                       {/* Video Preview Card */}
-                      <div className="rounded-xl overflow-hidden shadow-sm lg:row-span-2">
+                      <div className="rounded-xl overflow-hidden shadow-sm lg:row-span-2 lg:min-h-0">
                         <HomeVideoPlayer onMake={handleMake} />
                       </div>
 
