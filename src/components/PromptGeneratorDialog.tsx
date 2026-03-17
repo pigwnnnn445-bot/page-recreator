@@ -126,29 +126,31 @@ const PromptGeneratorInner = ({
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-2 pt-1">
-                {results.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleSelectResult(index)}
-                    className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
-                  >
-                    {index + 1}
-                  </button>
-                ))}
-                <button
-                  onClick={handleRefresh}
-                  disabled={isOptimizing}
-                  className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
-                >
-                  <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
-                </button>
-              </div>
             </>
           )}
         </>
       )}
     </div>
+    {results && !isOptimizing && (
+      <div className="flex items-center gap-2 px-4 pb-4 pt-2 flex-shrink-0 border-t border-border">
+        {results.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handleSelectResult(index)}
+            className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={handleRefresh}
+          disabled={isOptimizing}
+          className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
+        >
+          <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
+        </button>
+      </div>
+    )}
   </>
 );
 
