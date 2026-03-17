@@ -74,6 +74,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
 
     setHistoryItems(prev => [newItem, ...prev]);
     setPrompt("");
+    setPreviewItem(null);
     setGenerating(true);
     generatingItemIdRef.current = newItem.id;
     backgroundGenerationRef.current = false;
