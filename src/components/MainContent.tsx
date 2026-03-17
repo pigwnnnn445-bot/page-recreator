@@ -43,7 +43,7 @@ const SAMPLE_VIDEO = {
   prompt: "一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院",
 };
 
-const HomeVideoPlayer = () => {
+const HomeVideoPlayer = ({ onMake }: { onMake: () => void }) => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const handlePlayPause = () => {
@@ -52,12 +52,26 @@ const HomeVideoPlayer = () => {
     setPlaying(!playing);
   };
   return (
-    <div className="relative rounded-lg overflow-hidden mb-1.5 md:mb-4 cursor-pointer" onClick={handlePlayPause}>
-      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[5/2] md:aspect-video object-cover" />
-      <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}>
-        <div className="w-12 h-12 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center hover:bg-foreground/30 transition-colors">
-          {playing ? <Pause className="w-6 h-6 text-primary-foreground fill-primary-foreground" /> : <Play className="w-6 h-6 text-primary-foreground fill-primary-foreground" />}
+    <div className="relative rounded-xl overflow-hidden cursor-pointer group" onClick={handlePlayPause}>
+      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] md:aspect-video object-cover" />
+      {/* Gradient overlay at bottom */}
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+      {/* Play button */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+          {playing ? <Pause className="w-5 h-5 text-white fill-white" /> : <Play className="w-5 h-5 text-white fill-white" />}
         </div>
+      </div>
+      {/* Bottom bar: tags + make button overlaid */}
+      <div className="absolute inset-x-0 bottom-0 flex items-center gap-1.5 px-2.5 py-2 md:px-3 md:py-2.5">
+        <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-[11px] md:text-xs font-medium">Veo</span>
+        <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-[11px] md:text-xs font-medium">veo3-fast</span>
+        <button
+          onClick={(e) => { e.stopPropagation(); onMake(); }}
+          className="ml-auto px-3 py-1 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-md"
+        >
+          制作！
+        </button>
       </div>
     </div>
   );
