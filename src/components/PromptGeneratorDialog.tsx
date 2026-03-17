@@ -126,7 +126,6 @@ const PromptGeneratorInner = ({
                   </div>
                 ))}
               </div>
-              </div>
             </>
           )}
         </>
