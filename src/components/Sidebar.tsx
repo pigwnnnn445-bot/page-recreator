@@ -279,7 +279,7 @@ const Sidebar = ({
                   onClick={() => setSelectedDuration(d)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
                     d === selectedDuration
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground"
                       : "bg-secondary text-secondary-foreground hover:bg-accent"
                   }`}
                 >
