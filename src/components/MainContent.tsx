@@ -32,6 +32,7 @@ interface MainContentProps {
   onCloseSizeTip: () => void;
   imageRatioTipOpen: boolean;
   onCloseRatioTip: () => void;
+  hasUploadedImage: boolean;
 }
 
 // 示例视频关联的模型信息
