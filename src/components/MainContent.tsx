@@ -303,7 +303,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3 lg:gap-4 mb-2 lg:mb-8">
-                      <div className="rounded-xl overflow-hidden shadow-sm lg:row-span-2 lg:min-h-0">
+                      <div className="lg:row-span-2 lg:min-h-0">
                         <HomeVideoPlayer onMake={handleMake} />
                       </div>
 
