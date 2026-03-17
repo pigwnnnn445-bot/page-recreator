@@ -110,7 +110,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       }
       generatingItemIdRef.current = null;
     }, 5000);
-  }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
+  }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, isImageRequired]);
 
   const handleDeleteItem = useCallback((id: string) => {
     setHistoryItems(prev => prev.filter(item => item.id !== id));
