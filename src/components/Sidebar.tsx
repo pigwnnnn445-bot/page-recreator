@@ -40,7 +40,7 @@ const Sidebar = ({
   selectedQuality, setSelectedQuality,
   selectedDuration, setSelectedDuration,
   selectedRatio, setSelectedRatio,
-  currentConfig, onImageSizeError,
+  currentConfig, onImageSizeError, onImageRatioError,
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
   
