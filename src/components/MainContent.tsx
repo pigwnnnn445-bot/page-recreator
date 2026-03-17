@@ -52,8 +52,8 @@ const HomeVideoPlayer = ({ onMake }: { onMake: () => void }) => {
     setPlaying(!playing);
   };
   return (
-    <div className="relative rounded-xl overflow-hidden cursor-pointer group" onClick={handlePlayPause}>
-      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] md:aspect-video object-cover" />
+    <div className="relative rounded-xl overflow-hidden cursor-pointer group h-full" onClick={handlePlayPause}>
+      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] lg:aspect-auto lg:h-full lg:min-h-[200px] object-cover" />
       {/* Gradient overlay at bottom */}
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
       {/* Play button */}
