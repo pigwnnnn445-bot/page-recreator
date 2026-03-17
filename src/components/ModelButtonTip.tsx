@@ -20,9 +20,7 @@ const ModelButtonTip = () => {
   if (!visible) return null;
 
   return (
-    <div className="relative animate-fade-in">
-      {/* Arrow pointing down to the button */}
-      <div className="absolute -bottom-1.5 left-6 w-3 h-3 rotate-45 bg-primary" />
+    <div className="absolute bottom-full left-0 mb-1.5 z-10 animate-fade-in">
       <div className="relative flex items-start gap-2 px-3.5 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs leading-relaxed shadow-lg max-w-[300px]">
         <span className="flex-1">
           这里不止能选模型哦～点开还能设置清晰度、时长、上传参考图等更多视频参数。
@@ -34,6 +32,8 @@ const ModelButtonTip = () => {
           <X className="w-3.5 h-3.5" />
         </button>
       </div>
+      {/* Arrow pointing down to the button */}
+      <div className="absolute -bottom-1.5 left-6 w-3 h-3 rotate-45 bg-primary" />
     </div>
   );
 };
