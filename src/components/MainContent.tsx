@@ -6,6 +6,7 @@ import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import ImageRequiredTip from "./ImageRequiredTip";
 import ImageSizeTip from "./ImageSizeTip";
 import ImageRatioTip from "./ImageRatioTip";
+import MobileSettings from "./MobileSettings";
 import { useState, useCallback, useRef } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
@@ -22,15 +23,21 @@ interface MainContentProps {
   onSelectModel: (model: ModelInfo) => void;
   selectedModel: ModelInfo;
   selectedCreationMode: CreationMode;
+  setSelectedCreationMode: (mode: CreationMode) => void;
   selectedQuality: string;
+  setSelectedQuality: (q: string) => void;
   selectedDuration: string;
+  setSelectedDuration: (d: string) => void;
   selectedRatio: string;
+  setSelectedRatio: (r: string) => void;
   onRestoreFromHistory: (item: HistoryItem) => void;
   currentConfig: ModelConfig;
   imageSizeTipOpen: boolean;
   onCloseSizeTip: () => void;
   imageRatioTipOpen: boolean;
   onCloseRatioTip: () => void;
+  onImageSizeError?: () => void;
+  onImageRatioError?: () => void;
 }
 
 // 示例视频关联的模型信息
@@ -61,7 +68,7 @@ const HomeVideoPlayer = () => {
   );
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, setSelectedCreationMode, selectedQuality, setSelectedQuality, selectedDuration, setSelectedDuration, selectedRatio, setSelectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip, onImageSizeError, onImageRatioError }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -347,6 +354,26 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                   </div>
                 )}
               </div>
+
+              {/* Mobile Settings - flat inline above prompt */}
+              {!generating && (
+                <MobileSettings
+                  models={models}
+                  selectedModel={selectedModel}
+                  setSelectedModel={onSelectModel}
+                  selectedCreationMode={selectedCreationMode}
+                  setSelectedCreationMode={setSelectedCreationMode}
+                  selectedQuality={selectedQuality}
+                  setSelectedQuality={setSelectedQuality}
+                  selectedDuration={selectedDuration}
+                  setSelectedDuration={setSelectedDuration}
+                  selectedRatio={selectedRatio}
+                  setSelectedRatio={setSelectedRatio}
+                  currentConfig={currentConfig}
+                  onImageSizeError={onImageSizeError}
+                  onImageRatioError={onImageRatioError}
+                />
+              )}
 
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
