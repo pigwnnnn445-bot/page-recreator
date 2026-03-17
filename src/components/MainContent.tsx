@@ -6,7 +6,7 @@ import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import ImageRequiredTip from "./ImageRequiredTip";
 import ImageSizeTip from "./ImageSizeTip";
 import ImageRatioTip from "./ImageRatioTip";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
 import iconTips from "@/assets/icon-tips.png";
