@@ -43,6 +43,7 @@ const Sidebar = ({
   currentConfig, onImageSizeError, onImageRatioError,
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
+  const asideRef = useRef<HTMLElement>(null);
   
   const modelListRef = useRef<HTMLDivElement>(null);
 
@@ -50,12 +51,18 @@ const Sidebar = ({
     setModelOpen(nextOpen);
   }, []);
 
+  // Scroll sidebar to top when opened on mobile
+  useEffect(() => {
+    if (open && asideRef.current) {
+      asideRef.current.scrollTop = 0;
+    }
+  }, [open]);
+
   useEffect(() => {
     if (modelOpen && modelListRef.current) {
       const container = modelListRef.current;
       const selectedEl = container.querySelector('[data-selected="true"]') as HTMLElement | null;
       if (selectedEl) {
-        // Use requestAnimationFrame to ensure DOM is painted
         requestAnimationFrame(() => {
           selectedEl.scrollIntoView({ block: "nearest" });
         });
@@ -84,6 +91,7 @@ const Sidebar = ({
       )}
 
       <aside
+        ref={asideRef}
         className={`
           fixed md:static z-50 top-0 right-0 md:left-0 h-full
           w-[280px] min-h-screen bg-sidebar border-l md:border-l-0 md:border-r border-sidebar-border flex flex-col p-5
