@@ -208,9 +208,9 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       {/* Top area: content + history side by side */}
       <div className="flex-1 flex min-h-0">
         {/* Main column - hidden on mobile when history is open */}
-        <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-md:hidden' : ''}`}>
+        <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-lg:hidden' : ''}`}>
           {/* Top Nav */}
-          <header className="flex items-center justify-between px-4 md:px-6 py-2 md:py-4 gap-3">
+          <header className="flex items-center justify-between px-4 lg:px-6 py-2 lg:py-4 gap-3">
             <div className="flex-1" />
             <div className="flex items-center gap-2">
               <ThemeToggle />
@@ -234,8 +234,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
             <>
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} onRegenerate={handleRegenerate} />
               {/* Bottom Prompt Input - preview mode shows video prompt */}
-              <div className="px-5 pb-4 md:p-6 md:pt-0">
-                  <div className="md:hidden mb-2">
+              <div className="px-3 pb-3 lg:p-6 lg:pt-0">
+                  <div className="lg:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
@@ -247,7 +247,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
                     </button>
                   </div>
-                <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
+                <div className="flex flex-col gap-4 lg:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
                   <textarea
                     value={prompt}
                     onChange={(e) => {
@@ -287,7 +287,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
             </>
           ) : (
             <>
-              <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-1 md:pb-4 flex items-center justify-center">
+              <div className="flex-1 overflow-y-auto px-3 lg:px-6 pb-1 lg:pb-4 flex items-center justify-center">
                 {generating ? (
                   /* Generating State */
                   <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto animate-fade-in">
@@ -314,45 +314,45 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                 ) : (
                   <div className="max-w-3xl mx-auto">
                     {/* Welcome */}
-                    <div className="text-center mb-2 md:mb-8 mt-1 md:mt-8">
-                      <h1 className="text-lg md:text-3xl font-bold text-title mb-0.5 md:mb-2">👋嘿！欢迎来到 Rita</h1>
-                      <p className="text-text-muted text-[11px] md:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
+                    <div className="text-center mb-2 lg:mb-8 mt-1 lg:mt-8">
+                      <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-title mb-0.5 lg:mb-2">👋嘿！欢迎来到 Rita</h1>
+                      <p className="text-text-muted text-[11px] md:text-xs lg:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
                     </div>
 
                     {/* Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-2 md:mb-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3 lg:gap-4 mb-2 lg:mb-8">
                       {/* Video Preview Card */}
-                      <div className="rounded-xl overflow-hidden shadow-sm md:row-span-2">
+                      <div className="rounded-xl overflow-hidden shadow-sm lg:row-span-2">
                         <HomeVideoPlayer onMake={handleMake} />
                       </div>
 
                       {/* Chat Assistant Card */}
-                      <div className="bg-card rounded-xl border border-border p-2.5 md:p-4 shadow-sm">
-                        <div className="flex items-start gap-2 md:gap-3 mb-2 md:mb-3">
-                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Globe className="w-3.5 h-3.5 md:w-4 md:h-4 text-theme-1" />
+                      <div className="bg-card rounded-xl border border-border p-2.5 md:p-3 lg:p-4 shadow-sm">
+                        <div className="flex items-start gap-2 lg:gap-3 mb-2 lg:mb-3">
+                          <div className="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Globe className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-theme-1" />
                           </div>
-                          <p className="text-foreground text-xs md:text-sm leading-relaxed">
+                          <p className="text-foreground text-xs lg:text-sm leading-relaxed">
                             嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-3 py-2 md:px-4 md:py-2.5">
-                          <span className="text-primary text-xs md:text-sm">💡 输入点想法试试看</span>
-                          <div className="ml-auto w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
+                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5">
+                          <span className="text-primary text-xs lg:text-sm">💡 输入点想法试试看</span>
+                          <div className="ml-auto w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
                             <span className="text-primary-foreground text-xs">😊</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Guide & Tips */}
-                      <div className="grid grid-cols-2 gap-2 md:gap-4">
-                        <div className="bg-card rounded-xl border border-border p-2 md:p-4 flex flex-col items-center justify-center gap-1 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                          <img src={iconGuide} alt="使用说明" className="w-8 h-8 md:w-16 md:h-16 object-contain" />
-                          <span className="text-foreground text-[11px] md:text-sm font-medium">使用说明</span>
+                      <div className="grid grid-cols-2 gap-2 lg:gap-4">
+                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                          <img src={iconGuide} alt="使用说明" className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
+                          <span className="text-foreground text-[11px] md:text-xs lg:text-sm font-medium">使用说明</span>
                         </div>
-                        <div className="bg-card rounded-xl border border-border p-2 md:p-4 flex flex-col items-center justify-center gap-1 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                          <img src={iconTips} alt="生成技巧" className="w-8 h-8 md:w-16 md:h-16 object-contain" />
-                          <span className="text-foreground text-[11px] md:text-sm font-medium">生成技巧</span>
+                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                          <img src={iconTips} alt="生成技巧" className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
+                          <span className="text-foreground text-[11px] md:text-xs lg:text-sm font-medium">生成技巧</span>
                         </div>
                       </div>
                     </div>
@@ -362,8 +362,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
 
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
-                <div className="px-3 pb-3 md:p-6 md:pt-0">
-                  <div className="md:hidden mb-2 relative">
+                <div className="px-3 pb-3 lg:p-6 lg:pt-0">
+                  <div className="lg:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
@@ -375,7 +375,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
                     </button>
                   </div>
-                  <div className="flex flex-col gap-4 md:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 md:px-4 md:py-3 rounded-2xl md:rounded-3xl text-base">
+                  <div className="flex flex-col gap-4 lg:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
                     <textarea
                       value={prompt}
                       onChange={(e) => {
@@ -392,7 +392,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       }}
                       placeholder="输入你的提示，例如：一只猫"
                       rows={2}
-                      className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[3rem] md:max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
+                      className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[3rem] lg:max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
                     />
                     <div className="flex items-center justify-between">
                       <button
