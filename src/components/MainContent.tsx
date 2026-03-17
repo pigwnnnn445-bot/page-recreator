@@ -1,8 +1,9 @@
 import { Home, Clock, Play, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download } from "lucide-react";
-import type { CreationMode } from "@/types/api";
+import type { CreationMode, ModelConfig } from "@/types/api";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
 import PromptGeneratorDialog from "./PromptGeneratorDialog";
+import ImageRequiredTip from "./ImageRequiredTip";
 import { useState, useCallback, useRef } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
@@ -23,6 +24,7 @@ interface MainContentProps {
   selectedDuration: string;
   selectedRatio: string;
   onRestoreFromHistory: (item: HistoryItem) => void;
+  currentConfig: ModelConfig;
 }
 
 // 示例视频关联的模型信息
@@ -33,7 +35,7 @@ const SAMPLE_VIDEO = {
   prompt: "一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院",
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -43,6 +45,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const generateCountRef = useRef(0);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
   const [promptGenOpen, setPromptGenOpen] = useState(false);
+  const [imageRequiredTipOpen, setImageRequiredTipOpen] = useState(false);
   // Track the currently generating item ID and whether user chose background generation
   const generatingItemIdRef = useRef<string | null>(null);
   const backgroundGenerationRef = useRef(false);
@@ -55,9 +58,17 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     }
   };
 
+  // Check if image is required but not uploaded
+  const isImageRequired = selectedCreationMode === "image_to_video";
+
   const handleGenerate = useCallback(() => {
     if (!prompt.trim()) return;
 
+    // If in image_to_video mode, image is required
+    if (isImageRequired) {
+      setImageRequiredTipOpen(true);
+      return;
+    }
     const newItem: HistoryItem = {
       id: crypto.randomUUID(),
       status: "loading",
@@ -99,7 +110,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       }
       generatingItemIdRef.current = null;
     }, 5000);
-  }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
+  }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, isImageRequired]);
 
   const handleDeleteItem = useCallback((id: string) => {
     setHistoryItems(prev => prev.filter(item => item.id !== id));
@@ -383,6 +394,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
         onClose={() => setPromptGenOpen(false)}
         initialPrompt={prompt}
         onApplyPrompt={(p) => setPrompt(p)}
+      />
+      <ImageRequiredTip
+        open={imageRequiredTipOpen}
+        onClose={() => setImageRequiredTipOpen(false)}
       />
     </div>
   );
