@@ -9,6 +9,7 @@ import {
   type CreationMode,
 } from "@/types/api";
 import type { HistoryItem } from "@/types/history";
+import { shouldShowRatioTip } from "@/components/ImageRatioTip";
 
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
