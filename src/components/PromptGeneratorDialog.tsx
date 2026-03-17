@@ -96,8 +96,8 @@ const PromptGeneratorInner = ({
         </div>
       </div>
 
-      {isOptimizing && !results && (
-        <div className="flex flex-col items-center justify-center py-10 gap-4 animate-fade-in">
+      {isOptimizing && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-4 animate-fade-in pointer-events-none">
           <div className="relative w-12 h-12 flex items-center justify-center">
             <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[hsl(240,74%,61%)] border-r-[hsl(160,56%,64%)] animate-spin" />
             <div className="absolute inset-1.5 rounded-full border-[2px] border-transparent border-b-[hsl(240,74%,61%)] border-l-[hsl(160,56%,64%)] animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }} />
@@ -108,14 +108,7 @@ const PromptGeneratorInner = ({
 
       {results && (
         <>
-          {isOptimizing ? (
-            <div className="flex items-center justify-center py-6 animate-fade-in">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[hsl(240,74%,61%)] border-r-[hsl(160,56%,64%)] animate-spin" />
-                <div className="absolute inset-1.5 rounded-full border-[2px] border-transparent border-b-[hsl(240,74%,61%)] border-l-[hsl(160,56%,64%)] animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }} />
-              </div>
-            </div>
-          ) : (
+          {isOptimizing ? null : (
             <>
               <div className="flex flex-col gap-2">
                 {results.map((result, index) => (
