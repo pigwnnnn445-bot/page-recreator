@@ -362,8 +362,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
 
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
-                <div className="px-3 pb-3 md:p-6 md:pt-0">
-                  <div className="md:hidden mb-2 relative">
+                <div className="px-3 pb-3 lg:p-6 lg:pt-0">
+                  <div className="lg:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
@@ -375,7 +375,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
                     </button>
                   </div>
-                  <div className="flex flex-col gap-4 md:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 md:px-4 md:py-3 rounded-2xl md:rounded-3xl text-base">
+                  <div className="flex flex-col gap-4 lg:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
                     <textarea
                       value={prompt}
                       onChange={(e) => {
