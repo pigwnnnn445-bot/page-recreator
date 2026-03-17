@@ -91,6 +91,8 @@ const Index = () => {
         selectedRatio={selectedRatio}
         onRestoreFromHistory={handleRestoreFromHistory}
         currentConfig={currentConfig}
+        imageSizeTipOpen={imageSizeTipOpen}
+        onCloseSizeTip={() => setImageSizeTipOpen(false)}
       />
     </div>
   );
