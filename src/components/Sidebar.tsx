@@ -26,6 +26,7 @@ interface SidebarProps {
   currentConfig: ModelConfig;
   onImageSizeError?: () => void;
   onImageRatioError?: () => void;
+  onImageUploaded?: (hasImage: boolean) => void;
 }
 
 const creationModeLabels: Record<CreationMode, string> = {
