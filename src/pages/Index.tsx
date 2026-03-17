@@ -13,6 +13,7 @@ import type { HistoryItem } from "@/types/history";
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [imageSizeTipOpen, setImageSizeTipOpen] = useState(false);
+  const [imageRatioTipOpen, setImageRatioTipOpen] = useState(false);
 
   const config = mockUserConfig;
   const models = config.data.enable_model;
@@ -78,6 +79,7 @@ const Index = () => {
         setSelectedRatio={setSelectedRatio}
         currentConfig={currentConfig}
         onImageSizeError={() => setImageSizeTipOpen(true)}
+        onImageRatioError={() => setImageRatioTipOpen(true)}
       />
       <MainContent
         onMenuOpen={() => setSidebarOpen(true)}
@@ -93,6 +95,8 @@ const Index = () => {
         currentConfig={currentConfig}
         imageSizeTipOpen={imageSizeTipOpen}
         onCloseSizeTip={() => setImageSizeTipOpen(false)}
+        imageRatioTipOpen={imageRatioTipOpen}
+        onCloseRatioTip={() => setImageRatioTipOpen(false)}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import VideoPreview from "./VideoPreview";
 import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import ImageRequiredTip from "./ImageRequiredTip";
 import ImageSizeTip from "./ImageSizeTip";
+import ImageRatioTip from "./ImageRatioTip";
 import { useState, useCallback, useRef } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
@@ -28,6 +29,8 @@ interface MainContentProps {
   currentConfig: ModelConfig;
   imageSizeTipOpen: boolean;
   onCloseSizeTip: () => void;
+  imageRatioTipOpen: boolean;
+  onCloseRatioTip: () => void;
 }
 
 // 示例视频关联的模型信息
@@ -38,7 +41,7 @@ const SAMPLE_VIDEO = {
   prompt: "一只可爱的橘猫在阳光下慵懒地伸懒腰，镜头缓缓推近，背景是温暖的午后庭院",
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -406,6 +409,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       <ImageSizeTip
         open={imageSizeTipOpen}
         onClose={onCloseSizeTip}
+      />
+      <ImageRatioTip
+        open={imageRatioTipOpen}
+        onClose={onCloseRatioTip}
       />
     </div>
   );

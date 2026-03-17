@@ -4,15 +4,18 @@ import { useRef, useState } from "react";
 const ACCEPTED_FORMATS = "image/jpeg,image/png,image/webp";
 const MAX_SIZE_MB = 10;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+const MIN_RATIO = 1 / 2.5; // 1:2.5
+const MAX_RATIO = 2.5 / 1; // 2.5:1
 
 interface ImageUploadBoxProps {
   label: string;
   className?: string;
   onImageSelected?: (file: File | null) => void;
   onSizeError?: () => void;
+  onRatioError?: () => void;
 }
 
-const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError }: ImageUploadBoxProps) => {
+const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, onRatioError }: ImageUploadBoxProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -30,9 +33,21 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError }:
       return;
     }
 
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    onImageSelected?.(file);
+    // Check aspect ratio
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      const ratio = img.width / img.height;
+      if (ratio < MIN_RATIO || ratio > MAX_RATIO) {
+        URL.revokeObjectURL(objectUrl);
+        onRatioError?.();
+        if (inputRef.current) inputRef.current.value = "";
+        return;
+      }
+      setPreview(objectUrl);
+      onImageSelected?.(file);
+    };
+    img.src = objectUrl;
   };
 
   const handleRemove = (e: React.MouseEvent) => {
