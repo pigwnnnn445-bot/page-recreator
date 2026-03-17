@@ -104,10 +104,12 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                         className="relative group rounded-lg overflow-hidden"
                       >
                         {item.status === "loading" ? (
-                          /* Loading placeholder */
-                          <div className="w-full aspect-square bg-card-secondary rounded-lg flex flex-col items-center justify-center gap-2">
-                            <Video className="w-8 h-8 text-text-muted" />
-                            <span className="text-text-muted text-xs">加载中...</span>
+                          /* Loading placeholder with animation */
+                          <div className="w-full aspect-square bg-card-secondary rounded-lg flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                            {/* Shimmer overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-foreground/5 to-transparent animate-[shimmer_2s_ease-in-out_infinite]" />
+                            <Video className="w-8 h-8 text-text-muted animate-pulse" />
+                            <span className="text-text-muted text-xs animate-pulse">生成中...</span>
                           </div>
                         ) : item.status === "failed" ? (
                           /* Failed placeholder */
