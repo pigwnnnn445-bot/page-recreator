@@ -370,7 +370,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
                     </button>
                   </div>
-                  <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
+                  <div className="flex flex-col gap-4 md:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 md:px-4 md:py-3 rounded-2xl md:rounded-3xl text-base">
                     <textarea
                       value={prompt}
                       onChange={(e) => {
