@@ -91,6 +91,7 @@ const Sidebar = ({
       )}
 
       <aside
+        ref={asideRef}
         className={`
           fixed md:static z-50 top-0 right-0 md:left-0 h-full
           w-[280px] min-h-screen bg-sidebar border-l md:border-l-0 md:border-r border-sidebar-border flex flex-col p-5
