@@ -1,6 +1,5 @@
 import { ImagePlus, X } from "lucide-react";
 import { useRef, useState } from "react";
-import ImageSizeTip from "./ImageSizeTip";
 
 const ACCEPTED_FORMATS = "image/jpeg,image/png,image/webp";
 const MAX_SIZE_MB = 10;
@@ -10,12 +9,12 @@ interface ImageUploadBoxProps {
   label: string;
   className?: string;
   onImageSelected?: (file: File | null) => void;
+  onSizeError?: () => void;
 }
 
-const ImageUploadBox = ({ label, className = "", onImageSelected }: ImageUploadBoxProps) => {
+const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError }: ImageUploadBoxProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [sizeTipOpen, setSizeTipOpen] = useState(false);
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -26,7 +25,7 @@ const ImageUploadBox = ({ label, className = "", onImageSelected }: ImageUploadB
     if (!file) return;
 
     if (file.size > MAX_SIZE_BYTES) {
-      setSizeTipOpen(true);
+      onSizeError?.();
       e.target.value = "";
       return;
     }
@@ -72,7 +71,6 @@ const ImageUploadBox = ({ label, className = "", onImageSelected }: ImageUploadB
           <span className="text-sm text-text-muted">{label}</span>
         </button>
       )}
-      <ImageSizeTip open={sizeTipOpen} onClose={() => setSizeTipOpen(false)} />
     </>
   );
 };

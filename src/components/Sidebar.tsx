@@ -24,6 +24,7 @@ interface SidebarProps {
   selectedRatio: string;
   setSelectedRatio: (r: string) => void;
   currentConfig: ModelConfig;
+  onImageSizeError?: () => void;
 }
 
 const creationModeLabels: Record<CreationMode, string> = {
@@ -38,7 +39,7 @@ const Sidebar = ({
   selectedQuality, setSelectedQuality,
   selectedDuration, setSelectedDuration,
   selectedRatio, setSelectedRatio,
-  currentConfig,
+  currentConfig, onImageSizeError,
 }: SidebarProps) => {
   const [modelOpen, setModelOpen] = useState(false);
   
@@ -285,7 +286,7 @@ const Sidebar = ({
             <span className="text-sm text-text-secondary mb-2 block">
               参考图片 （<span className="text-destructive">!</span> 必填）
             </span>
-            <ImageUploadBox label="上传" className="w-full h-[120px]" />
+            <ImageUploadBox label="上传" className="w-full h-[120px]" onSizeError={onImageSizeError} />
           </div>
         )}
 
@@ -294,8 +295,8 @@ const Sidebar = ({
           <div className="mb-6">
             <span className="text-sm text-text-secondary mb-2 block">第一帧和最后一帧</span>
             <div className="flex gap-3">
-              <ImageUploadBox label="上传第一帧" className="flex-1 h-[100px]" />
-              <ImageUploadBox label="上传最后一帧" className="flex-1 h-[100px]" />
+              <ImageUploadBox label="上传第一帧" className="flex-1 h-[100px]" onSizeError={onImageSizeError} />
+              <ImageUploadBox label="上传最后一帧" className="flex-1 h-[100px]" onSizeError={onImageSizeError} />
             </div>
           </div>
         )}
