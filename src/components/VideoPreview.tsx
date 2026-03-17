@@ -109,7 +109,7 @@ const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
 
       {/* Download button */}
       <div className="flex justify-start pt-3 md:pt-4 pb-1">
-        <button className="flex items-center gap-2 px-12 py-3 rounded-full bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer">
+        <button onClick={handleDownload} className="flex items-center gap-2 px-12 py-3 rounded-full bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer">
           <Download className="w-5 h-5" /> 下载
         </button>
       </div>
