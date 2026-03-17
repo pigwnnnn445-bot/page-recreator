@@ -298,6 +298,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                         if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
                         typingTimerRef.current = setTimeout(() => setIsTyping(false), 1000);
                       }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey && prompt.trim()) {
+                          e.preventDefault();
+                          handleGenerate();
+                        }
+                      }}
                       placeholder="输入你的提示，例如：一只猫"
                       rows={3}
                       className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
