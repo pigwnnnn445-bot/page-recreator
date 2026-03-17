@@ -85,10 +85,10 @@ const Sidebar = ({
 
       <aside
         className={`
-          fixed md:static z-50 top-0 left-0 h-full
-          w-[280px] min-h-screen bg-sidebar border-r border-sidebar-border flex flex-col p-5
+          fixed md:static z-50 top-0 right-0 md:left-0 h-full
+          w-[280px] min-h-screen bg-sidebar border-l md:border-l-0 md:border-r border-sidebar-border flex flex-col p-5
           transition-transform duration-300 ease-in-out overflow-y-auto
-          ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+          ${open ? "translate-x-0" : "translate-x-full md:translate-x-0"}
         `}
       >
         <div className="flex items-center justify-between mb-6">
