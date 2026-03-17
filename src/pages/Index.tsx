@@ -89,21 +89,15 @@ const Index = () => {
         onSelectModel={setSelectedModel}
         selectedModel={selectedModel}
         selectedCreationMode={selectedCreationMode}
-        setSelectedCreationMode={setSelectedCreationMode}
         selectedQuality={selectedQuality}
-        setSelectedQuality={setSelectedQuality}
         selectedDuration={selectedDuration}
-        setSelectedDuration={setSelectedDuration}
         selectedRatio={selectedRatio}
-        setSelectedRatio={setSelectedRatio}
         onRestoreFromHistory={handleRestoreFromHistory}
         currentConfig={currentConfig}
         imageSizeTipOpen={imageSizeTipOpen}
         onCloseSizeTip={() => setImageSizeTipOpen(false)}
         imageRatioTipOpen={imageRatioTipOpen}
         onCloseRatioTip={() => setImageRatioTipOpen(false)}
-        onImageSizeError={() => setImageSizeTipOpen(true)}
-        onImageRatioError={() => { if (shouldShowRatioTip()) setImageRatioTipOpen(true); }}
       />
     </div>
   );

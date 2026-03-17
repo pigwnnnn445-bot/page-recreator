@@ -6,7 +6,6 @@ import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import ImageRequiredTip from "./ImageRequiredTip";
 import ImageSizeTip from "./ImageSizeTip";
 import ImageRatioTip from "./ImageRatioTip";
-import MobileSettings from "./MobileSettings";
 import { useState, useCallback, useRef } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
@@ -23,21 +22,15 @@ interface MainContentProps {
   onSelectModel: (model: ModelInfo) => void;
   selectedModel: ModelInfo;
   selectedCreationMode: CreationMode;
-  setSelectedCreationMode: (mode: CreationMode) => void;
   selectedQuality: string;
-  setSelectedQuality: (q: string) => void;
   selectedDuration: string;
-  setSelectedDuration: (d: string) => void;
   selectedRatio: string;
-  setSelectedRatio: (r: string) => void;
   onRestoreFromHistory: (item: HistoryItem) => void;
   currentConfig: ModelConfig;
   imageSizeTipOpen: boolean;
   onCloseSizeTip: () => void;
   imageRatioTipOpen: boolean;
   onCloseRatioTip: () => void;
-  onImageSizeError?: () => void;
-  onImageRatioError?: () => void;
 }
 
 // 示例视频关联的模型信息
@@ -68,7 +61,7 @@ const HomeVideoPlayer = () => {
   );
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, setSelectedCreationMode, selectedQuality, setSelectedQuality, selectedDuration, setSelectedDuration, selectedRatio, setSelectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip, onImageSizeError, onImageRatioError }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -257,7 +250,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                       style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                     >
-                      <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> <span className="hidden md:inline">提示词生成器</span>
+                      <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
                     </button>
                     <button
                       onClick={handleGenerate}
@@ -307,7 +300,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-8">
                       {/* Video Preview Card */}
-                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
+                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm md:row-span-2">
                         <HomeVideoPlayer />
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">Veo</span>
@@ -320,30 +313,40 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                           </button>
                         </div>
                       </div>
+
+                      {/* Chat Assistant Card */}
+                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
+                        <div className="flex items-start gap-3 mb-3">
+                          <div className="w-8 h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Globe className="w-4 h-4 text-theme-1" />
+                          </div>
+                          <p className="text-foreground text-sm leading-relaxed">
+                            嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-4 py-2.5">
+                          <span className="text-primary text-sm">💡 输入点想法试试看</span>
+                          <div className="ml-auto w-7 h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
+                            <span className="text-primary-foreground text-xs">😊</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Guide & Tips */}
+                      <div className="grid grid-cols-2 gap-3 md:gap-4">
+                        <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                          <img src={iconGuide} alt="使用说明" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
+                          <span className="text-foreground text-xs md:text-sm font-medium">使用说明</span>
+                        </div>
+                        <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                          <img src={iconTips} alt="生成技巧" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
+                          <span className="text-foreground text-xs md:text-sm font-medium">生成技巧</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
               </div>
-
-              {/* Mobile Settings - flat inline above prompt */}
-              {!generating && (
-                <MobileSettings
-                  models={models}
-                  selectedModel={selectedModel}
-                  setSelectedModel={onSelectModel}
-                  selectedCreationMode={selectedCreationMode}
-                  setSelectedCreationMode={setSelectedCreationMode}
-                  selectedQuality={selectedQuality}
-                  setSelectedQuality={setSelectedQuality}
-                  selectedDuration={selectedDuration}
-                  setSelectedDuration={setSelectedDuration}
-                  selectedRatio={selectedRatio}
-                  setSelectedRatio={setSelectedRatio}
-                  currentConfig={currentConfig}
-                  onImageSizeError={onImageSizeError}
-                  onImageRatioError={onImageRatioError}
-                />
-              )}
 
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
@@ -373,7 +376,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                         className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                         style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                       >
-                        <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> <span className="hidden md:inline">提示词生成器</span>
+                        <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
                       </button>
                       <button
                         onClick={handleGenerate}
