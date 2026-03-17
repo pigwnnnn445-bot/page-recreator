@@ -24,6 +24,7 @@ interface MainContentProps {
   selectedDuration: string;
   selectedRatio: string;
   onRestoreFromHistory: (item: HistoryItem) => void;
+  currentConfig: ModelConfig;
 }
 
 // 示例视频关联的模型信息
