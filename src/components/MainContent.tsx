@@ -314,7 +314,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                           <span className="px-2.5 py-1 rounded-full bg-card-secondary text-text-secondary text-xs">veo3-fast</span>
                           <button
                             onClick={handleMake}
-                            className="ml-auto px-4 py-1.5 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                            className="ml-auto px-3 py-1 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-xs md:text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
                           >
                             制作！
                           </button>
