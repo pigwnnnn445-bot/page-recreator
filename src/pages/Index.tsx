@@ -95,6 +95,8 @@ const Index = () => {
         currentConfig={currentConfig}
         imageSizeTipOpen={imageSizeTipOpen}
         onCloseSizeTip={() => setImageSizeTipOpen(false)}
+        imageRatioTipOpen={imageRatioTipOpen}
+        onCloseRatioTip={() => setImageRatioTipOpen(false)}
       />
     </div>
   );
