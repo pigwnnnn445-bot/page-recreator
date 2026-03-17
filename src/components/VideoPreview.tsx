@@ -22,8 +22,28 @@ const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
     setPlaying(!playing);
   };
 
-  const handleVideoEnded = () => {
-    setPlaying(false);
+  const handleVideoEnded = () => setPlaying(false);
+
+  const handleDownload = async () => {
+    if (!item.videoUrl) return;
+    try {
+      const response = await fetch(item.videoUrl);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${item.modelName || "video"}-${Date.now()}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      // fallback: direct link
+      const a = document.createElement("a");
+      a.href = item.videoUrl;
+      a.download = `${item.modelName || "video"}-${Date.now()}.mp4`;
+      a.click();
+    }
   };
 
   // Failed state
