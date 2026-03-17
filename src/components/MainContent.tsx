@@ -73,12 +73,17 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     setPrompt("");
     setGenerating(true);
 
-    // Simulate completion after 5 seconds (demo purposes)
+    // Simulate: odd calls succeed, even calls fail (1st success, 2nd fail, ...)
+    generateCountRef.current += 1;
+    const shouldFail = generateCountRef.current % 2 === 0;
+
     setTimeout(() => {
       setHistoryItems(prev =>
         prev.map(item =>
           item.id === newItem.id
-            ? { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
+            ? shouldFail
+              ? { ...item, status: "failed" as const }
+              : { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
             : item
         )
       );
