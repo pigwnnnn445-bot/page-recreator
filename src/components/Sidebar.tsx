@@ -271,7 +271,7 @@ const Sidebar = ({
         {/* Duration */}
         {currentConfig.durations.length > 0 && (
           <div className="mb-6">
-            <span className="text-sm text-foreground dark:text-muted-foreground mb-2 block">时长</span>
+            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">时长</span>
             <div className="flex gap-2 flex-wrap">
               {currentConfig.durations.map((d) => (
                 <button
