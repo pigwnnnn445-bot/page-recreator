@@ -305,7 +305,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     </div>
 
                     {/* Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-2 md:mb-8">
                       {/* Video Preview Card */}
                       <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm md:row-span-2">
                         <HomeVideoPlayer />
