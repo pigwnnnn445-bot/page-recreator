@@ -235,7 +235,7 @@ const Sidebar = ({
                     onClick={() => setSelectedRatio(r.label)}
                     className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer border ${
                       isSelected
-                        ? "bg-primary text-primary-foreground border-primary"
+                        ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground border-primary dark:border-[hsl(240,74%,61%)]"
                         : "bg-card border-border text-muted-foreground hover:bg-accent"
                     }`}
                   >
