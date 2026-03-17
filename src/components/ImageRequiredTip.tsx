@@ -9,7 +9,7 @@ const ImageRequiredTip = ({ open, onClose }: ImageRequiredTipProps) => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center pb-28 bg-black/50" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
       <div
         className="bg-card rounded-2xl p-6 max-w-sm w-[90%] mx-4 shadow-xl animate-fade-in"
         onClick={(e) => e.stopPropagation()}
