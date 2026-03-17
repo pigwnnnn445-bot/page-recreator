@@ -96,42 +96,63 @@ const PromptGeneratorInner = ({
         </div>
       </div>
 
+      {isOptimizing && !results && (
+        <div className="flex flex-col items-center justify-center py-10 gap-4 animate-fade-in">
+          <div className="relative w-12 h-12 flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[hsl(240,74%,61%)] border-r-[hsl(160,56%,64%)] animate-spin" />
+            <div className="absolute inset-1.5 rounded-full border-[2px] border-transparent border-b-[hsl(240,74%,61%)] border-l-[hsl(160,56%,64%)] animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }} />
+          </div>
+          <p className="text-muted-foreground text-sm">正在优化提示词...</p>
+        </div>
+      )}
+
       {results && (
         <>
-          <div className="flex flex-col gap-2">
-            {results.map((result, index) => (
-              <div key={index} className="bg-secondary rounded-xl p-3 flex items-start gap-2">
-                <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-primary-foreground text-xs font-bold flex-shrink-0 mt-0.5">
-                  {index + 1}
-                </span>
-                <p className="text-foreground text-sm leading-relaxed flex-1">{result}</p>
+          {isOptimizing ? (
+            <div className="flex items-center justify-center py-6 animate-fade-in">
+              <div className="relative w-10 h-10 flex items-center justify-center">
+                <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[hsl(240,74%,61%)] border-r-[hsl(160,56%,64%)] animate-spin" />
+                <div className="absolute inset-1.5 rounded-full border-[2px] border-transparent border-b-[hsl(240,74%,61%)] border-l-[hsl(160,56%,64%)] animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }} />
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col gap-2">
+                {results.map((result, index) => (
+                  <div key={index} className="bg-secondary rounded-xl p-3 flex items-start gap-2">
+                    <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-primary-foreground text-xs font-bold flex-shrink-0 mt-0.5">
+                      {index + 1}
+                    </span>
+                    <p className="text-foreground text-sm leading-relaxed flex-1">{result}</p>
+                    <button
+                      onClick={() => handleEditResult(index)}
+                      className="flex-shrink-0 mt-0.5 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 pt-1">
+                {results.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSelectResult(index)}
+                    className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
+                  >
+                    {index + 1}
+                  </button>
+                ))}
                 <button
-                  onClick={() => handleEditResult(index)}
-                  className="flex-shrink-0 mt-0.5 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  onClick={handleRefresh}
+                  disabled={isOptimizing}
+                  className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
                 >
-                  <Edit3 className="w-4 h-4" />
+                  <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
                 </button>
               </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-2 pt-1">
-            {results.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => handleSelectResult(index)}
-                className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
-              >
-                {index + 1}
-              </button>
-            ))}
-            <button
-              onClick={handleRefresh}
-              disabled={isOptimizing}
-              className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
-            >
-              <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
-            </button>
-          </div>
+            </>
+          )}
         </>
       )}
     </div>
