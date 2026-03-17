@@ -5,8 +5,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from "@/components/ui/dialog";
+import {
+  Drawer,
+  DrawerContent,
+} from "@/components/ui/drawer";
 
 interface PromptGeneratorDialogProps {
   open: boolean;
@@ -30,6 +33,105 @@ const MOCK_PROMPT_SETS = [
   ],
 ];
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(() => typeof window !== "undefined" ? window.innerWidth >= 1024 : true);
+  useEffect(() => {
+    const handler = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isDesktop;
+}
+
+const PromptGeneratorInner = ({
+  inputText,
+  setInputText,
+  results,
+  isOptimizing,
+  generateResults,
+  handleRefresh,
+  handleSelectResult,
+  handleEditResult,
+  onClose,
+}: {
+  inputText: string;
+  setInputText: (v: string) => void;
+  results: string[] | null;
+  isOptimizing: boolean;
+  generateResults: () => void;
+  handleRefresh: () => void;
+  handleSelectResult: (i: number) => void;
+  handleEditResult: (i: number) => void;
+  onClose: () => void;
+}) => (
+  <>
+    <div className="flex items-center justify-between p-4 pb-0 flex-shrink-0">
+      <h2 className="text-foreground text-base font-semibold">提示词生成器</h2>
+      <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer p-1">
+        <X className="w-5 h-5" />
+      </button>
+    </div>
+    <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0">
+      <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[140px] md:min-h-[180px] flex-shrink-0">
+        <textarea
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          placeholder="输入你的提示，例如：可爱的猫"
+          className="flex-1 w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none"
+        />
+        <div className="flex justify-end mt-2">
+          <button
+            onClick={generateResults}
+            disabled={!inputText.trim() || isOptimizing}
+            className="px-5 py-2 rounded-full bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {isOptimizing ? "优化中..." : "优化"}
+          </button>
+        </div>
+      </div>
+
+      {results && (
+        <>
+          <div className="flex flex-col gap-2">
+            {results.map((result, index) => (
+              <div key={index} className="bg-secondary rounded-xl p-3 flex items-start gap-2">
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-primary-foreground text-xs font-bold flex-shrink-0 mt-0.5">
+                  {index + 1}
+                </span>
+                <p className="text-foreground text-sm leading-relaxed flex-1">{result}</p>
+                <button
+                  onClick={() => handleEditResult(index)}
+                  className="flex-shrink-0 mt-0.5 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                >
+                  <Edit3 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 pt-1">
+            {results.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleSelectResult(index)}
+                className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={handleRefresh}
+              disabled={isOptimizing}
+              className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
+            >
+              <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  </>
+);
+
 const PromptGeneratorDialog = ({
   open,
   onClose,
@@ -42,6 +144,7 @@ const PromptGeneratorDialog = ({
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editIndex, setEditIndex] = useState<number>(0);
   const [editText, setEditText] = useState("");
+  const isDesktop = useIsDesktop();
 
   useEffect(() => {
     if (open) {
@@ -50,10 +153,6 @@ const PromptGeneratorDialog = ({
       setIsOptimizing(false);
     }
   }, [open, initialPrompt]);
-
-  const handleOpenChange = (isOpen: boolean) => {
-    if (!isOpen) onClose();
-  };
 
   const generateResults = useCallback(() => {
     if (!inputText.trim()) return;
@@ -96,118 +195,103 @@ const PromptGeneratorDialog = ({
     onClose();
   }, [editText, onApplyPrompt, onClose]);
 
+  const innerProps = {
+    inputText,
+    setInputText,
+    results,
+    isOptimizing,
+    generateResults,
+    handleRefresh,
+    handleSelectResult,
+    handleEditResult,
+    onClose,
+  };
+
   return (
     <>
-      <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="sm:max-w-[560px] max-h-[90vh] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden flex flex-col">
-          <DialogHeader className="p-4 pb-0 flex-shrink-0">
-            <div className="flex items-center gap-2">
-              <DialogTitle className="text-foreground text-base font-semibold">
-                提示词生成器
-              </DialogTitle>
-            </div>
-          </DialogHeader>
+      {/* Desktop: Dialog */}
+      {isDesktop ? (
+        <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
+          <DialogContent className="sm:max-w-[560px] max-h-[90vh] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden flex flex-col [&>button]:hidden">
+            <PromptGeneratorInner {...innerProps} />
+          </DialogContent>
+        </Dialog>
+      ) : (
+        /* Mobile/Tablet: Bottom Drawer */
+        <Drawer open={open} onOpenChange={(v) => !v && onClose()}>
+          <DrawerContent className="max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+            <PromptGeneratorInner {...innerProps} />
+          </DrawerContent>
+        </Drawer>
+      )}
 
-          <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0">
-            <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[140px] md:min-h-[180px] flex-shrink-0">
-              <textarea
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder="输入你的提示，例如：可爱的猫"
-                className="flex-1 w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none"
-              />
-              <div className="flex justify-end mt-2">
-                <button
-                  onClick={generateResults}
-                  disabled={!inputText.trim() || isOptimizing}
-                  className="px-5 py-2 rounded-full bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  {isOptimizing ? "优化中..." : "优化"}
-                </button>
+      {/* Edit sub-dialog */}
+      {isDesktop ? (
+        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+          <DialogContent className="sm:max-w-[560px] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden">
+            <DialogHeader className="p-4 pb-0">
+              <div className="flex items-center gap-2">
+                <DialogTitle className="text-foreground text-base font-semibold">
+                  提示词生成器
+                </DialogTitle>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-primary text-primary-foreground text-xs font-bold">
+                  {editIndex + 1}
+                </span>
               </div>
-            </div>
-
-            {results && (
-              <>
-                <div className="flex flex-col gap-2">
-                  {results.map((result, index) => (
-                    <div
-                      key={index}
-                      className="bg-secondary rounded-xl p-3 flex items-start gap-2"
-                    >
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-primary-foreground text-xs font-bold flex-shrink-0 mt-0.5">
-                        {index + 1}
-                      </span>
-                      <p className="text-foreground text-sm leading-relaxed flex-1">
-                        {result}
-                      </p>
-                      <button
-                        onClick={() => handleEditResult(index)}
-                        className="flex-shrink-0 mt-0.5 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                      >
-                        <Edit3 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-2 pt-1">
-                  {results.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleSelectResult(index)}
-                      className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
+            </DialogHeader>
+            <div className="p-4">
+              <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[220px]">
+                <textarea
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  className="flex-1 w-full bg-transparent text-foreground outline-none text-sm resize-none leading-relaxed"
+                />
+                <div className="flex justify-end mt-2">
                   <button
-                    onClick={handleRefresh}
-                    disabled={isOptimizing}
-                    className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
+                    onClick={handleEditApply}
+                    disabled={!editText.trim()}
+                    className="px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
+                    生成
                   </button>
                 </div>
-              </>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-        <DialogContent className="sm:max-w-[560px] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden">
-          <DialogHeader className="p-4 pb-0">
-            <div className="flex items-center gap-2">
-              <DialogTitle className="text-foreground text-base font-semibold">
-                提示词生成器
-              </DialogTitle>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+          <DrawerContent className="max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+            <div className="flex items-center gap-2 p-4 pb-0">
+              <h2 className="text-foreground text-base font-semibold">提示词生成器</h2>
               <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-primary text-primary-foreground text-xs font-bold">
                 {editIndex + 1}
               </span>
+              <button onClick={() => setEditDialogOpen(false)} className="ml-auto text-muted-foreground hover:text-foreground transition-colors cursor-pointer p-1">
+                <X className="w-5 h-5" />
+              </button>
             </div>
-          </DialogHeader>
-
-          <div className="p-4">
-            <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[220px]">
-              <textarea
-                value={editText}
-                onChange={(e) => setEditText(e.target.value)}
-                className="flex-1 w-full bg-transparent text-foreground outline-none text-sm resize-none leading-relaxed"
-              />
-              <div className="flex justify-end mt-2">
-                <button
-                  onClick={handleEditApply}
-                  disabled={!editText.trim()}
-                  className="px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  生成
-                </button>
+            <div className="p-4">
+              <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[220px]">
+                <textarea
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  className="flex-1 w-full bg-transparent text-foreground outline-none text-sm resize-none leading-relaxed"
+                />
+                <div className="flex justify-end mt-2">
+                  <button
+                    onClick={handleEditApply}
+                    disabled={!editText.trim()}
+                    className="px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    生成
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+          </DrawerContent>
+        </Drawer>
+      )}
     </>
   );
 };
