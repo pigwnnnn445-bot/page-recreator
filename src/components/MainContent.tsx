@@ -410,6 +410,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
         open={imageSizeTipOpen}
         onClose={onCloseSizeTip}
       />
+      <ImageRatioTip
+        open={imageRatioTipOpen}
+        onClose={onCloseRatioTip}
+      />
     </div>
   );
 };
