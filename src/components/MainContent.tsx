@@ -26,6 +26,8 @@ interface MainContentProps {
   selectedRatio: string;
   onRestoreFromHistory: (item: HistoryItem) => void;
   currentConfig: ModelConfig;
+  imageSizeTipOpen: boolean;
+  onCloseSizeTip: () => void;
 }
 
 // 示例视频关联的模型信息
