@@ -208,9 +208,9 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       {/* Top area: content + history side by side */}
       <div className="flex-1 flex min-h-0">
         {/* Main column - hidden on mobile when history is open */}
-        <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-md:hidden' : ''}`}>
+        <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-lg:hidden' : ''}`}>
           {/* Top Nav */}
-          <header className="flex items-center justify-between px-4 md:px-6 py-2 md:py-4 gap-3">
+          <header className="flex items-center justify-between px-4 lg:px-6 py-2 lg:py-4 gap-3">
             <div className="flex-1" />
             <div className="flex items-center gap-2">
               <ThemeToggle />
