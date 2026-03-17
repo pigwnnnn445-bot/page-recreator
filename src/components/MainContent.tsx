@@ -51,20 +51,21 @@ const HomeVideoPlayer = ({ onMake }: { onMake: () => void }) => {
     setPlaying(!playing);
   };
   return (
-    <div className="relative rounded-xl overflow-hidden cursor-pointer group h-full" onClick={handlePlayPause}>
-      <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] lg:aspect-auto lg:h-full lg:min-h-[200px] object-cover" />
-      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-      <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-          {playing ? <Pause className="w-5 h-5 text-white fill-white" /> : <Play className="w-5 h-5 text-white fill-white" />}
+    <div className="bg-card rounded-xl border border-border p-2 md:p-2.5 lg:p-3 shadow-sm h-full flex flex-col">
+      <div className="relative rounded-lg overflow-hidden cursor-pointer group flex-1 min-h-0" onClick={handlePlayPause}>
+        <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] lg:aspect-auto lg:h-full lg:min-h-[200px] object-cover" />
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+            {playing ? <Pause className="w-5 h-5 text-white fill-white" /> : <Play className="w-5 h-5 text-white fill-white" />}
+          </div>
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 flex items-center gap-1.5 px-2.5 py-2 md:px-3 md:py-2.5">
-        <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-[11px] md:text-xs font-medium">Veo</span>
-        <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-[11px] md:text-xs font-medium">veo3-fast</span>
+      <div className="flex items-center gap-1.5 pt-2 md:pt-2.5 px-0.5">
+        <span className="px-2.5 py-1 rounded-full bg-secondary text-muted-foreground text-[11px] md:text-xs font-medium">Veo</span>
+        <span className="px-2.5 py-1 rounded-full bg-secondary text-muted-foreground text-[11px] md:text-xs font-medium">veo3-fast</span>
         <button
           onClick={(e) => { e.stopPropagation(); onMake(); }}
-          className="ml-auto px-3 py-1 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-md"
+          className="ml-auto px-4 py-1.5 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-md"
         >
           制作！
         </button>
