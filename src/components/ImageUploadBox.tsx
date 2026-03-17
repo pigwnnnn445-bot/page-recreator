@@ -33,16 +33,13 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       return;
     }
 
-    // Check aspect ratio
+    // Check aspect ratio (soft warning, image still accepted)
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
     img.onload = () => {
       const ratio = img.width / img.height;
       if (ratio < MIN_RATIO || ratio > MAX_RATIO) {
-        URL.revokeObjectURL(objectUrl);
         onRatioError?.();
-        if (inputRef.current) inputRef.current.value = "";
-        return;
       }
       setPreview(objectUrl);
       onImageSelected?.(file);

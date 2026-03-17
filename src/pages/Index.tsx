@@ -9,6 +9,7 @@ import {
   type CreationMode,
 } from "@/types/api";
 import type { HistoryItem } from "@/types/history";
+import { shouldShowRatioTip } from "@/components/ImageRatioTip";
 
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -79,7 +80,7 @@ const Index = () => {
         setSelectedRatio={setSelectedRatio}
         currentConfig={currentConfig}
         onImageSizeError={() => setImageSizeTipOpen(true)}
-        onImageRatioError={() => setImageRatioTipOpen(true)}
+        onImageRatioError={() => { if (shouldShowRatioTip()) setImageRatioTipOpen(true); }}
       />
       <MainContent
         onMenuOpen={() => setSidebarOpen(true)}
