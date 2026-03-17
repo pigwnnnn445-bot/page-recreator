@@ -405,7 +405,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       />
       <ImageSizeTip
         open={imageSizeTipOpen}
-        onClose={() => setImageSizeTipOpen(false)}
+        onClose={onCloseSizeTip}
       />
     </div>
   );
