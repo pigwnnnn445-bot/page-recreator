@@ -219,7 +219,7 @@ const PromptGeneratorDialog = ({
       ) : (
         /* Mobile/Tablet: Bottom Drawer */
         <Drawer open={open} onOpenChange={(v) => !v && onClose()}>
-          <DrawerContent className="h-[55vh] max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+          <DrawerContent className="h-[85vh] max-h-[90vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
             <PromptGeneratorInner {...innerProps} />
           </DrawerContent>
         </Drawer>
@@ -261,7 +261,7 @@ const PromptGeneratorDialog = ({
         </Dialog>
       ) : (
         <Drawer open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-          <DrawerContent className="h-[55vh] max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+          <DrawerContent className="h-[85vh] max-h-[90vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
             <div className="flex items-center gap-2 p-4 pb-0">
               <h2 className="text-foreground text-base font-semibold">提示词生成器</h2>
               <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-primary text-primary-foreground text-xs font-bold">
