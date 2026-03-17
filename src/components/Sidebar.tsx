@@ -198,7 +198,7 @@ const Sidebar = ({
         {/* Creation Mode Selector */}
         {showCreationModeSelector && (
           <div className="mb-6">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)] mb-2 block">创作模式</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">创作模式</span>
             <div className="relative">
               <button
                 onClick={() => setModeOpen(!modeOpen)}
