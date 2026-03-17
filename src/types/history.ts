@@ -2,7 +2,7 @@ import type { CreationMode } from "./api";
 
 export interface HistoryItem {
   id: string;
-  status: "loading" | "completed";
+  status: "loading" | "completed" | "failed";
   thumb?: string;
   videoUrl?: string;
   prompt: string;
