@@ -4,12 +4,15 @@ import { useRef, useState } from "react";
 const ACCEPTED_FORMATS = "image/jpeg,image/png,image/webp";
 const MAX_SIZE_MB = 10;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+const MIN_RATIO = 1 / 2.5; // 1:2.5
+const MAX_RATIO = 2.5 / 1; // 2.5:1
 
 interface ImageUploadBoxProps {
   label: string;
   className?: string;
   onImageSelected?: (file: File | null) => void;
   onSizeError?: () => void;
+  onRatioError?: () => void;
 }
 
 const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError }: ImageUploadBoxProps) => {
