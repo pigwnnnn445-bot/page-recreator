@@ -332,7 +332,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       </button>
                       <button
                         onClick={handleGenerate}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                        disabled={!prompt.trim()}
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-opacity ${
+                          prompt.trim()
+                            ? "bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground hover:opacity-90 cursor-pointer"
+                            : "bg-muted text-muted-foreground cursor-not-allowed"
+                        }`}
                       >
                         生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
                       </button>
