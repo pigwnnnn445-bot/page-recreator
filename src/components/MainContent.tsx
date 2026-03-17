@@ -235,7 +235,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} onRegenerate={handleRegenerate} />
               {/* Bottom Prompt Input - preview mode shows video prompt */}
               <div className="px-3 pb-3 lg:p-6 lg:pt-0">
-                  <div className="lg:hidden mb-2 relative">
+                  <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
