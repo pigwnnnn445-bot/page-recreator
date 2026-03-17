@@ -68,6 +68,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const [historyOpen, setHistoryOpen] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([]);
+  const [showParamTip, setShowParamTip] = useState(() => localStorage.getItem("hideParamTip") !== "true");
+
+  const dismissParamTip = useCallback(() => {
+    setShowParamTip(false);
+    localStorage.setItem("hideParamTip", "true");
+  }, []);
   const generateCountRef = useRef(0);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
   const [promptGenOpen, setPromptGenOpen] = useState(false);
