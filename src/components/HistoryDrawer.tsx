@@ -1,4 +1,4 @@
-import { X, Video, MoreHorizontal, Trash2 } from "lucide-react";
+import { X, Video, VideoOff, MoreHorizontal, Trash2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import type { HistoryItem } from "@/types/history";
 import {
