@@ -75,22 +75,28 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     setHistoryItems(prev => [newItem, ...prev]);
     setPrompt("");
     setGenerating(true);
+    generatingItemIdRef.current = newItem.id;
+    backgroundGenerationRef.current = false;
 
-    // Simulate: odd calls succeed, even calls fail (1st success, 2nd fail, ...)
+    // Simulate: odd calls succeed, even calls fail
     generateCountRef.current += 1;
     const shouldFail = generateCountRef.current % 2 === 0;
 
     setTimeout(() => {
+      const completedItem = shouldFail
+        ? { ...newItem, status: "failed" as const }
+        : { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" };
+
       setHistoryItems(prev =>
-        prev.map(item =>
-          item.id === newItem.id
-            ? shouldFail
-              ? { ...item, status: "failed" as const }
-              : { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
-            : item
-        )
+        prev.map(item => item.id === newItem.id ? completedItem : item)
       );
       setGenerating(false);
+
+      // Auto-show result if user didn't click "后台生成"
+      if (!backgroundGenerationRef.current && generatingItemIdRef.current === newItem.id) {
+        setPreviewItem(completedItem);
+      }
+      generatingItemIdRef.current = null;
     }, 5000);
   }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
