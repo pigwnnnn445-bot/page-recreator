@@ -296,7 +296,7 @@ const Sidebar = ({
             <span className="text-sm text-text-secondary mb-2 block">
               参考图片 （<span className="text-destructive">!</span> 必填）
             </span>
-            <ImageUploadBox label="上传" className="w-full h-[120px]" onSizeError={onImageSizeError} onRatioError={onImageRatioError} />
+            <ImageUploadBox label="上传" className="w-full h-[120px]" onSizeError={onImageSizeError} onRatioError={onImageRatioError} onImageSelected={(f) => onImageUploaded?.(!!f)} />
           </div>
         )}
 
