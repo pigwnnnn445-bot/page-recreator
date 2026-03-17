@@ -106,7 +106,7 @@ const PromptGeneratorDialog = ({
           <DialogHeader className="p-4 pb-0 flex-shrink-0">
             <div className="flex items-center gap-2">
               <DialogTitle className="text-foreground text-base font-semibold">
-                提示生成器
+                提示词生成器
               </DialogTitle>
             </div>
           </DialogHeader>
