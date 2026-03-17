@@ -69,6 +69,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     };
 
     setHistoryItems(prev => [newItem, ...prev]);
+    setPrompt("");
     setGenerating(true);
 
     // Simulate completion after 5 seconds (demo purposes)
