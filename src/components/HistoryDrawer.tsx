@@ -66,7 +66,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
       <div
         className={`flex-shrink-0 border-l border-border bg-card flex flex-col h-full transition-all duration-300 ease-in-out overflow-hidden ${
           open
-            ? 'max-md:w-full max-md:absolute max-md:inset-0 max-md:z-50 max-md:border-l-0 md:w-80 opacity-100'
+            ? 'max-lg:w-full max-lg:absolute max-lg:inset-0 max-lg:z-50 max-lg:border-l-0 lg:w-80 opacity-100'
             : 'w-0 opacity-0 border-l-0'
         }`}
       >
