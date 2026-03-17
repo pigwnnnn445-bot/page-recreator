@@ -4,6 +4,7 @@ import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
 import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import ImageRequiredTip from "./ImageRequiredTip";
+import ImageSizeTip from "./ImageSizeTip";
 import { useState, useCallback, useRef } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
