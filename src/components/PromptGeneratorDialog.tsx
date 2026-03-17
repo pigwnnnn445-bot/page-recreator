@@ -187,7 +187,7 @@ const PromptGeneratorDialog = ({
           <DialogHeader className="p-4 pb-0">
             <div className="flex items-center gap-2">
               <DialogTitle className="text-foreground text-base font-semibold">
-                提示生成器
+                提示词生成器
               </DialogTitle>
               <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-primary text-primary-foreground text-xs font-bold">
                 {editIndex + 1}
