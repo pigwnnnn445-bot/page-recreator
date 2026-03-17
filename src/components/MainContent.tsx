@@ -310,7 +310,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       <div className="bg-card rounded-xl border border-border p-2 md:p-4 shadow-sm md:row-span-2">
                         <HomeVideoPlayer />
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">Veo</span>
+                          <span className="px-2.5 py-1 rounded-full bg-card-secondary text-text-secondary text-xs">Veo</span>
                           <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">veo3-fast</span>
                           <button
                             onClick={handleMake}
