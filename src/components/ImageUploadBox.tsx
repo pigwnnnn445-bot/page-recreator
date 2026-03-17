@@ -15,7 +15,7 @@ interface ImageUploadBoxProps {
   onRatioError?: () => void;
 }
 
-const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError }: ImageUploadBoxProps) => {
+const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, onRatioError }: ImageUploadBoxProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -33,9 +33,21 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError }:
       return;
     }
 
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    onImageSelected?.(file);
+    // Check aspect ratio
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      const ratio = img.width / img.height;
+      if (ratio < MIN_RATIO || ratio > MAX_RATIO) {
+        URL.revokeObjectURL(objectUrl);
+        onRatioError?.();
+        if (inputRef.current) inputRef.current.value = "";
+        return;
+      }
+      setPreview(objectUrl);
+      onImageSelected?.(file);
+    };
+    img.src = objectUrl;
   };
 
   const handleRemove = (e: React.MouseEvent) => {
