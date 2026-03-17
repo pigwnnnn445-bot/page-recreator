@@ -194,7 +194,7 @@ const Sidebar = ({
         {/* Creation Mode Selector */}
         {showCreationModeSelector && (
           <div className="mb-6">
-            <span className="text-sm text-muted-foreground mb-2 block">创作模式</span>
+            <span className="text-sm text-foreground dark:text-muted-foreground mb-2 block">创作模式</span>
             <div className="flex h-[48px] rounded-full border border-border bg-card p-1">
               {currentConfig.creationModes.map((mode) => (
                 <button
