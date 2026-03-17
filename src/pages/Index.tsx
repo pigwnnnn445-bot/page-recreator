@@ -16,8 +16,10 @@ const Index = () => {
   const config = mockUserConfig;
   const models = config.data.enable_model;
 
-  const initialConfig = modelConfigMap[models[0].id] ?? defaultModelConfig;
-  const [selectedModel, setSelectedModel] = useState<ModelInfo>(models[0]);
+  // Default to first online (non-coming_soon) model
+  const firstOnlineModel = models.find(m => m.status === "online") ?? models[0];
+  const initialConfig = modelConfigMap[firstOnlineModel.id] ?? defaultModelConfig;
+  const [selectedModel, setSelectedModel] = useState<ModelInfo>(firstOnlineModel);
   const [selectedCreationMode, setSelectedCreationMode] = useState<CreationMode>(initialConfig.creationModes[0]);
   const [selectedQuality, setSelectedQuality] = useState<string>(initialConfig.qualities[0]);
   const [selectedDuration, setSelectedDuration] = useState<string>(initialConfig.durations.length > 0 ? initialConfig.durations[0] : "");

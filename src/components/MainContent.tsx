@@ -43,6 +43,9 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const generateCountRef = useRef(0);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
   const [promptGenOpen, setPromptGenOpen] = useState(false);
+  // Track the currently generating item ID and whether user chose background generation
+  const generatingItemIdRef = useRef<string | null>(null);
+  const backgroundGenerationRef = useRef(false);
 
   const handleMake = () => {
     setPrompt(SAMPLE_VIDEO.prompt);
