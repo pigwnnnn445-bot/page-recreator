@@ -43,6 +43,9 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const generateCountRef = useRef(0);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
   const [promptGenOpen, setPromptGenOpen] = useState(false);
+  // Track the currently generating item ID and whether user chose background generation
+  const generatingItemIdRef = useRef<string | null>(null);
+  const backgroundGenerationRef = useRef(false);
 
   const handleMake = () => {
     setPrompt(SAMPLE_VIDEO.prompt);
@@ -72,22 +75,28 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     setHistoryItems(prev => [newItem, ...prev]);
     setPrompt("");
     setGenerating(true);
+    generatingItemIdRef.current = newItem.id;
+    backgroundGenerationRef.current = false;
 
-    // Simulate: odd calls succeed, even calls fail (1st success, 2nd fail, ...)
+    // Simulate: odd calls succeed, even calls fail
     generateCountRef.current += 1;
     const shouldFail = generateCountRef.current % 2 === 0;
 
     setTimeout(() => {
+      const completedItem = shouldFail
+        ? { ...newItem, status: "failed" as const }
+        : { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" };
+
       setHistoryItems(prev =>
-        prev.map(item =>
-          item.id === newItem.id
-            ? shouldFail
-              ? { ...item, status: "failed" as const }
-              : { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
-            : item
-        )
+        prev.map(item => item.id === newItem.id ? completedItem : item)
       );
       setGenerating(false);
+
+      // Auto-show result if user didn't click "后台生成"
+      if (!backgroundGenerationRef.current && generatingItemIdRef.current === newItem.id) {
+        setPreviewItem(completedItem);
+      }
+      generatingItemIdRef.current = null;
     }, 5000);
   }, [prompt, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
@@ -187,9 +196,14 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     >
                       <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
                     </button>
-                    <button
+                     <button
                       onClick={handleGenerate}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                      disabled={!previewItem?.prompt}
+                      className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-opacity ${
+                        previewItem?.prompt
+                          ? "bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground hover:opacity-90 cursor-pointer"
+                          : "bg-muted text-muted-foreground cursor-not-allowed"
+                      }`}
                     >
                       生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
                     </button>
@@ -208,7 +222,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       视频生成大约需要20分钟🏖️。在这期间，您可以尽情体验其他有趣的AI模型，或者放松一下，生成过程不会中断哦！完成后，别忘了在历史记录中查看您的精彩视频！
                     </p>
                     <button
-                      onClick={() => { setGenerating(false); setPrompt(""); }}
+                      onClick={() => { backgroundGenerationRef.current = true; setGenerating(false); setPrompt(""); }}
                       className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
                     >
                       <Copy className="w-5 h-5" /> 后台生成
@@ -318,7 +332,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       </button>
                       <button
                         onClick={handleGenerate}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                        disabled={!prompt.trim()}
+                        className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-opacity ${
+                          prompt.trim()
+                            ? "bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground hover:opacity-90 cursor-pointer"
+                            : "bg-muted text-muted-foreground cursor-not-allowed"
+                        }`}
                       >
                         生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
                       </button>
