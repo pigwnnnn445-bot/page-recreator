@@ -68,7 +68,7 @@ const HomeVideoPlayer = () => {
   );
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, setSelectedCreationMode, selectedQuality, setSelectedQuality, selectedDuration, setSelectedDuration, selectedRatio, setSelectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip, onImageSizeError, onImageRatioError }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
