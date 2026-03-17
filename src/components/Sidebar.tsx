@@ -51,12 +51,18 @@ const Sidebar = ({
     setModelOpen(nextOpen);
   }, []);
 
+  // Scroll sidebar to top when opened on mobile
+  useEffect(() => {
+    if (open && asideRef.current) {
+      asideRef.current.scrollTop = 0;
+    }
+  }, [open]);
+
   useEffect(() => {
     if (modelOpen && modelListRef.current) {
       const container = modelListRef.current;
       const selectedEl = container.querySelector('[data-selected="true"]') as HTMLElement | null;
       if (selectedEl) {
-        // Use requestAnimationFrame to ensure DOM is painted
         requestAnimationFrame(() => {
           selectedEl.scrollIntoView({ block: "nearest" });
         });
