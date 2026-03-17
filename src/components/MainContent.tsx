@@ -355,6 +355,26 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                 )}
               </div>
 
+              {/* Mobile Settings - flat inline above prompt */}
+              {!generating && (
+                <MobileSettings
+                  models={models}
+                  selectedModel={selectedModel}
+                  setSelectedModel={onSelectModel}
+                  selectedCreationMode={selectedCreationMode}
+                  setSelectedCreationMode={setSelectedCreationMode}
+                  selectedQuality={selectedQuality}
+                  setSelectedQuality={setSelectedQuality}
+                  selectedDuration={selectedDuration}
+                  setSelectedDuration={setSelectedDuration}
+                  selectedRatio={selectedRatio}
+                  setSelectedRatio={setSelectedRatio}
+                  currentConfig={currentConfig}
+                  onImageSizeError={onImageSizeError}
+                  onImageRatioError={onImageRatioError}
+                />
+              )}
+
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
                 <div className="px-5 pb-4 md:p-6 md:pt-0">
