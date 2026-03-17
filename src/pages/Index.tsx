@@ -100,6 +100,7 @@ const Index = () => {
         onCloseSizeTip={() => setImageSizeTipOpen(false)}
         imageRatioTipOpen={imageRatioTipOpen}
         onCloseRatioTip={() => setImageRatioTipOpen(false)}
+        hasUploadedImage={hasUploadedImage}
       />
     </div>
   );
