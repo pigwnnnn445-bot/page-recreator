@@ -71,8 +71,8 @@ const PromptGeneratorInner = ({
         <X className="w-5 h-5" />
       </button>
     </div>
-    <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0">
-      <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[140px] md:min-h-[180px] flex-shrink-0">
+    <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0 flex-1">
+      <div className="bg-secondary rounded-xl p-3 flex flex-col flex-1 min-h-[140px] md:min-h-[180px]">
         <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
@@ -219,7 +219,7 @@ const PromptGeneratorDialog = ({
       ) : (
         /* Mobile/Tablet: Bottom Drawer */
         <Drawer open={open} onOpenChange={(v) => !v && onClose()}>
-          <DrawerContent className="max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+          <DrawerContent className="h-[55vh] max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
             <PromptGeneratorInner {...innerProps} />
           </DrawerContent>
         </Drawer>
@@ -261,7 +261,7 @@ const PromptGeneratorDialog = ({
         </Dialog>
       ) : (
         <Drawer open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-          <DrawerContent className="max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
+          <DrawerContent className="h-[55vh] max-h-[85vh] bg-card border-border rounded-t-2xl p-0 flex flex-col">
             <div className="flex items-center gap-2 p-4 pb-0">
               <h2 className="text-foreground text-base font-semibold">提示词生成器</h2>
               <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-primary text-primary-foreground text-xs font-bold">
