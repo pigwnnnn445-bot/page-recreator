@@ -12,6 +12,7 @@ import iconGuide from "@/assets/icon-guide.png";
 import iconTips from "@/assets/icon-tips.png";
 import iconPromptGen from "@/assets/icon-prompt-generator.webp";
 import ThemeToggle from "./ThemeToggle";
+import ModelButtonTip from "./ModelButtonTip";
 import type { ModelInfo } from "@/types/api";
 import type { HistoryItem } from "@/types/history";
 
