@@ -58,9 +58,17 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     }
   };
 
+  // Check if image is required but not uploaded
+  const isImageRequired = selectedCreationMode === "image_to_video";
+
   const handleGenerate = useCallback(() => {
     if (!prompt.trim()) return;
 
+    // If in image_to_video mode, image is required
+    if (isImageRequired) {
+      setImageRequiredTipOpen(true);
+      return;
+    }
     const newItem: HistoryItem = {
       id: crypto.randomUUID(),
       status: "loading",
