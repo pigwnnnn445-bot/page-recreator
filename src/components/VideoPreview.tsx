@@ -30,12 +30,12 @@ const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
   if (item.status === "failed") {
     return (
       <div className="flex-1 flex flex-col items-center justify-center min-h-0 px-3 md:px-6 py-2 md:py-4">
-        <VideoOff className="w-16 h-16 text-text-muted mb-4" />
-        <p className="text-text-muted text-sm md:text-base mb-8">视频生成失败</p>
+        <VideoOff className="w-16 h-16 text-muted-foreground mb-4" />
+        <p className="text-muted-foreground text-sm md:text-base mb-8">视频生成失败</p>
         {onRegenerate && (
           <button
             onClick={onRegenerate}
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
           >
             <RefreshCw className="w-5 h-5" /> 重新生成
           </button>
@@ -64,9 +64,9 @@ const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
             >
               <div className="w-16 h-16 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
                 {playing ? (
-                  <Pause className="w-8 h-8 text-primary-foreground fill-primary-foreground" />
+                  <Pause className="w-8 h-8 text-white fill-white" />
                 ) : (
-                  <Play className="w-8 h-8 text-primary-foreground fill-primary-foreground" />
+                  <Play className="w-8 h-8 text-white fill-white" />
                 )}
               </div>
             </div>
@@ -80,7 +80,7 @@ const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-16 h-16 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
-                <Play className="w-8 h-8 text-primary-foreground fill-primary-foreground" />
+                <Play className="w-8 h-8 text-white fill-white" />
               </div>
             </div>
           </>

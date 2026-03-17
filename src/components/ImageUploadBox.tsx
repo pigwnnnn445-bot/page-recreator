@@ -4,8 +4,8 @@ import { useRef, useState } from "react";
 const ACCEPTED_FORMATS = "image/jpeg,image/png,image/webp";
 const MAX_SIZE_MB = 10;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
-const MIN_RATIO = 1 / 2.5; // 1:2.5
-const MAX_RATIO = 2.5 / 1; // 2.5:1
+const MIN_RATIO = 1 / 2.5;
+const MAX_RATIO = 2.5 / 1;
 
 interface ImageUploadBoxProps {
   label: string;
@@ -33,7 +33,6 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       return;
     }
 
-    // Check aspect ratio (soft warning, image still accepted)
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
     img.onload = () => {
@@ -77,10 +76,10 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       ) : (
         <button
           onClick={handleClick}
-          className={`flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-card hover:bg-hover-bg transition-colors cursor-pointer ${className}`}
+          className={`flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-card hover:bg-accent transition-colors cursor-pointer ${className}`}
         >
-          <ImagePlus className="w-6 h-6 text-text-muted" />
-          <span className="text-sm text-text-muted">{label}</span>
+          <ImagePlus className="w-6 h-6 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">{label}</span>
         </button>
       )}
     </>
