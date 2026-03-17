@@ -196,9 +196,14 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     >
                       <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
                     </button>
-                    <button
+                     <button
                       onClick={handleGenerate}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                      disabled={!previewItem?.prompt}
+                      className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-opacity ${
+                        previewItem?.prompt
+                          ? "bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground hover:opacity-90 cursor-pointer"
+                          : "bg-muted text-muted-foreground cursor-not-allowed"
+                      }`}
                     >
                       生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
                     </button>
