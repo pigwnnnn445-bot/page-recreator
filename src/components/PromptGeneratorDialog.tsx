@@ -120,7 +120,7 @@ const PromptGeneratorDialog = ({
                 <button
                   onClick={generateResults}
                   disabled={!inputText.trim() || isOptimizing}
-                  className="px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-5 py-2 rounded-full bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {isOptimizing ? "优化中..." : "优化"}
                 </button>
