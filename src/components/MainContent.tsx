@@ -208,7 +208,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                 onClick={onMenuOpen}
                 className="md:hidden flex items-center gap-2 px-3 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
               >
-                <Menu className="w-5 h-5" />
+                <Menu className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setHistoryOpen(!historyOpen)}
