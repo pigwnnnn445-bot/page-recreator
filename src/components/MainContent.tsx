@@ -1,4 +1,4 @@
-import { Home, Clock, Play, Pause, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download, SlidersHorizontal, ChevronRight, X } from "lucide-react";
+import { Home, Clock, Play, Pause, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download, SlidersHorizontal, ChevronRight } from "lucide-react";
 import type { CreationMode, ModelConfig } from "@/types/api";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
@@ -6,7 +6,7 @@ import PromptGeneratorDialog from "./PromptGeneratorDialog";
 import ImageRequiredTip from "./ImageRequiredTip";
 import ImageSizeTip from "./ImageSizeTip";
 import ImageRatioTip from "./ImageRatioTip";
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import sampleThumb from "@/assets/sample-video-thumb.jpg";
 import iconGuide from "@/assets/icon-guide.png";
 import iconTips from "@/assets/icon-tips.png";
@@ -68,12 +68,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const [historyOpen, setHistoryOpen] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([]);
-  const [showParamTip, setShowParamTip] = useState(() => localStorage.getItem("hideParamTip") !== "true");
-
-  const dismissParamTip = useCallback(() => {
-    setShowParamTip(false);
-    localStorage.setItem("hideParamTip", "true");
-  }, []);
   const generateCountRef = useRef(0);
   const [previewItem, setPreviewItem] = useState<HistoryItem | null>(null);
   const [promptGenOpen, setPromptGenOpen] = useState(false);
@@ -225,14 +219,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} onRegenerate={handleRegenerate} />
               {/* Bottom Prompt Input - preview mode shows video prompt */}
               <div className="px-5 pb-4 md:p-6 md:pt-0">
-                {showParamTip && (
-                  <div className="md:hidden flex items-start gap-2 mb-2 px-3 py-2.5 rounded-xl bg-accent/60 border border-accent text-sm text-foreground animate-fade-in">
-                    <span className="flex-1 leading-relaxed">💡 这里不止能选模型哦～点开还能设置清晰度、时长、上传参考图等更多视频参数。</span>
-                    <button onClick={dismissParamTip} className="p-0.5 rounded-md hover:bg-hover-bg transition-colors cursor-pointer shrink-0 mt-0.5">
-                      <X className="w-3.5 h-3.5 text-text-muted" />
-                    </button>
-                  </div>
-                )}
                 <button
                   onClick={onMenuOpen}
                   className="md:hidden flex items-center gap-2 mb-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer w-fit"
@@ -368,14 +354,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
                 <div className="px-5 pb-4 md:p-6 md:pt-0">
-                  {showParamTip && (
-                    <div className="md:hidden flex items-start gap-2 mb-2 px-3 py-2.5 rounded-xl bg-accent/60 border border-accent text-sm text-foreground animate-fade-in">
-                      <span className="flex-1 leading-relaxed">💡 这里不止能选模型哦～点开还能设置清晰度、时长、上传参考图等更多视频参数。</span>
-                      <button onClick={dismissParamTip} className="p-0.5 rounded-md hover:bg-hover-bg transition-colors cursor-pointer shrink-0 mt-0.5">
-                        <X className="w-3.5 h-3.5 text-text-muted" />
-                      </button>
-                    </div>
-                  )}
                   <button
                     onClick={onMenuOpen}
                     className="md:hidden flex items-center gap-2 mb-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer w-fit"
