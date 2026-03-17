@@ -229,8 +229,17 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-2 md:pb-4 flex items-center justify-center">
                 {generating ? (
                   /* Generating State */
-                  <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto">
-                    <Video className="w-16 h-16 text-primary mb-6" />
+                  <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto animate-fade-in">
+                    {/* Animated icon with pulse + shimmer */}
+                    <div className="relative w-20 h-20 mb-6 flex items-center justify-center">
+                      <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping" style={{ animationDuration: '2.5s' }} />
+                      <div className="absolute inset-1 rounded-full bg-primary/5 animate-pulse" />
+                      <Video className="relative w-10 h-10 text-primary animate-pulse" />
+                    </div>
+                    {/* Progress bar shimmer */}
+                    <div className="w-48 h-1.5 rounded-full bg-muted overflow-hidden mb-6">
+                      <div className="h-full w-1/2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 animate-[shimmer_2s_ease-in-out_infinite]" />
+                    </div>
                     <p className="text-text-muted text-sm md:text-base leading-relaxed mb-8">
                       视频生成大约需要20分钟🏖️。在这期间，您可以尽情体验其他有趣的AI模型，或者放松一下，生成过程不会中断哦！完成后，别忘了在历史记录中查看您的精彩视频！
                     </p>
