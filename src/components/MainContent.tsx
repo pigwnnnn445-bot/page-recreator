@@ -395,6 +395,10 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
         initialPrompt={prompt}
         onApplyPrompt={(p) => setPrompt(p)}
       />
+      <ImageRequiredTip
+        open={imageRequiredTipOpen}
+        onClose={() => setImageRequiredTipOpen(false)}
+      />
     </div>
   );
 };
