@@ -79,6 +79,7 @@ const Index = () => {
         setSelectedRatio={setSelectedRatio}
         currentConfig={currentConfig}
         onImageSizeError={() => setImageSizeTipOpen(true)}
+        onImageRatioError={() => setImageRatioTipOpen(true)}
       />
       <MainContent
         onMenuOpen={() => setSidebarOpen(true)}
