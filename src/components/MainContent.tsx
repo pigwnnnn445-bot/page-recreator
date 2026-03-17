@@ -307,7 +307,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-2 md:mb-8">
                       {/* Video Preview Card */}
-                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm md:row-span-2">
+                      <div className="bg-card rounded-xl border border-border p-2 md:p-4 shadow-sm md:row-span-2">
                         <HomeVideoPlayer />
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">Veo</span>
