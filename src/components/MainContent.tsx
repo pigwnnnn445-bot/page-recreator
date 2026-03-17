@@ -91,13 +91,47 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   }, [previewItem]);
 
   const handleSelectItem = useCallback((item: HistoryItem) => {
-    if (item.status === "completed") {
+    if (item.status === "completed" || item.status === "failed") {
       setPreviewItem(item);
       setPrompt(item.prompt);
       onRestoreFromHistory(item);
       setHistoryOpen(false);
     }
   }, [onRestoreFromHistory]);
+
+  const handleRegenerate = useCallback(() => {
+    if (!previewItem) return;
+    // Restore prompt from the failed item and trigger generate
+    setPrompt(previewItem.prompt);
+    setPreviewItem(null);
+    // Create new generation with same prompt
+    const newItem: HistoryItem = {
+      id: crypto.randomUUID(),
+      status: "loading",
+      prompt: previewItem.prompt,
+      modelName: selectedModel.name,
+      category: selectedModel.category ?? "",
+      createdAt: new Date(),
+      modelId: selectedModel.id,
+      creationMode: selectedCreationMode,
+      quality: selectedQuality,
+      duration: selectedDuration,
+      ratio: selectedRatio,
+    };
+    setHistoryItems(prev => [newItem, ...prev]);
+    setPrompt("");
+    setGenerating(true);
+    setTimeout(() => {
+      setHistoryItems(prev =>
+        prev.map(item =>
+          item.id === newItem.id
+            ? { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
+            : item
+        )
+      );
+      setGenerating(false);
+    }, 5000);
+  }, [previewItem, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
   return (
     <div className="flex-1 flex flex-col min-h-screen min-w-0">
@@ -134,7 +168,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
           {/* Main Area */}
           {previewItem ? (
             <>
-              <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} />
+              <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} onRegenerate={handleRegenerate} />
               {/* Bottom Prompt Input - preview mode shows video prompt */}
               <div className="px-5 pb-4 md:p-6 md:pt-0">
                 <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">

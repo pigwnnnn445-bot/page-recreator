@@ -1,13 +1,14 @@
-import { Download, Play, Pause } from "lucide-react";
+import { Download, Play, Pause, VideoOff, RefreshCw } from "lucide-react";
 import { useState, useRef } from "react";
 import type { HistoryItem } from "@/types/history";
 
 interface VideoPreviewProps {
   item: HistoryItem;
   onBack: () => void;
+  onRegenerate?: () => void;
 }
 
-const VideoPreview = ({ item }: VideoPreviewProps) => {
+const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -24,6 +25,24 @@ const VideoPreview = ({ item }: VideoPreviewProps) => {
   const handleVideoEnded = () => {
     setPlaying(false);
   };
+
+  // Failed state
+  if (item.status === "failed") {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center min-h-0 px-3 md:px-6 py-2 md:py-4">
+        <VideoOff className="w-16 h-16 text-text-muted mb-4" />
+        <p className="text-text-muted text-sm md:text-base mb-8">视频生成失败</p>
+        {onRegenerate && (
+          <button
+            onClick={onRegenerate}
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
+          >
+            <RefreshCw className="w-5 h-5" /> 重新生成
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 px-3 md:px-6 py-2 md:py-4 overflow-hidden">

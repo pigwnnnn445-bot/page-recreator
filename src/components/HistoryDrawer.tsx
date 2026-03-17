@@ -1,4 +1,4 @@
-import { X, Video, MoreHorizontal, Trash2 } from "lucide-react";
+import { X, Video, VideoOff, MoreHorizontal, Trash2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import type { HistoryItem } from "@/types/history";
 import {
@@ -109,6 +109,15 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                             <Video className="w-8 h-8 text-text-muted" />
                             <span className="text-text-muted text-xs">加载中...</span>
                           </div>
+                        ) : item.status === "failed" ? (
+                          /* Failed placeholder */
+                          <div
+                            className="w-full aspect-square bg-card-secondary rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                            onClick={() => onSelect(item)}
+                          >
+                            <VideoOff className="w-8 h-8 text-destructive" />
+                            <span className="text-destructive text-xs">生成失败</span>
+                          </div>
                         ) : (
                           /* Completed thumbnail */
                           <div
@@ -126,7 +135,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                         )}
 
                         {/* Three-dot menu on hover (only for completed items) */}
-                        {item.status === "completed" && (
+                        {(item.status === "completed" || item.status === "failed") && (
                           <div className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity" ref={menuOpenId === item.id ? menuRef : undefined}>
                             <button
                               onClick={(e) => {
