@@ -23,15 +23,21 @@ interface MainContentProps {
   onSelectModel: (model: ModelInfo) => void;
   selectedModel: ModelInfo;
   selectedCreationMode: CreationMode;
+  setSelectedCreationMode: (mode: CreationMode) => void;
   selectedQuality: string;
+  setSelectedQuality: (q: string) => void;
   selectedDuration: string;
+  setSelectedDuration: (d: string) => void;
   selectedRatio: string;
+  setSelectedRatio: (r: string) => void;
   onRestoreFromHistory: (item: HistoryItem) => void;
   currentConfig: ModelConfig;
   imageSizeTipOpen: boolean;
   onCloseSizeTip: () => void;
   imageRatioTipOpen: boolean;
   onCloseRatioTip: () => void;
+  onImageSizeError?: () => void;
+  onImageRatioError?: () => void;
 }
 
 // 示例视频关联的模型信息
