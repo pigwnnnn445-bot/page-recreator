@@ -307,7 +307,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     {/* Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-8">
                       {/* Video Preview Card */}
-                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm md:row-span-2">
+                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
                         <HomeVideoPlayer />
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="px-3 py-1.5 rounded-full bg-card-secondary text-text-secondary text-sm">Veo</span>
@@ -318,36 +318,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                           >
                             制作！
                           </button>
-                        </div>
-                      </div>
-
-                      {/* Chat Assistant Card */}
-                      <div className="bg-card rounded-xl border border-border p-3 md:p-4 shadow-sm">
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className="w-8 h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Globe className="w-4 h-4 text-theme-1" />
-                          </div>
-                          <p className="text-foreground text-sm leading-relaxed">
-                            嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-4 py-2.5">
-                          <span className="text-primary text-sm">💡 输入点想法试试看</span>
-                          <div className="ml-auto w-7 h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
-                            <span className="text-primary-foreground text-xs">😊</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Guide & Tips */}
-                      <div className="grid grid-cols-2 gap-3 md:gap-4">
-                        <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                          <img src={iconGuide} alt="使用说明" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
-                          <span className="text-foreground text-xs md:text-sm font-medium">使用说明</span>
-                        </div>
-                        <div className="bg-card rounded-xl border border-border p-3 md:p-4 flex flex-col items-center justify-center gap-1.5 md:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
-                          <img src={iconTips} alt="生成技巧" className="w-10 h-10 md:w-16 md:h-16 object-contain" />
-                          <span className="text-foreground text-xs md:text-sm font-medium">生成技巧</span>
                         </div>
                       </div>
                     </div>
