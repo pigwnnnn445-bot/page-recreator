@@ -88,6 +88,7 @@ const Index = () => {
         selectedDuration={selectedDuration}
         selectedRatio={selectedRatio}
         onRestoreFromHistory={handleRestoreFromHistory}
+        currentConfig={currentConfig}
       />
     </div>
   );
