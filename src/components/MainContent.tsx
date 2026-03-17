@@ -29,6 +29,8 @@ interface MainContentProps {
   currentConfig: ModelConfig;
   imageSizeTipOpen: boolean;
   onCloseSizeTip: () => void;
+  imageRatioTipOpen: boolean;
+  onCloseRatioTip: () => void;
 }
 
 // 示例视频关联的模型信息
