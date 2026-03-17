@@ -15,6 +15,7 @@ const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [imageSizeTipOpen, setImageSizeTipOpen] = useState(false);
   const [imageRatioTipOpen, setImageRatioTipOpen] = useState(false);
+  const [hasUploadedImage, setHasUploadedImage] = useState(false);
 
   const config = mockUserConfig;
   const models = config.data.enable_model;
@@ -81,6 +82,7 @@ const Index = () => {
         currentConfig={currentConfig}
         onImageSizeError={() => setImageSizeTipOpen(true)}
         onImageRatioError={() => { if (shouldShowRatioTip()) setImageRatioTipOpen(true); }}
+        onImageUploaded={(hasImage) => setHasUploadedImage(hasImage)}
       />
       <MainContent
         onMenuOpen={() => setSidebarOpen(true)}
@@ -98,6 +100,7 @@ const Index = () => {
         onCloseSizeTip={() => setImageSizeTipOpen(false)}
         imageRatioTipOpen={imageRatioTipOpen}
         onCloseRatioTip={() => setImageRatioTipOpen(false)}
+        hasUploadedImage={hasUploadedImage}
       />
     </div>
   );

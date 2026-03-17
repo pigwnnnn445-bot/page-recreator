@@ -32,6 +32,7 @@ interface MainContentProps {
   onCloseSizeTip: () => void;
   imageRatioTipOpen: boolean;
   onCloseRatioTip: () => void;
+  hasUploadedImage: boolean;
 }
 
 // 示例视频关联的模型信息
@@ -62,7 +63,7 @@ const HomeVideoPlayer = () => {
   );
 };
 
-const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip }: MainContentProps) => {
+const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio, onRestoreFromHistory, currentConfig, imageSizeTipOpen, onCloseSizeTip, imageRatioTipOpen, onCloseRatioTip, hasUploadedImage }: MainContentProps) => {
   const [prompt, setPrompt] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -87,12 +88,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   };
 
   // Check if image is required but not uploaded
-  const isImageRequired = selectedCreationMode === "image_to_video";
+  const isImageRequired = selectedCreationMode === "image_to_video" && !hasUploadedImage;
 
   const handleGenerate = useCallback(() => {
     if (!prompt.trim()) return;
 
-    // If in image_to_video mode, image is required
+    // If in image_to_video mode and no image uploaded, show tip
     if (isImageRequired) {
       setImageRequiredTipOpen(true);
       return;
