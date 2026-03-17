@@ -35,7 +35,6 @@ interface MainContentProps {
   hasUploadedImage: boolean;
 }
 
-// 示例视频关联的模型信息
 const SAMPLE_VIDEO = {
   modelId: 1110,
   category: "Veo",
@@ -54,21 +53,18 @@ const HomeVideoPlayer = ({ onMake }: { onMake: () => void }) => {
   return (
     <div className="relative rounded-xl overflow-hidden cursor-pointer group h-full" onClick={handlePlayPause}>
       <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] lg:aspect-auto lg:h-full lg:min-h-[200px] object-cover" />
-      {/* Gradient overlay at bottom */}
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-      {/* Play button */}
       <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
         <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
           {playing ? <Pause className="w-5 h-5 text-white fill-white" /> : <Play className="w-5 h-5 text-white fill-white" />}
         </div>
       </div>
-      {/* Bottom bar: tags + make button overlaid */}
       <div className="absolute inset-x-0 bottom-0 flex items-center gap-1.5 px-2.5 py-2 md:px-3 md:py-2.5">
         <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-[11px] md:text-xs font-medium">Veo</span>
         <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-[11px] md:text-xs font-medium">veo3-fast</span>
         <button
           onClick={(e) => { e.stopPropagation(); onMake(); }}
-          className="ml-auto px-3 py-1 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-md"
+          className="ml-auto px-3 py-1 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-md"
         >
           制作！
         </button>
@@ -89,7 +85,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   const [promptGenOpen, setPromptGenOpen] = useState(false);
   const [imageRequiredTipOpen, setImageRequiredTipOpen] = useState(false);
   
-  // Track the currently generating item ID and whether user chose background generation
   const generatingItemIdRef = useRef<string | null>(null);
   const backgroundGenerationRef = useRef(false);
 
@@ -101,13 +96,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     }
   };
 
-  // Check if image is required but not uploaded
   const isImageRequired = selectedCreationMode === "image_to_video" && !hasUploadedImage;
 
   const handleGenerate = useCallback(() => {
     if (!prompt.trim()) return;
 
-    // If in image_to_video mode and no image uploaded, show tip
     if (isImageRequired) {
       setImageRequiredTipOpen(true);
       return;
@@ -133,7 +126,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     generatingItemIdRef.current = newItem.id;
     backgroundGenerationRef.current = false;
 
-    // Simulate: odd calls succeed, even calls fail
     generateCountRef.current += 1;
     const shouldFail = generateCountRef.current % 2 === 0;
 
@@ -147,7 +139,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       );
       setGenerating(false);
 
-      // Auto-show result if user didn't click "后台生成"
       if (!backgroundGenerationRef.current && generatingItemIdRef.current === newItem.id) {
         setPreviewItem(completedItem);
       }
@@ -171,10 +162,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
 
   const handleRegenerate = useCallback(() => {
     if (!previewItem) return;
-    // Restore prompt from the failed item and trigger generate
     setPrompt(previewItem.prompt);
     setPreviewItem(null);
-    // Create new generation with same prompt
     const newItem: HistoryItem = {
       id: crypto.randomUUID(),
       status: "loading",
@@ -205,9 +194,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
 
   return (
     <div className="flex-1 flex flex-col min-h-screen min-w-0 relative">
-      {/* Top area: content + history side by side */}
       <div className="flex-1 flex min-h-0">
-        {/* Main column - hidden on mobile when history is open */}
         <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-lg:hidden' : ''}`}>
           {/* Top Nav */}
           <header className="flex items-center justify-between px-4 lg:px-6 py-2 lg:py-4 gap-3">
@@ -216,13 +203,13 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               <ThemeToggle />
               <button
                 onClick={() => { setPreviewItem(null); backgroundGenerationRef.current = true; setGenerating(false); setPrompt(""); }}
-                className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-accent transition-colors cursor-pointer"
               >
                 <Home className="w-4 h-4" /> <span className="hidden sm:inline">首页</span>
               </button>
               <button
                 onClick={() => setHistoryOpen(!historyOpen)}
-                className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg border border-border text-foreground text-sm hover:bg-accent transition-colors cursor-pointer"
               >
                 <Clock className="w-4 h-4" /> <span className="hidden sm:inline">历史记录</span>
               </button>
@@ -233,21 +220,20 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
           {previewItem ? (
             <>
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} onRegenerate={handleRegenerate} />
-              {/* Bottom Prompt Input - preview mode shows video prompt */}
               <div className="px-3 pb-3 lg:p-6 lg:pt-0">
                   <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer w-fit"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-accent transition-colors cursor-pointer w-fit"
                     >
-                      <SlidersHorizontal className="w-4 h-4 text-text-secondary" />
-                      <span className="text-text-secondary">模型:</span>
+                      <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">模型:</span>
                       <span className="font-medium truncate max-w-[120px]">{selectedModel.name}</span>
-                      <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
+                      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
                     </button>
                   </div>
-                <div className="flex flex-col gap-4 lg:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
+                <div className="flex flex-col gap-4 lg:gap-6 bg-card border border-border px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
                   <textarea
                     value={prompt}
                     onChange={(e) => {
@@ -264,12 +250,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     }}
                     placeholder="输入你的提示，例如：一只猫"
                     rows={3}
-                    className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
+                    className={`w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none overflow-y-scroll max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
                   />
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => setPromptGenOpen(true)}
-                      className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
+                      className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                       style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                     >
                       <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
@@ -277,7 +263,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                     <button
                       onClick={handleGenerate}
                       disabled={!prompt.trim()}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
                     </button>
@@ -289,62 +275,54 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
             <>
               <div className="flex-1 overflow-y-auto px-3 lg:px-6 pb-1 lg:pb-4 flex items-center justify-center">
                 {generating ? (
-                  /* Generating State */
                   <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto animate-fade-in">
-                    {/* Animated icon with pulse + shimmer */}
                     <div className="relative w-20 h-20 mb-6 flex items-center justify-center">
                       <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping" style={{ animationDuration: '2.5s' }} />
                       <div className="absolute inset-1 rounded-full bg-primary/5 animate-pulse" />
                       <Video className="relative w-10 h-10 text-primary animate-pulse" />
                     </div>
-                    {/* Progress bar shimmer */}
                     <div className="w-48 h-1.5 rounded-full bg-muted overflow-hidden mb-6">
-                      <div className="h-full w-1/2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 animate-[shimmer_2s_ease-in-out_infinite]" />
+                      <div className="h-full w-1/2 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] animate-[shimmer_2s_ease-in-out_infinite]" />
                     </div>
-                    <p className="text-text-muted text-sm md:text-base leading-relaxed mb-8">
+                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8">
                       视频生成大约需要20分钟🏖️。在这期间，您可以尽情体验其他有趣的AI模型，或者放松一下，生成过程不会中断哦！完成后，别忘了在历史记录中查看您的精彩视频！
                     </p>
                     <button
                       onClick={() => { backgroundGenerationRef.current = true; setGenerating(false); setPrompt(""); }}
-                      className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                      className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
                     >
                       <Copy className="w-5 h-5" /> 后台生成
                     </button>
                   </div>
                 ) : (
                   <div className="max-w-3xl mx-auto">
-                    {/* Welcome */}
                     <div className="text-center mb-2 lg:mb-8 mt-1 lg:mt-8">
-                      <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-title mb-0.5 lg:mb-2">👋嘿！欢迎来到 Rita</h1>
-                      <p className="text-text-muted text-[11px] md:text-xs lg:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
+                      <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground mb-0.5 lg:mb-2">👋嘿！欢迎来到 Rita</h1>
+                      <p className="text-muted-foreground text-[11px] md:text-xs lg:text-base">这是您的专属频道，请发送第一条消息开始制作您自己的视频！</p>
                     </div>
 
-                    {/* Cards Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3 lg:gap-4 mb-2 lg:mb-8">
-                      {/* Video Preview Card */}
                       <div className="rounded-xl overflow-hidden shadow-sm lg:row-span-2 lg:min-h-0">
                         <HomeVideoPlayer onMake={handleMake} />
                       </div>
 
-                      {/* Chat Assistant Card */}
                       <div className="bg-card rounded-xl border border-border p-2.5 md:p-3 lg:p-4 shadow-sm">
                         <div className="flex items-start gap-2 lg:gap-3 mb-2 lg:mb-3">
-                          <div className="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-theme-1/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Globe className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-theme-1" />
+                          <div className="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Globe className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-emerald-500" />
                           </div>
                           <p className="text-foreground text-xs lg:text-sm leading-relaxed">
                             嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 bg-card-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5">
+                        <div className="flex items-center gap-2 bg-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5">
                           <span className="text-primary text-xs lg:text-sm">💡 输入点想法试试看</span>
-                          <div className="ml-auto w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 flex items-center justify-center">
-                            <span className="text-primary-foreground text-xs">😊</span>
+                          <div className="ml-auto w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] flex items-center justify-center">
+                            <span className="text-white text-xs">😊</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Guide & Tips */}
                       <div className="grid grid-cols-2 gap-2 lg:gap-4">
                         <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
                           <img src={iconGuide} alt="使用说明" className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
@@ -360,22 +338,21 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                 )}
               </div>
 
-              {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
                 <div className="px-3 pb-3 lg:p-6 lg:pt-0">
                   <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
                       onClick={onMenuOpen}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer w-fit"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-accent transition-colors cursor-pointer w-fit"
                     >
-                      <SlidersHorizontal className="w-4 h-4 text-text-secondary" />
-                      <span className="text-text-secondary">模型:</span>
+                      <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">模型:</span>
                       <span className="font-medium truncate max-w-[120px]">{selectedModel.name}</span>
-                      <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
+                      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
                     </button>
                   </div>
-                  <div className="flex flex-col gap-4 lg:gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
+                  <div className="flex flex-col gap-4 lg:gap-6 bg-card border border-border px-3 py-2.5 lg:px-4 lg:py-3 rounded-2xl lg:rounded-3xl text-base">
                     <textarea
                       value={prompt}
                       onChange={(e) => {
@@ -392,12 +369,12 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       }}
                       placeholder="输入你的提示，例如：一只猫"
                       rows={2}
-                      className={`w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none overflow-y-scroll max-h-[3rem] lg:max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
+                      className={`w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none overflow-y-scroll max-h-[3rem] lg:max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
                     />
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => setPromptGenOpen(true)}
-                        className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
+                        className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-muted-foreground hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                         style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                       >
                         <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
@@ -405,7 +382,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       <button
                         onClick={handleGenerate}
                         disabled={!prompt.trim()}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-theme-2 to-theme-1 text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] text-white text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         生成 <Zap className="w-3.5 h-3.5" /> {totalCost}
                       </button>
@@ -417,7 +394,6 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
           )}
         </div>
 
-        {/* History Panel - inline, not overlay */}
         <HistoryDrawer
           open={historyOpen}
           onClose={() => setHistoryOpen(false)}

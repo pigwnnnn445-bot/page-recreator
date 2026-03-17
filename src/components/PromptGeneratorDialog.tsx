@@ -15,7 +15,6 @@ interface PromptGeneratorDialogProps {
   onApplyPrompt: (prompt: string) => void;
 }
 
-// Mock generated prompts for demo
 const MOCK_PROMPT_SETS = [
   [
     "一幅神秘场景，描绘隐藏在浓雾弥漫的密林中的古老日本神社，泛着幽幽灯光，樱花轻轻飘落。氛围融合宁静与神秘，以柔和的色调和细腻的笔触表现。",
@@ -44,7 +43,6 @@ const PromptGeneratorDialog = ({
   const [editIndex, setEditIndex] = useState<number>(0);
   const [editText, setEditText] = useState("");
 
-  // Reset state when dialog opens
   useEffect(() => {
     if (open) {
       setInputText(initialPrompt || "");
@@ -60,7 +58,6 @@ const PromptGeneratorDialog = ({
   const generateResults = useCallback(() => {
     if (!inputText.trim()) return;
     setIsOptimizing(true);
-    // Simulate API call
     setTimeout(() => {
       const randomSet = MOCK_PROMPT_SETS[Math.floor(Math.random() * MOCK_PROMPT_SETS.length)];
       setResults([...randomSet]);
@@ -112,13 +109,12 @@ const PromptGeneratorDialog = ({
           </DialogHeader>
 
           <div className="p-4 flex flex-col gap-3 overflow-y-auto min-h-0">
-            {/* Input area */}
             <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[140px] md:min-h-[180px] flex-shrink-0">
               <textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="输入你的提示，例如：可爱的猫"
-                className="flex-1 w-full bg-transparent text-foreground placeholder:text-text-muted outline-none text-sm resize-none"
+                className="flex-1 w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none"
               />
               <div className="flex justify-end mt-2">
                 <button
@@ -131,7 +127,6 @@ const PromptGeneratorDialog = ({
               </div>
             </div>
 
-            {/* Results */}
             {results && (
               <>
                 <div className="flex flex-col gap-2">
@@ -148,7 +143,7 @@ const PromptGeneratorDialog = ({
                       </p>
                       <button
                         onClick={() => handleEditResult(index)}
-                        className="flex-shrink-0 mt-0.5 p-1 text-text-secondary hover:text-foreground transition-colors cursor-pointer"
+                        className="flex-shrink-0 mt-0.5 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                       >
                         <Edit3 className="w-4 h-4" />
                       </button>
@@ -156,13 +151,12 @@ const PromptGeneratorDialog = ({
                   ))}
                 </div>
 
-                {/* Bottom selection bar */}
                 <div className="flex items-center gap-2 pt-1">
                   {results.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => handleSelectResult(index)}
-                      className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-hover-bg transition-colors cursor-pointer"
+                      className="flex-1 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
                     >
                       {index + 1}
                     </button>
@@ -170,7 +164,7 @@ const PromptGeneratorDialog = ({
                   <button
                     onClick={handleRefresh}
                     disabled={isOptimizing}
-                    className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-hover-bg transition-colors cursor-pointer disabled:opacity-40"
+                    className="py-2 px-3 rounded-lg border border-border text-foreground hover:bg-accent transition-colors cursor-pointer disabled:opacity-40"
                   >
                     <RefreshCw className={`w-4 h-4 ${isOptimizing ? "animate-spin" : ""}`} />
                   </button>
@@ -181,7 +175,6 @@ const PromptGeneratorDialog = ({
         </DialogContent>
       </Dialog>
 
-      {/* Edit sub-dialog */}
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <DialogContent className="sm:max-w-[560px] p-0 gap-0 bg-card border-border rounded-2xl overflow-hidden">
           <DialogHeader className="p-4 pb-0">

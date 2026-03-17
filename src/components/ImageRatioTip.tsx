@@ -29,11 +29,11 @@ const ImageRatioTip = ({ open, onClose }: ImageRatioTipProps) => {
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-warning" />
+            <Lightbulb className="w-5 h-5 text-amber-500" />
             <span className="text-foreground font-semibold text-base">使用小提示</span>
           </div>
-          <button onClick={handleClose} className="p-1 rounded-lg hover:bg-hover-bg transition-colors cursor-pointer">
-            <X className="w-5 h-5 text-text-muted" />
+          <button onClick={handleClose} className="p-1 rounded-lg hover:bg-accent transition-colors cursor-pointer">
+            <X className="w-5 h-5 text-muted-foreground" />
           </button>
         </div>
 
