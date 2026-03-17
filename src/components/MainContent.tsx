@@ -376,7 +376,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                         className="inline-flex items-center justify-center gap-4 whitespace-nowrap px-3 py-1.5 text-text-secondary hover:text-foreground transition-colors cursor-pointer rounded-[16px] border border-border"
                         style={{ fontFamily: "Gilroy, ui-sans-serif, system-ui, sans-serif", fontSize: "14px" }}
                       >
-                        <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> 提示词生成器
+                        <img src={iconPromptGen} alt="提示词生成器" className="w-4 h-4" /> <span className="hidden md:inline">提示词生成器</span>
                       </button>
                       <button
                         onClick={handleGenerate}
