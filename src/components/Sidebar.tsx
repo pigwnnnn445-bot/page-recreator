@@ -114,7 +114,7 @@ const Sidebar = ({
         {/* Model Selector */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-foreground dark:text-[hsl(240,1%,20%)]">切换模型</span>
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground">切换模型</span>
             <div className="flex -space-x-1.5">
               {models.slice(0, 4).map((m) => (
                 m.icon ? (
