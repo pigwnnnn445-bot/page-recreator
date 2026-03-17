@@ -351,6 +351,15 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               {/* Bottom Prompt Input - only show when not generating */}
               {!generating && (
                 <div className="px-5 pb-4 md:p-6 md:pt-0">
+                  <button
+                    onClick={onMenuOpen}
+                    className="md:hidden flex items-center gap-2 mb-2 px-3 py-2 rounded-xl border border-border bg-card text-foreground text-sm hover:bg-hover-bg transition-colors cursor-pointer w-fit"
+                  >
+                    <SlidersHorizontal className="w-4 h-4 text-text-secondary" />
+                    <span className="text-text-secondary">模型:</span>
+                    <span className="font-medium truncate max-w-[120px]">{selectedModel.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
+                  </button>
                   <div className="flex flex-col gap-6 bg-white dark:bg-bg-4 border border-bg-4 dark:border-none px-4 py-3 rounded-2xl md:rounded-3xl text-base">
                     <textarea
                       value={prompt}
