@@ -135,7 +135,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                         )}
 
                         {/* Three-dot menu on hover (only for completed items) */}
-                        {item.status === "completed" && (
+                        {(item.status === "completed" || item.status === "failed") && (
                           <div className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity" ref={menuOpenId === item.id ? menuRef : undefined}>
                             <button
                               onClick={(e) => {
