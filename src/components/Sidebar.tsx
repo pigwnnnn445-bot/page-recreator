@@ -251,7 +251,7 @@ const Sidebar = ({
                     className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer border ${
                       isSelected
                         ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground border-primary dark:border-[hsl(240,74%,61%)]"
-                        : "bg-card border-border text-muted-foreground hover:bg-accent"
+                        : "bg-card border-border text-[hsl(240,1%,20%)] dark:text-muted-foreground hover:bg-accent"
                     }`}
                   >
                     <span className={`${icon.w} ${icon.h} border-2 rounded-[2px] ${isSelected ? "border-primary-foreground" : "border-muted-foreground"}`} />
