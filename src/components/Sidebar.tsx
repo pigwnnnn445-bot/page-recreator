@@ -292,7 +292,7 @@ const Sidebar = ({
                 <button
                   key={d}
                   onClick={() => setSelectedDuration(d)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer border ${
+                  className={`px-4 py-2 rounded-[12px] text-sm font-medium transition-colors cursor-pointer border ${
                     d === selectedDuration
                       ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground border-primary dark:border-[hsl(240,74%,61%)]"
                       : "bg-sidebar border-border text-[hsl(240,1%,20%)] dark:text-muted-foreground hover:bg-accent"
