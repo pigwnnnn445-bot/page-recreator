@@ -274,7 +274,7 @@ const Sidebar = ({
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer border ${
                   q === selectedQuality
                     ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground border-primary dark:border-[hsl(240,74%,61%)]"
-                    : "bg-card border-border text-[hsl(240,1%,20%)] dark:text-muted-foreground hover:bg-accent"
+                    : "bg-sidebar border-border text-[hsl(240,1%,20%)] dark:text-muted-foreground hover:bg-accent"
                 }`}
               >
                 {q}
