@@ -217,7 +217,7 @@ const Sidebar = ({
         {showCreationModeSelector && (
           <div className="mb-6">
             <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">创作模式</span>
-            <div className="relative">
+            <div className="relative" ref={modeDropdownRef}>
               <button
                 onClick={() => setModeOpen(!modeOpen)}
                 className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer"
