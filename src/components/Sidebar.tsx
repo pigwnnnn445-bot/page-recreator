@@ -150,7 +150,7 @@ const Sidebar = ({
               )}
             </div>
           </div>
-          <div className="relative">
+          <div className="relative" ref={modelDropdownRef}>
             <button
               onClick={() => handleModelOpen(!modelOpen)}
               className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer group"
