@@ -51,10 +51,28 @@ const Sidebar = ({
   const asideRef = useRef<HTMLElement>(null);
   
   const modelListRef = useRef<HTMLDivElement>(null);
+  const modelDropdownRef = useRef<HTMLDivElement>(null);
+  const modeDropdownRef = useRef<HTMLDivElement>(null);
 
   const handleModelOpen = useCallback((nextOpen: boolean) => {
     setModelOpen(nextOpen);
   }, []);
+
+  // Click outside to close dropdowns
+  useEffect(() => {
+    if (!openDropdown) return;
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (openDropdown === 'model' && modelDropdownRef.current && !modelDropdownRef.current.contains(target)) {
+        setOpenDropdown(null);
+      }
+      if (openDropdown === 'mode' && modeDropdownRef.current && !modeDropdownRef.current.contains(target)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [openDropdown]);
 
   // Scroll sidebar to top when opened on mobile
   useEffect(() => {
@@ -132,7 +150,7 @@ const Sidebar = ({
               )}
             </div>
           </div>
-          <div className="relative">
+          <div className="relative" ref={modelDropdownRef}>
             <button
               onClick={() => handleModelOpen(!modelOpen)}
               className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer group"
@@ -199,7 +217,7 @@ const Sidebar = ({
         {showCreationModeSelector && (
           <div className="mb-6">
             <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">创作模式</span>
-            <div className="relative">
+            <div className="relative" ref={modeDropdownRef}>
               <button
                 onClick={() => setModeOpen(!modeOpen)}
                 className="w-full h-[48px] outline-none border border-border rounded-xl px-4 text-foreground text-sm flex items-center justify-between transition-colors cursor-pointer"
