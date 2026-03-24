@@ -51,10 +51,28 @@ const Sidebar = ({
   const asideRef = useRef<HTMLElement>(null);
   
   const modelListRef = useRef<HTMLDivElement>(null);
+  const modelDropdownRef = useRef<HTMLDivElement>(null);
+  const modeDropdownRef = useRef<HTMLDivElement>(null);
 
   const handleModelOpen = useCallback((nextOpen: boolean) => {
     setModelOpen(nextOpen);
   }, []);
+
+  // Click outside to close dropdowns
+  useEffect(() => {
+    if (!openDropdown) return;
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (openDropdown === 'model' && modelDropdownRef.current && !modelDropdownRef.current.contains(target)) {
+        setOpenDropdown(null);
+      }
+      if (openDropdown === 'mode' && modeDropdownRef.current && !modeDropdownRef.current.contains(target)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [openDropdown]);
 
   // Scroll sidebar to top when opened on mobile
   useEffect(() => {
