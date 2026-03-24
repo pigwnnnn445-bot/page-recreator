@@ -96,12 +96,22 @@ const Sidebar = ({
   const handleSelectModel = (model: ModelInfo) => {
     setSelectedModel(model);
     setModelOpen(false);
-    const cfg = modelConfigMap[model.id] ?? defaultModelConfig;
-    setSelectedCreationMode(cfg.creationModes[0]);
-    setSelectedQuality(cfg.qualities[0]);
-    setSelectedDuration(cfg.durations.length > 0 ? cfg.durations[0] : "");
-    const enabledRatios = cfg.aspectRatios.filter(r => r.enabled);
-    setSelectedRatio(enabledRatios.length > 0 ? enabledRatios[0].label : "");
+
+    // Clear all config values first
+    setSelectedCreationMode("text_to_video");
+    setSelectedQuality("");
+    setSelectedDuration("");
+    setSelectedRatio("");
+
+    // Re-assign based on new model config
+    requestAnimationFrame(() => {
+      const cfg = modelConfigMap[model.id] ?? defaultModelConfig;
+      setSelectedCreationMode(cfg.creationModes[0]);
+      setSelectedQuality(cfg.qualities[0]);
+      setSelectedDuration(cfg.durations.length > 0 ? cfg.durations[0] : "");
+      const enabledRatios = cfg.aspectRatios.filter(r => r.enabled);
+      setSelectedRatio(enabledRatios.length > 0 ? enabledRatios[0].label : "");
+    });
   };
 
   const showCreationModeSelector = currentConfig.creationModes.length > 1;
