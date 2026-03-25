@@ -60,6 +60,8 @@ const MultiVideoCarousel = ({ videos, modelName }: { videos: { videoUrl: string 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
 
   const currentVideo = videos[currentIndex];
 
