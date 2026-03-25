@@ -294,7 +294,7 @@ const PromptGeneratorDialog = ({
               </button>
             </div>
             <div className="p-4">
-              <div className="bg-secondary rounded-xl p-3 flex flex-col min-h-[220px]">
+              <div className="bg-secondary rounded-xl p-3 flex flex-col">
                 <textarea
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
