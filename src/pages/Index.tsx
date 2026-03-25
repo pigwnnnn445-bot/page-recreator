@@ -75,7 +75,7 @@ const Index = () => {
   }, [models]);
 
   return (
-    <div className="flex bg-background overflow-hidden" style={{ height: '100dvh' }}>
+    <div className="flex bg-background max-md:overflow-hidden" style={{ minHeight: '100dvh' }}>
       <Sidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
