@@ -194,7 +194,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   }, [previewItem, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen min-w-0 relative">
+    <div className="flex-1 flex flex-col min-w-0 relative" style={{ minHeight: '100dvh' }}>
       <div className="flex-1 flex min-h-0">
         <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-lg:hidden' : ''}`}>
           {/* Top Nav */}
