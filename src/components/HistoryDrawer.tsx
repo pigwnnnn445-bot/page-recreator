@@ -123,9 +123,14 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                           </div>
                         ) : (
                           <div
-                            className="cursor-pointer"
+                            className="cursor-pointer relative"
                             onClick={() => onSelect(item)}
                           >
+                            {item.cost != null && (
+                              <span className="absolute top-1.5 left-1.5 z-[1] px-1.5 py-0.5 rounded bg-foreground/50 backdrop-blur-sm text-white text-[10px] font-medium leading-tight">
+                                {item.cost} 配额
+                              </span>
+                            )}
                             <video
                               src={item.videoUrl ? `${item.videoUrl}#t=0.001` : undefined}
                               muted
