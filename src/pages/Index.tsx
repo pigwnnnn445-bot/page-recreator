@@ -99,7 +99,7 @@ const Index = () => {
         onMenuOpen={() => setSidebarOpen(true)}
         totalCost={totalCost}
         models={models}
-        onSelectModel={setSelectedModel}
+        onSelectModel={handleSelectModelWithDefaults}
         selectedModel={selectedModel}
         selectedCreationMode={selectedCreationMode}
         selectedQuality={selectedQuality}
