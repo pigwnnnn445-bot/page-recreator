@@ -21,16 +21,25 @@ const SingleVideoPlayer = ({ videoUrl, onDownload }: { videoUrl: string; onDownl
   return (
     <div className="flex-1 min-h-0 flex flex-col">
       <div className="flex-1 min-h-0 relative rounded-xl overflow-hidden bg-black">
+        {/* Blurred background video for letterbox areas */}
+        <video
+          src={`${videoUrl}#t=0.001`}
+          className="absolute inset-0 w-full h-full object-cover scale-150 blur-2xl opacity-60 pointer-events-none"
+          playsInline
+          muted
+          preload="metadata"
+          aria-hidden="true"
+        />
         <video
           ref={videoRef}
           src={`${videoUrl}#t=0.001`}
           onEnded={() => setPlaying(false)}
-          className="absolute inset-0 w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full object-contain z-[1]"
           playsInline
           preload="metadata"
         />
         <div
-          className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
+          className={`absolute inset-0 flex items-center justify-center transition-opacity z-[2] ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
           onClick={handlePlayPause}
         >
           <div className="w-16 h-16 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
@@ -89,17 +98,27 @@ const MultiVideoCarousel = ({ videos, modelName }: { videos: { videoUrl: string 
   return (
     <div className="flex-1 min-h-0 flex flex-col">
       <div className="flex-1 min-h-0 relative rounded-xl overflow-hidden bg-black">
+        {/* Blurred background video for letterbox areas */}
+        <video
+          key={`bg-${currentIndex}`}
+          src={`${currentVideo.videoUrl}#t=0.001`}
+          className="absolute inset-0 w-full h-full object-cover scale-150 blur-2xl opacity-60 pointer-events-none"
+          playsInline
+          muted
+          preload="metadata"
+          aria-hidden="true"
+        />
         <video
           key={currentIndex}
           ref={videoRef}
           src={`${currentVideo.videoUrl}#t=0.001`}
           onEnded={() => setPlaying(false)}
-          className="absolute inset-0 w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full object-contain z-[1]"
           playsInline
           preload="metadata"
         />
         <div
-          className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
+          className={`absolute inset-0 flex items-center justify-center transition-opacity z-[2] ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
           onClick={handlePlayPause}
         >
           <div className="w-16 h-16 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
