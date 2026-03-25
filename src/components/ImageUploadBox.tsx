@@ -76,7 +76,7 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       {preview ? (
         <div className={`relative rounded-xl overflow-hidden border border-border bg-card group ${className}`}>
           <img src={preview} alt="uploaded" className="w-full h-full object-contain" />
-          <div className="absolute bottom-1.5 right-1.5 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute bottom-1.5 right-1.5 flex gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
             <button
               onClick={handleReplace}
               title="替换"
