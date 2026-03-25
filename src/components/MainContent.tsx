@@ -53,7 +53,7 @@ const HomeVideoPlayer = ({ onMake }: { onMake: () => void }) => {
   return (
     <div className="bg-card rounded-xl border border-border p-2 md:p-2.5 lg:p-3 shadow-sm h-full flex flex-col">
       <div className="relative rounded-lg overflow-hidden cursor-pointer group flex-1 min-h-0" onClick={handlePlayPause}>
-        <video ref={videoRef} src="/videos/sample-home.mp4" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] lg:aspect-auto lg:h-full lg:min-h-[200px] object-cover" />
+        <video ref={videoRef} src="/videos/sample-home.mp4#t=0.001" muted playsInline preload="metadata" onEnded={() => setPlaying(false)} className="w-full aspect-[2.2/1] lg:aspect-auto lg:h-full lg:min-h-[200px] object-cover" />
         <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
             {playing ? <Pause className="w-5 h-5 text-white fill-white" /> : <Play className="w-5 h-5 text-white fill-white" />}
