@@ -1,5 +1,6 @@
 import { Home, Clock, Play, Pause, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download, SlidersHorizontal, ChevronRight } from "lucide-react";
 import type { CreationMode, ModelConfig } from "@/types/api";
+import { modelConfigMap, defaultModelConfig } from "@/types/api";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
 import PromptGeneratorDialog from "./PromptGeneratorDialog";
@@ -129,11 +130,22 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
 
     generateCountRef.current += 1;
     const shouldFail = generateCountRef.current % 2 === 0;
+    const modelCfg = modelConfigMap[selectedModel.id] ?? defaultModelConfig;
+    const isMultiVideo = (modelCfg.multiVideoCount ?? 1) > 1;
 
     setTimeout(() => {
-      const completedItem = shouldFail
-        ? { ...newItem, status: "failed" as const }
-        : { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" };
+      let completedItem: HistoryItem;
+      if (shouldFail) {
+        completedItem = { ...newItem, status: "failed" as const };
+      } else if (isMultiVideo) {
+        const count = modelCfg.multiVideoCount!;
+        const videos = Array.from({ length: count }, () => ({
+          videoUrl: "/videos/sample-generated.mp4",
+        }));
+        completedItem = { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4", videos };
+      } else {
+        completedItem = { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" };
+      }
 
       setHistoryItems(prev =>
         prev.map(item => item.id === newItem.id ? completedItem : item)

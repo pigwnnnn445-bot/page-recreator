@@ -48,6 +48,7 @@ export const mockUserConfig: UserConfig = {
       { id: 1109, name: "Veo3", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "稳定的视频输出质量", cost: 40, status: "online", category: "veo" },
       { id: 1110, name: "veo3-fast", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "快速生成，适合预览", cost: 20, status: "online", category: "veo" },
       { id: 1111, name: "veo3-pro", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "专业级视频生成", cost: 60, status: "online", category: "veo" },
+      { id: 1200, name: "midjourney V1", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "一次生成4段视频，多样化创意输出", cost: 20, status: "online", category: "midjourney" },
     ],
     service_end_ms: 25308006271,
     service_end_time: "2026-12-28 16:43:49",
@@ -82,6 +83,8 @@ export interface ModelConfig {
   durations: string[];
   // 基础消耗配额
   costPerGenerate: number;
+  // 一次生成多段视频数量（如 Midjourney 一次生成4段）
+  multiVideoCount?: number;
 }
 
 export const modelConfigMap: Record<number, ModelConfig> = {
@@ -195,6 +198,16 @@ export const modelConfigMap: Record<number, ModelConfig> = {
       { label: "12:9", enabled: true, extraCost: 10 },
     ],
     costPerGenerate: 60,
+  },
+  1200: {
+    creationModes: ["text_to_video"],
+    enableReferenceImage: false,
+    enableFirstLastFrame: false,
+    qualities: [],
+    durations: ["5s", "10s"],
+    aspectRatios: [],
+    costPerGenerate: 20,
+    multiVideoCount: 4,
   },
 };
 

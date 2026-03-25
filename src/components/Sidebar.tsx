@@ -301,24 +301,26 @@ const Sidebar = ({
         )}
 
         {/* Video Quality */}
-        <div className="mb-6">
-          <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">视频质量</span>
-          <div className="flex gap-2 flex-wrap">
-            {currentConfig.qualities.map((q) => (
-              <button
-                key={q}
-                onClick={() => setSelectedQuality(q)}
-                className={`px-4 py-2 rounded-[12px] text-sm font-medium transition-colors cursor-pointer border ${
-                  q === selectedQuality
-                    ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground border-primary dark:border-[hsl(240,74%,61%)]"
-                    : "bg-sidebar border-border text-[hsl(240,1%,20%)] dark:text-muted-foreground hover:bg-accent"
-                }`}
-              >
-                {q}
-              </button>
-            ))}
+        {currentConfig.qualities.length > 0 && (
+          <div className="mb-6">
+            <span className="text-sm text-[hsl(240,1%,20%)] dark:text-sidebar-foreground mb-2 block">视频质量</span>
+            <div className="flex gap-2 flex-wrap">
+              {currentConfig.qualities.map((q) => (
+                <button
+                  key={q}
+                  onClick={() => setSelectedQuality(q)}
+                  className={`px-4 py-2 rounded-[12px] text-sm font-medium transition-colors cursor-pointer border ${
+                    q === selectedQuality
+                      ? "bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground border-primary dark:border-[hsl(240,74%,61%)]"
+                      : "bg-sidebar border-border text-[hsl(240,1%,20%)] dark:text-muted-foreground hover:bg-accent"
+                  }`}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Duration */}
         {currentConfig.durations.length > 0 && (
