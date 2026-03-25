@@ -1,5 +1,6 @@
 import { Home, Clock, Play, Pause, Globe, Zap, Menu, Video, Copy, ArrowLeft, Download, SlidersHorizontal, ChevronRight } from "lucide-react";
 import type { CreationMode, ModelConfig } from "@/types/api";
+import { modelConfigMap, defaultModelConfig } from "@/types/api";
 import HistoryDrawer from "./HistoryDrawer";
 import VideoPreview from "./VideoPreview";
 import PromptGeneratorDialog from "./PromptGeneratorDialog";
