@@ -316,7 +316,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                             嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 bg-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5">
+                        <div className="flex items-center gap-2 bg-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5 opacity-50 cursor-not-allowed pointer-events-none select-none">
                           <span className="text-primary text-xs lg:text-sm">💡 输入点想法试试看</span>
                           <div className="ml-auto w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] flex items-center justify-center">
                             <span className="text-white text-xs">😊</span>
