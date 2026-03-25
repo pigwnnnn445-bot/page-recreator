@@ -62,11 +62,15 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
   return (
     <>
       <div
-        className={`flex-shrink-0 border-l border-border bg-card flex flex-col h-full overflow-hidden max-lg:absolute max-lg:inset-0 max-lg:z-50 max-lg:border-l-0 lg:transition-all lg:duration-300 lg:ease-in-out ${
+        className={`flex-shrink-0 border-l border-border bg-card flex flex-col h-full overflow-hidden max-lg:absolute max-lg:inset-0 max-lg:z-50 max-lg:h-[100dvh] max-lg:border-l-0 lg:transition-all lg:duration-300 lg:ease-in-out ${
           open
             ? 'max-lg:w-full lg:w-80 opacity-100'
             : 'max-lg:hidden lg:w-0 lg:opacity-0 lg:border-l-0 lg:pointer-events-none'
         }`}
+        style={{
+          paddingTop: 'env(safe-area-inset-top, 0px)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
           <h2 className="text-foreground font-semibold text-base">历史记录</h2>
@@ -77,7 +81,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
             <X className="w-5 h-5 text-muted-foreground" />
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto px-5 py-4">
+        <div className="flex-1 overflow-y-auto px-5 py-4 max-lg:pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
           {isEmpty ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <div className="relative mb-4">
@@ -166,7 +170,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
             </div>
           )}
         </div>
-        <div className="px-5 py-4 border-t border-border">
+        <div className="px-5 py-4 border-t border-border max-lg:pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
           <button
             onClick={onClose}
             className="w-full py-2.5 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
