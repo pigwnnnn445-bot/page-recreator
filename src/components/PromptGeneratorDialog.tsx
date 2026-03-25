@@ -77,7 +77,7 @@ const PromptGeneratorInner = ({
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           placeholder="输入你的提示，例如：可爱的猫"
-          className="flex-1 w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none"
+          className="flex-1 w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none prompt-scrollbar"
         />
         <div className="flex justify-end mt-2">
           <button
