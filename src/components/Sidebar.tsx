@@ -221,7 +221,7 @@ const Sidebar = ({
                           </span>
                         )}
                       </div>
-                      <p className={`text-xs leading-relaxed ${isComingSoon ? "text-muted-foreground" : "text-secondary-foreground"}`}>
+                      <p className={`text-xs leading-relaxed line-clamp-2 ${isComingSoon ? "text-muted-foreground" : "text-secondary-foreground"}`}>
                         {m.description}
                       </p>
                     </button>
