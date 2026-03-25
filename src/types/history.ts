@@ -21,4 +21,5 @@ export interface HistoryItem {
   quality: string;
   duration: string;
   ratio: string;
+  cost?: number; // 配额消耗
 }
