@@ -316,7 +316,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                             嗨！我是 GPT——你的视频提示助手！让我们一起改进你的提示吧。
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 bg-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5">
+                        <div className="flex items-center gap-2 bg-secondary rounded-full px-3 py-2 lg:px-4 lg:py-2.5 opacity-50 cursor-not-allowed pointer-events-none select-none">
                           <span className="text-primary text-xs lg:text-sm">💡 输入点想法试试看</span>
                           <div className="ml-auto w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-gradient-to-r from-[hsl(240,74%,61%)] to-[hsl(160,56%,64%)] flex items-center justify-center">
                             <span className="text-white text-xs">😊</span>
@@ -325,11 +325,11 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 lg:gap-4">
-                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 shadow-sm opacity-50 cursor-not-allowed pointer-events-none select-none">
                           <img src={iconGuide} alt="使用说明" className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
                           <span className="text-foreground text-[11px] md:text-xs lg:text-sm font-medium">使用说明</span>
                         </div>
-                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer shadow-sm">
+                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 shadow-sm opacity-50 cursor-not-allowed pointer-events-none select-none">
                           <img src={iconTips} alt="生成技巧" className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
                           <span className="text-foreground text-[11px] md:text-xs lg:text-sm font-medium">生成技巧</span>
                         </div>
