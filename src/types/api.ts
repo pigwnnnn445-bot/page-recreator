@@ -82,6 +82,8 @@ export interface ModelConfig {
   durations: string[];
   // 基础消耗配额
   costPerGenerate: number;
+  // 一次生成多段视频数量（如 Midjourney 一次生成4段）
+  multiVideoCount?: number;
 }
 
 export const modelConfigMap: Record<number, ModelConfig> = {
