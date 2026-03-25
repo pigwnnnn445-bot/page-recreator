@@ -274,7 +274,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
             </>
           ) : (
             <>
-              <div className="flex-1 overflow-y-auto px-3 lg:px-6 pb-1 lg:pb-4 flex items-center justify-center">
+              <div className="flex-1 overflow-hidden px-3 lg:px-6 pb-1 lg:pb-4 flex items-center justify-center">
                 {generating ? (
                   <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto animate-fade-in">
                     <div className="relative w-20 h-20 mb-6 flex items-center justify-center">
