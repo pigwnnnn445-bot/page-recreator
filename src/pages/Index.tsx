@@ -42,6 +42,17 @@ const Index = () => {
     return baseCost + extraCost;
   }, [currentConfig, selectedRatio]);
 
+  // Select a model and reset all config to its defaults
+  const handleSelectModelWithDefaults = useCallback((model: ModelInfo) => {
+    setSelectedModel(model);
+    const cfg = modelConfigMap[model.id] ?? defaultModelConfig;
+    setSelectedCreationMode(cfg.creationModes[0]);
+    setSelectedQuality(cfg.qualities[0]);
+    setSelectedDuration(cfg.durations.length > 0 ? cfg.durations[0] : "");
+    const enabledRatios = cfg.aspectRatios.filter(r => r.enabled);
+    setSelectedRatio(enabledRatios.length > 0 ? enabledRatios[0].label : "");
+  }, []);
+
   // Restore sidebar settings from a history item
   const handleRestoreFromHistory = useCallback((item: HistoryItem) => {
     const model = models.find(m => m.id === item.modelId);
@@ -88,7 +99,7 @@ const Index = () => {
         onMenuOpen={() => setSidebarOpen(true)}
         totalCost={totalCost}
         models={models}
-        onSelectModel={setSelectedModel}
+        onSelectModel={handleSelectModelWithDefaults}
         selectedModel={selectedModel}
         selectedCreationMode={selectedCreationMode}
         selectedQuality={selectedQuality}
