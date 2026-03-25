@@ -72,7 +72,7 @@ const VideoPreview = ({ item, onRegenerate }: VideoPreviewProps) => {
           <>
             <video
               ref={videoRef}
-              src={item.videoUrl}
+              src={`${item.videoUrl}#t=0.001`}
               onEnded={handleVideoEnded}
               className="absolute inset-0 w-full h-full object-contain"
               playsInline

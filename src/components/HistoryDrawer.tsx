@@ -123,7 +123,7 @@ const HistoryDrawer = ({ open, onClose, items, onDelete, onSelect }: HistoryPane
                             onClick={() => onSelect(item)}
                           >
                             <video
-                              src={item.videoUrl}
+                              src={item.videoUrl ? `${item.videoUrl}#t=0.001` : undefined}
                               muted
                               playsInline
                               preload="metadata"
