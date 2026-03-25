@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Bulb base/screw -->
+  <rect x="19" y="34" width="10" height="3" rx="1" fill="#8D6E63"/>
+  <rect x="18" y="31" width="12" height="3" rx="1" fill="#A1887F"/>
+  <rect x="17" y="28" width="14" height="3" rx="1.5" fill="#8D6E63"/>
+  <!-- Bulb glass -->
+  <path d="M18 28C15 25 13 21 13 17C13 10.9 17.9 6 24 6C30.1 6 35 10.9 35 17C35 21 33 25 30 28H18Z" fill="#FFD54F"/>
+  <!-- Glow effect -->
+  <path d="M18 28C15 25 13 21 13 17C13 10.9 17.9 6 24 6C30.1 6 35 10.9 35 17C35 21 33 25 30 28H18Z" fill="url(#glow)" opacity="0.4"/>
+  <!-- Filament -->
+  <path d="M22 24C22 22 20 20 22 17C23 15 25 15 26 17C28 20 26 22 26 24" stroke="#FF8F00" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFEE58"/>
+      <stop offset="100%" stop-color="#FFD54F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
