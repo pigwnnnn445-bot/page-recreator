@@ -34,7 +34,7 @@ const SingleVideoPlayer = ({ videoUrl, onDownload }: { videoUrl: string; onDownl
           ref={videoRef}
           src={`${videoUrl}#t=0.001`}
           onEnded={() => setPlaying(false)}
-          className="absolute inset-0 w-full h-full object-contain relative z-[1]"
+          className="absolute inset-0 w-full h-full object-contain z-[1]"
           playsInline
           preload="metadata"
         />
