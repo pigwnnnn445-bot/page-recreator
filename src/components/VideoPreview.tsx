@@ -141,7 +141,7 @@ const MultiVideoCarousel = ({ videos, modelName }: { videos: { videoUrl: string 
 
       <div className="flex justify-start pt-3 md:pt-4 pb-1">
         <button onClick={() => handleDownload(currentVideo.videoUrl)} className="flex items-center justify-center gap-2 w-full md:w-auto px-12 py-3 rounded-full bg-primary dark:bg-[hsl(240,74%,61%)] text-primary-foreground text-base font-medium hover:opacity-90 transition-opacity cursor-pointer">
-          <Download className="w-5 h-5" /> 下载当前视频 ({currentIndex + 1}/{videos.length})
+          <Download className="w-5 h-5" /> 下载当前视频
         </button>
       </div>
     </div>
