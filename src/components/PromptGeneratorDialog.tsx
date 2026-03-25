@@ -112,13 +112,17 @@ const PromptGeneratorInner = ({
             <>
               <div className="flex flex-col gap-2">
                 {results.map((result, index) => (
-                  <div key={index} className="bg-secondary rounded-xl p-3 flex items-start gap-2">
+                  <div
+                    key={index}
+                    onClick={() => handleSelectResult(index)}
+                    className="bg-secondary rounded-xl p-3 flex items-start gap-2 cursor-pointer hover:bg-accent transition-colors"
+                  >
                     <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-primary text-primary-foreground text-xs font-bold flex-shrink-0 mt-0.5">
                       {index + 1}
                     </span>
                     <p className="text-foreground text-sm leading-relaxed flex-1">{result}</p>
                     <button
-                      onClick={() => handleEditResult(index)}
+                      onClick={(e) => { e.stopPropagation(); handleEditResult(index); }}
                       className="flex-shrink-0 mt-0.5 p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                     >
                       <Edit3 className="w-4 h-4" />
