@@ -65,7 +65,7 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       />
       {preview ? (
         <div className={`relative rounded-xl overflow-hidden border border-border bg-card group ${className}`}>
-          <img src={preview} alt="uploaded" className="w-full h-full object-cover" />
+          <img src={preview} alt="uploaded" className="w-full h-full object-contain" />
           <button
             onClick={handleRemove}
             className="absolute top-1.5 right-1.5 p-1 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
