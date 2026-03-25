@@ -194,10 +194,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   }, [previewItem, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
   return (
-    <div
-      className="flex-1 flex flex-col min-w-0 relative overflow-hidden"
-      style={{ minHeight: '100dvh', height: '100dvh' }}
-    >
+    <div className="flex-1 flex flex-col min-w-0 relative" style={{ minHeight: '100dvh' }}>
       <div className="flex-1 flex min-h-0">
         <div className="flex-1 flex flex-col min-w-0">
           {/* Top Nav */}
@@ -224,10 +221,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
           {previewItem ? (
             <>
               <VideoPreview item={previewItem} onBack={() => setPreviewItem(null)} onRegenerate={handleRegenerate} />
-              <div
-                className="px-3 pb-3 lg:p-6 lg:pt-0"
-                style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px) + 3.5rem)' }}
-              >
+              <div className="px-3 pb-3 lg:p-6 lg:pt-0" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}>
                   <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
@@ -280,10 +274,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
             </>
           ) : (
             <>
-              <div
-                className="flex-1 overflow-y-auto px-3 lg:px-6 pb-1 lg:pb-4 flex items-center justify-center"
-                style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px) + 8.5rem)' }}
-              >
+              <div className="flex-1 overflow-y-auto px-3 lg:px-6 pb-1 lg:pb-4 flex items-center justify-center">
                 {generating ? (
                   <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto animate-fade-in">
                     <div className="relative w-20 h-20 mb-6 flex items-center justify-center">
@@ -349,13 +340,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               </div>
 
               {!generating && (
-                <div
-                  className="sticky bottom-0 z-10 px-3 pt-2 lg:static lg:p-6 lg:pt-0"
-                  style={{
-                    paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px) + 3.5rem)',
-                    background: 'linear-gradient(to top, hsl(var(--background)) 72%, hsl(var(--background) / 0))',
-                  }}
-                >
+                <div className="px-3 pb-3 lg:p-6 lg:pt-0" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}>
                   <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
