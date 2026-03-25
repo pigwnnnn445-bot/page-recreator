@@ -48,6 +48,7 @@ export const mockUserConfig: UserConfig = {
       { id: 1109, name: "Veo3", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "稳定的视频输出质量", cost: 40, status: "online", category: "veo" },
       { id: 1110, name: "veo3-fast", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "快速生成，适合预览", cost: 20, status: "online", category: "veo" },
       { id: 1111, name: "veo3-pro", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "专业级视频生成", cost: 60, status: "online", category: "veo" },
+      { id: 1200, name: "midjourney V1", icon: "https://static.wahezu.cn/image/bbaa9922a32f07eea80f400c20497c87.webp", description: "一次生成4段视频，多样化创意输出", cost: 20, status: "online", category: "midjourney" },
     ],
     service_end_ms: 25308006271,
     service_end_time: "2026-12-28 16:43:49",
