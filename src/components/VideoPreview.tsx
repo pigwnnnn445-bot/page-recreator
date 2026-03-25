@@ -60,6 +60,8 @@ const MultiVideoCarousel = ({ videos, modelName }: { videos: { videoUrl: string 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
 
   const currentVideo = videos[currentIndex];
 
@@ -97,7 +99,28 @@ const MultiVideoCarousel = ({ videos, modelName }: { videos: { videoUrl: string 
 
   return (
     <div className="flex-1 min-h-0 flex flex-col">
-      <div className="flex-1 min-h-0 relative rounded-xl overflow-hidden bg-black">
+      <div
+        className="flex-1 min-h-0 relative rounded-xl overflow-hidden bg-black touch-pan-y"
+        onTouchStart={(e) => {
+          touchStartX.current = e.touches[0].clientX;
+          touchDeltaX.current = 0;
+        }}
+        onTouchMove={(e) => {
+          if (touchStartX.current !== null) {
+            touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+          }
+        }}
+        onTouchEnd={() => {
+          const threshold = 50;
+          if (touchDeltaX.current < -threshold && currentIndex < videos.length - 1) {
+            goTo(currentIndex + 1);
+          } else if (touchDeltaX.current > threshold && currentIndex > 0) {
+            goTo(currentIndex - 1);
+          }
+          touchStartX.current = null;
+          touchDeltaX.current = 0;
+        }}
+      >
         {/* Blurred background video for letterbox areas */}
         <video
           key={`bg-${currentIndex}`}
