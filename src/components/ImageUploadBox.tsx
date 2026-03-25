@@ -1,5 +1,6 @@
 import { ImagePlus, RefreshCw, ZoomIn, Trash2 } from "lucide-react";
 import { useRef, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 
 const ACCEPTED_FORMATS = "image/jpeg,image/png,image/webp";
 const MAX_SIZE_MB = 10;
