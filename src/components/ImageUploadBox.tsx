@@ -20,10 +20,33 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [zoomed, setZoomed] = useState(false);
+  const [dragging, setDragging] = useState(false);
 
   const handleClick = () => {
     inputRef.current?.click();
   };
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && ACCEPTED_FORMATS.split(",").includes(file.type)) {
+      processFile(file);
+    }
+  }, []);
 
   const processFile = useCallback((file: File) => {
     if (file.size > MAX_SIZE_BYTES) {
