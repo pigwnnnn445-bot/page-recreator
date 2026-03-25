@@ -190,6 +190,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
       quality: selectedQuality,
       duration: selectedDuration,
       ratio: selectedRatio,
+      cost: totalCost,
     };
     setHistoryItems(prev => [newItem, ...prev]);
     setPrompt("");
