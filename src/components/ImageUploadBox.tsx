@@ -1,5 +1,5 @@
-import { ImagePlus, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { ImagePlus, RefreshCw, ZoomIn, Trash2 } from "lucide-react";
+import { useRef, useState, useCallback } from "react";
 
 const ACCEPTED_FORMATS = "image/jpeg,image/png,image/webp";
 const MAX_SIZE_MB = 10;
@@ -18,21 +18,17 @@ interface ImageUploadBoxProps {
 const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, onRatioError }: ImageUploadBoxProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [zoomed, setZoomed] = useState(false);
 
   const handleClick = () => {
     inputRef.current?.click();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
+  const processFile = useCallback((file: File) => {
     if (file.size > MAX_SIZE_BYTES) {
       onSizeError?.();
-      e.target.value = "";
       return;
     }
-
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
     img.onload = () => {
@@ -40,10 +36,23 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       if (ratio < MIN_RATIO || ratio > MAX_RATIO) {
         onRatioError?.();
       }
+      if (preview) URL.revokeObjectURL(preview);
       setPreview(objectUrl);
       onImageSelected?.(file);
     };
     img.src = objectUrl;
+  }, [preview, onSizeError, onRatioError, onImageSelected]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    processFile(file);
+    e.target.value = "";
+  };
+
+  const handleReplace = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    inputRef.current?.click();
   };
 
   const handleRemove = (e: React.MouseEvent) => {
@@ -66,12 +75,29 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       {preview ? (
         <div className={`relative rounded-xl overflow-hidden border border-border bg-card group ${className}`}>
           <img src={preview} alt="uploaded" className="w-full h-full object-contain" />
-          <button
-            onClick={handleRemove}
-            className="absolute top-1.5 right-1.5 p-1 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-          >
-            <X className="w-4 h-4" />
-          </button>
+          <div className="absolute bottom-1.5 right-1.5 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={handleReplace}
+              title="替换"
+              className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); setZoomed(true); }}
+              title="放大"
+              className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors cursor-pointer"
+            >
+              <ZoomIn className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={handleRemove}
+              title="删除"
+              className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors cursor-pointer"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       ) : (
         <button
@@ -81,6 +107,16 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
           <ImagePlus className="w-6 h-6 text-muted-foreground" />
           <span className="text-sm text-muted-foreground">{label}</span>
         </button>
+      )}
+
+      {/* Zoom overlay */}
+      {zoomed && preview && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center cursor-pointer"
+          onClick={() => setZoomed(false)}
+        >
+          <img src={preview} alt="zoomed" className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg" />
+        </div>
       )}
     </>
   );
