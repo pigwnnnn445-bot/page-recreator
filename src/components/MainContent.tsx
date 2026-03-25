@@ -193,15 +193,26 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
     setHistoryItems(prev => [newItem, ...prev]);
     setPrompt("");
     setGenerating(true);
+    const modelCfg = modelConfigMap[selectedModel.id] ?? defaultModelConfig;
+    const isMultiVideo = (modelCfg.multiVideoCount ?? 1) > 1;
+
     setTimeout(() => {
+      let completedItem: HistoryItem;
+      if (isMultiVideo) {
+        const count = modelCfg.multiVideoCount!;
+        const videos = Array.from({ length: count }, () => ({
+          videoUrl: "/videos/sample-generated.mp4",
+        }));
+        completedItem = { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4", videos };
+      } else {
+        completedItem = { ...newItem, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" };
+      }
+
       setHistoryItems(prev =>
-        prev.map(item =>
-          item.id === newItem.id
-            ? { ...item, status: "completed" as const, thumb: sampleThumb, videoUrl: "/videos/sample-generated.mp4" }
-            : item
-        )
+        prev.map(item => item.id === newItem.id ? completedItem : item)
       );
       setGenerating(false);
+      setPreviewItem(completedItem);
     }, 5000);
   }, [previewItem, selectedModel, selectedCreationMode, selectedQuality, selectedDuration, selectedRatio]);
 
