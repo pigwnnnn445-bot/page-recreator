@@ -266,7 +266,8 @@ const PromptGeneratorDialog = ({
                 <textarea
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
-                  className="flex-1 w-full bg-transparent text-foreground outline-none text-sm resize-none leading-relaxed"
+                  rows={4}
+                  className="w-full bg-transparent text-foreground outline-none text-sm resize-none leading-relaxed prompt-scrollbar"
                 />
                 <div className="flex justify-end mt-2">
                   <button
