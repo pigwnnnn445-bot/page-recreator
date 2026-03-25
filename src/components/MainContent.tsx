@@ -196,7 +196,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
   return (
     <div className="flex-1 flex flex-col min-w-0 relative" style={{ minHeight: '100dvh' }}>
       <div className="flex-1 flex min-h-0">
-        <div className={`flex-1 flex flex-col min-w-0 ${historyOpen ? 'max-lg:hidden' : ''}`}>
+        <div className="flex-1 flex flex-col min-w-0">
           {/* Top Nav */}
           <header className="flex items-center justify-between px-4 lg:px-6 py-2 lg:py-4 gap-3">
             <div className="flex-1" />
