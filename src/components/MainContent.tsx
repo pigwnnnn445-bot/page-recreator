@@ -340,7 +340,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
               </div>
 
               {!generating && (
-                <div className="px-3 pb-3 lg:p-6 lg:pt-0">
+                <div className="px-3 pb-3 lg:p-6 lg:pt-0" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}>
                   <div className="md:hidden mb-2 relative">
                     <ModelButtonTip />
                     <button
