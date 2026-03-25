@@ -75,7 +75,7 @@ const Index = () => {
   }, [models]);
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex bg-background" style={{ minHeight: '100dvh' }}>
       <Sidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
