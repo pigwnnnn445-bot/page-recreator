@@ -136,6 +136,7 @@ const Sidebar = ({
         className={`
           fixed md:static z-50 top-0 right-0 md:left-0 h-full
           w-[280px] min-h-screen bg-sidebar border-l md:border-l-0 md:border-r border-border flex flex-col p-5
+          pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]
           transition-transform duration-300 ease-in-out overflow-y-auto
           ${open ? "translate-x-0" : "translate-x-full md:translate-x-0"}
         `}
