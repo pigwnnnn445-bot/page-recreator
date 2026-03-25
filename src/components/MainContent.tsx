@@ -370,7 +370,7 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                       }}
                       placeholder="输入你的提示，例如：一只猫"
                       rows={2}
-                      className={`w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none overflow-y-scroll max-h-[3rem] lg:max-h-[4.5rem] ${isTyping ? 'prompt-scrollbar-hidden' : 'prompt-scrollbar'}`}
+                      className={`w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm resize-none overflow-y-auto max-h-[3rem] lg:max-h-[4.5rem] prompt-scrollbar`}
                     />
                     <div className="flex items-center justify-between">
                       <button
