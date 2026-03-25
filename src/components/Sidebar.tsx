@@ -74,6 +74,14 @@ const Sidebar = ({
     return () => document.removeEventListener('mousedown', handler);
   }, [openDropdown]);
 
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (open && window.innerWidth < 768) {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }
+  }, [open]);
+
   // Scroll sidebar to top when opened on mobile
   useEffect(() => {
     if (open && asideRef.current) {
