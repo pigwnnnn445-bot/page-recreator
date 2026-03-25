@@ -20,6 +20,7 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [zoomed, setZoomed] = useState(false);
+  const [dragging, setDragging] = useState(false);
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -43,6 +44,28 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
     };
     img.src = objectUrl;
   }, [preview, onSizeError, onRatioError, onImageSelected]);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && ACCEPTED_FORMATS.split(",").includes(file.type)) {
+      processFile(file);
+    }
+  }, [processFile]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -74,8 +97,18 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
         onChange={handleChange}
       />
       {preview ? (
-        <div className={`relative rounded-xl overflow-hidden border border-border bg-card group ${className}`}>
+        <div
+          className={`relative rounded-xl overflow-hidden border border-border bg-card group ${className}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
           <img src={preview} alt="uploaded" className="w-full h-full object-contain" />
+          {dragging && (
+            <div className="absolute inset-0 bg-primary/10 border-2 border-dashed border-primary rounded-xl flex items-center justify-center">
+              <span className="text-sm text-primary font-medium">释放以替换图片</span>
+            </div>
+          )}
           <div className="absolute bottom-1.5 right-1.5 flex gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
             <button
               onClick={handleReplace}
@@ -103,10 +136,19 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       ) : (
         <button
           onClick={handleClick}
-          className={`flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-card hover:bg-accent transition-colors cursor-pointer ${className}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed transition-colors cursor-pointer ${
+            dragging
+              ? "border-primary bg-primary/10"
+              : "border-border bg-card hover:bg-accent"
+          } ${className}`}
         >
           <ImagePlus className="w-6 h-6 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">{label}</span>
+          <span className="text-sm text-muted-foreground">
+            {dragging ? "释放以上传" : label}
+          </span>
         </button>
       )}
 
