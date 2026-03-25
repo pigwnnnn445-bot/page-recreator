@@ -199,6 +199,16 @@ export const modelConfigMap: Record<number, ModelConfig> = {
     ],
     costPerGenerate: 60,
   },
+  1200: {
+    creationModes: ["text_to_video"],
+    enableReferenceImage: false,
+    enableFirstLastFrame: false,
+    qualities: [],
+    durations: ["5s", "10s"],
+    aspectRatios: [],
+    costPerGenerate: 20,
+    multiVideoCount: 4,
+  },
 };
 
 export const defaultModelConfig: ModelConfig = {
