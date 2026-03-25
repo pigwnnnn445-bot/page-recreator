@@ -21,11 +21,20 @@ const SingleVideoPlayer = ({ videoUrl, onDownload }: { videoUrl: string; onDownl
   return (
     <div className="flex-1 min-h-0 flex flex-col">
       <div className="flex-1 min-h-0 relative rounded-xl overflow-hidden bg-black">
+        {/* Blurred background video for letterbox areas */}
+        <video
+          src={`${videoUrl}#t=0.001`}
+          className="absolute inset-0 w-full h-full object-cover scale-150 blur-2xl opacity-60 pointer-events-none"
+          playsInline
+          muted
+          preload="metadata"
+          aria-hidden="true"
+        />
         <video
           ref={videoRef}
           src={`${videoUrl}#t=0.001`}
           onEnded={() => setPlaying(false)}
-          className="absolute inset-0 w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full object-contain relative z-[1]"
           playsInline
           preload="metadata"
         />
