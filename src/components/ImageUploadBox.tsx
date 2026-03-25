@@ -111,13 +111,14 @@ const ImageUploadBox = ({ label, className = "", onImageSelected, onSizeError, o
       )}
 
       {/* Zoom overlay */}
-      {zoomed && preview && (
+      {zoomed && preview && createPortal(
         <div
           className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center cursor-pointer"
           onClick={() => setZoomed(false)}
         >
           <img src={preview} alt="zoomed" className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg" />
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
