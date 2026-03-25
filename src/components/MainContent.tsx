@@ -324,8 +324,8 @@ const MainContent = ({ onMenuOpen, totalCost, models, onSelectModel, selectedMod
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 lg:gap-4">
-                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 shadow-sm opacity-50 cursor-not-allowed pointer-events-none select-none">
+                      <div className="hidden md:grid grid-cols-2 gap-2 lg:gap-4">
+                        <div className="bg-card rounded-xl border border-border p-2 md:p-3 lg:p-4 flex flex-col items-center justify-center gap-1 lg:gap-2 shadow-sm opacity-50 pointer-events-none select-none">
                           <img src={iconGuide} alt="使用说明" className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain" />
                           <span className="text-foreground text-[11px] md:text-xs lg:text-sm font-medium">使用说明</span>
                         </div>
