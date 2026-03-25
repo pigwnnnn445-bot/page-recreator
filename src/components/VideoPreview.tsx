@@ -39,7 +39,7 @@ const SingleVideoPlayer = ({ videoUrl, onDownload }: { videoUrl: string; onDownl
           preload="metadata"
         />
         <div
-          className={`absolute inset-0 flex items-center justify-center transition-opacity ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
+          className={`absolute inset-0 flex items-center justify-center transition-opacity z-[2] ${playing ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
           onClick={handlePlayPause}
         >
           <div className="w-16 h-16 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-foreground/30 transition-colors">
